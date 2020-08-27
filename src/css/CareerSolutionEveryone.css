@@ -1,0 +1,74 @@
+#career-solution-everyone{
+    font-size:16px;
+}
+#career-solution-everyone h1{
+    color:orange;
+    font-size:3.5em;
+    font-weight: 900;
+    line-height: .8em;
+}
+#career-solution-everyone #everyone{
+    font-size:5em;
+    margin-top:0em;
+    line-height: 1em;
+}
+.big-brother{
+    height:300px;
+}
+.sm-brother{
+    width:230px;
+    height:100%;
+    border:1px solid grey;
+    border-radius:2rem;
+}
+.sm-brother h2{
+    color:grey;
+    font-weight: 900;
+    margin:7px auto;
+}
+.li-item{
+    display: flex;
+    flex-direction: row;
+    justify-items: flex-start;
+    align-items: center;
+}
+.li-item div{
+
+    width: 10px;
+    height: 10px;
+    background-color: darkturquoise;
+    border-radius: 50%; 
+    margin-right: 7px;
+}
+.li-item p{
+    display: block;
+    margin: 0;
+}
+.explore{
+    color:grey;
+    font-size:1rem;
+    font-weight: 700;
+    align-self: center;
+    padding:.2rem 1.7rem;
+    margin-bottom: 15px;
+    background-color:white;
+    border-radius:1rem;
+    border:2px solid grey;
+
+}
+.explore:hover{
+    text-decoration:none;
+}
+.orange{
+    color:orange;
+}
+@media(max-width:768px){
+    #career-solution-everyone{
+        font-size:12px;
+    }
+}
+@media(max-width:576px){
+    #career-solution-everyone{
+        font-size:10px;
+    }
+}

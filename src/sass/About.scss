@@ -1,0 +1,26 @@
+#about{
+    font-size:16px;
+    h1{
+        font-size:3.6em;
+        font-weight: 900;
+        color:orange;
+    }
+    .square{
+        width:250px;
+        height: 250px;
+        box-shadow: 1px 1px 50px rgb(219, 219, 219);
+        border-radius: 15px;
+
+        img{
+            width:100px;
+        }
+
+        p{
+            font-size:1.7em;
+            color:gray;
+            margin-top:5px;
+          
+        }
+     
+    }
+}

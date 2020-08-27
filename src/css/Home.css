@@ -1,0 +1,65 @@
+
+#greaterThen{
+    right: 0;
+    top:45%;
+   width:5%;
+   max-width: 21px;
+}
+#teacher{
+    max-height:500px ;
+}
+#dialog{
+    top:-30px;
+    right: 10px;
+    width:25%;
+    max-width: 100px;
+}
+#mic{
+    bottom:15%;
+    right: 26%;
+    height: 10%;
+}
+#video{
+    bottom:15%;
+    right: 26%;
+    width: 20%;
+}
+#btn-register{
+    color:orange;
+    font-size:1.3em;
+    font-weight: 900;
+    width: min-content;
+    padding:.6rem 3.5rem;
+    border:1px solid lightgrey;
+    border-radius: 2rem;
+}
+#btn-sm-register{
+    bottom:15px;
+    color:orange;
+    font-size:1em;
+    font-weight: 900;
+    width: min-content;
+    padding:.4rem 2rem;
+    border:1px solid lightgrey;
+    border-radius: 2rem;
+}
+#btn-register:hover{
+    text-decoration:none;
+}
+@media(max-width:900px){
+    #btn-register{
+        font-size:1em;
+        padding:.4rem 3rem;
+    }
+}
+@media(max-width:600px){
+    #teacher{
+        max-height: 400px;
+    }
+}
+@media(max-width:450px){
+    #btn-sm-register{
+        font-size:.8em;
+        padding:.3rem 2rem;
+    }
+}

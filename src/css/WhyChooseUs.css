@@ -1,0 +1,161 @@
+#why-choose-us{
+    font-size:1rem;
+    padding-top:2.5rem;
+    margin-bottom: 6rem;
+}
+#why-choose-us h1{
+    font-size:3.5em;
+    font-weight: bolder;
+}
+#why-choose-us #whchus-row{
+    margin-top:5.2rem;
+}
+.orange{
+    color:orange;
+}
+#why-choose-us .bg-brother{
+    
+}
+#why-choose-us .s-brother{
+    width:220px;
+    height:230px;
+    margin-top:4rem;
+    padding: 5rem 0rem;
+    margin:10px;
+    border: 2px solid grey;
+    text-align: center;
+    border-radius: 2rem;
+    box-shadow: 7px 7px 3px 0px lightgray;
+    position: relative;
+}
+#why-choose-us .s-brother img{
+    height: 120px;
+    position: absolute;
+    top:-60px;
+    
+}
+#why-choose-us .s-brother p{
+    font-size:18px;
+    color:grey;
+    font-weight: 900;
+}
+#why-choose-us #btn-speak{
+    font-size:1.1em;
+    font-weight: 600;
+    color:grey;
+    border:1px solid lightgrey;
+    box-shadow: 7px 7px 3px 0px lightgray;
+    width: max-content;
+    padding: .9rem 4rem;
+    margin-top:1.7rem;
+    border-radius: 2rem;
+}
+#why-choose-us a:hover{
+    text-decoration:none;
+}
+@media(max-width:700px){
+    #why-choose-us{
+        font-size:14px;
+    }
+}
+@media(max-width:600px){
+    #why-choose-us #btn-speak{
+        font-size:.9em;
+        padding: .7rem 3rem;
+        margin-top:1.7rem;
+        border-radius: 2rem;
+    }
+}
+@media(max-width:500px){
+    #why-choose-us{
+        font-size:12px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#why-choose-us .square{
+    border: 2px solid grey;
+    text-align: center;
+    border-radius: 2rem;
+    box-shadow: 9px 9px 3px 0px lightgray;
+}
+#why-choose-us .square p{
+    font-size:1.2em;
+    font-weight: 600;
+    color:grey;
+}
+#why-choose-us .square img{
+    height: 120px;
+}
+#why-choose-us .square:first-child{
+    position: relative;
+    margin-left: 0px;
+}
+
+#why-choose-us .square:first-child img{
+    position: absolute;
+    top:-60px;
+
+}
+#why-choose-us .square:nth-child(2) {
+    position: relative;
+
+}
+#why-choose-us .square:nth-child(2) img{
+    position: absolute;
+    top:-60px;
+}
+#why-choose-us .square:nth-child(3) {
+    position: relative;
+
+}
+#why-choose-us .square:nth-child(3) img{
+    position: absolute;
+    top:-60px;
+}
+#why-choose-us .square:nth-child(4) {
+    position: relative;
+
+}
+#why-choose-us .square:nth-child(4) img{
+    position: absolute;
+    top:-60px;
+}
+#why-choose-us .square:last-child{
+    margin-right: 0px;
+}
+#why-choose-us a{
+    font-size:1.1em;
+    font-weight: 600;
+    color:grey;
+    border:1px solid grey;
+    box-shadow: 9px 9px 3px 0px lightgray;
+    width: max-content;
+    padding: .9rem 4.5rem;
+    margin-top:1.2rem;
+    border-radius: 2rem;
+}
+#why-choose-us a:hover{
+    text-decoration:none;
+}
+
+
+/* #why-choose-us .col{
+    border:1px solid black;
+    margin:50px;
+} */

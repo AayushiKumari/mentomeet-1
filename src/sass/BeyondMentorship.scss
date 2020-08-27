@@ -1,0 +1,49 @@
+#beyond-mentorship{
+    font-size:16px;
+    h1{
+        font-size:3.6em;
+        font-weight: 900;
+        color:orange;
+    }
+    .square{
+        width:180px;
+        height: 310px;
+        box-shadow: 1px 1px 50px rgb(219, 219, 219);
+        border-radius: 55px;
+
+        img{
+            height:100px;
+        }
+
+        p{
+            font-size:1.3rem;
+            letter-spacing: 0px;
+            line-height: 1.4rem;
+            font-weight: 900;
+            color:gray;
+            margin-top:10px;
+            text-align: center;
+
+            .orange{
+                color:orange;
+            }
+        }
+     
+    }
+}
+
+@media(max-width:768px){
+    #beyond-mentorship{
+        font-size: 13px;
+    }
+}
+@media(max-width:576px){
+    #beyond-mentorship{
+        font-size: 11px;
+    }
+}
+@media(max-width:464px){
+    #beyond-mentorship{
+        font-size: 10px;
+    }
+}

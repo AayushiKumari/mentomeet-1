@@ -1,0 +1,42 @@
+#post{
+    
+    #post-body{
+
+        #post-title{
+            font-size:2em;
+            color:grey;
+            font-weight: 600;
+        }
+        #H-line{
+            width:7%;
+            height: 2px;
+            background-color:grey;
+            display:block;
+            font-size:.8em;
+        }
+        p{
+            font-size:.8em;
+            border-top:1px solid gray;
+            border-bottom:none;
+        }
+    }
+}
+
+@media(max-width:768px){
+    #post{
+        font-size:13px;
+    }
+    
+}
+@media(max-width:600px){
+    #post{
+        font-size:12px;
+    }
+    
+}
+@media(max-width:500px){
+    #post{
+        font-size:10px;
+    }
+    
+}

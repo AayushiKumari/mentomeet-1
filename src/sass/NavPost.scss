@@ -1,0 +1,23 @@
+#nav-post{
+    border-bottom:1px solid lightgray;
+    padding:.8rem;
+    div{
+        img{
+            border-radius: 50%;
+        }
+        h5{
+            font-size:.8em;
+        }
+    }
+    .post-title{
+        h5{
+            font-size:.9em;
+            font-weight: 700;
+            color: gray;
+            }
+        p{
+            font-size:.8em;
+            color:lightgray;
+        }
+    }
+}
