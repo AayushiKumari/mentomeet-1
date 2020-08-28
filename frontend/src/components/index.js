@@ -3,6 +3,7 @@ import React from 'react';
 import './../css/App.css';
 
 import WhyChooseUs from '../components/WhyChooseUs'
+import NavBar from '../components/NavBar'
 import Home from '../components/Home'
 import CareerSolutionEveryone from "../components/CareerSolutionEveryone"
 import BlogDetailedPage from '../components/BlogPostDetailed/BlogDetailedPage'
@@ -16,15 +17,16 @@ import WordFromStudents from './WordFromStudents.js'
 function Index() {
   return (
     <div>
+      <NavBar/>
       <Home/>
       <CareerSolutionEveryone/>
       <WhyChooseUs/> 
-      <BlogDetailedPage/>
+      {/* <BlogDetailedPage/> */}
       <BlogList/>
       <About/>
       <BeyondMentorship/>
       <WordFromStudents />
-      <WhyChooseMentomeet/>
+      {/* <WhyChooseMentomeet/> */}
     </div>
   )
 }

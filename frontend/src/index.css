@@ -1,0 +1,15 @@
+html{
+    scroll-behavior: smooth;
+}
+
+.nav-tabs-question{
+    border-bottom: .2rem solid #ffc107;
+  }
+.nav-tabs-question .nav-item.active{
+background: #ffc107;
+color: white !important;
+border: none;
+}
+.cursor-pointer{
+cursor: pointer;
+}
