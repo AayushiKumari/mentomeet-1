@@ -2,6 +2,41 @@ html{
     scroll-behavior: smooth;
 }
 
+.navbar a:hover, .navbar a:focus{
+  color: #ffc107 !important;
+}
+.navbar a.login:hover, .navbar a.login:focus{
+  color: #17a2b8 !important;
+}
+
+
+/*------------ nav-item border-bottom animation----------- */
+.navbar li.different{
+  border:none;
+  position: relative;
+}
+.different::after{
+  content: '';
+  position: absolute;
+  width: 0px;
+  height: 2px;
+  left: 0%;
+  bottom:0;
+  background-color: #ffc107;
+  transition: all ease-in-out .4s;
+}
+.different:hover::after{
+  width: 100%;
+  left: 0;
+}
+/* ---------------------------- */
+
+
+
+
+
+
+
 .nav-tabs-question{
     border-bottom: .2rem solid #ffc107;
   }

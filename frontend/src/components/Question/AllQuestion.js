@@ -49,7 +49,7 @@ class AllQuestion extends Component{
                                     <a href="#" class="bg-warning px-2  text-decoration-none text-white small rounded">JEE</a>
                                 </div>
                                 <h5 class="card-title"><a href="answer" className="text-decoration-none">{data.question}</a></h5>
-                                { data.images? <img class="card-img-top w-100" src="http://localhost:5005/1598617230641-dribble_daily_ui__064_select_user_type.png" alt="alternate image"/>: "" }
+                                { data.images? <img class="card-img-top w-100" src={data.images} alt="alternate image"/>: "" }
                                 <div className="mt-3">
                                     {data.tags.map((tag, index) => {
                                         return(
