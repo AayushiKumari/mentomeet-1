@@ -1,8 +1,10 @@
 import path from 'path'
+import http from 'http'
 import express  from 'express'
 import dotenv from 'dotenv'
 import bodypParser from 'body-parser'
 import cookieParser from 'cookie-parser'
+import socketio from 'socket.io'
 import morgan from 'morgan'
 import bookingRouter from './routes/bookings/index.js'
 
@@ -11,6 +13,8 @@ import signInrouter from './routes/auth/signIn/index.js'
 import signOutRouter from './routes/auth/signOut/index.js'
 
 import quoraRouter from './routes/quora/index.js'
+import chatRouter from './routes/chat/index.js'
+import {addUser, removeUser, getUser, getUsersInRoom} from './controllers/chat/users.js'
 
 // var quoraRouter = require('./routes/quora/quora.route.js');
 
@@ -22,6 +26,8 @@ const port  = process.env.PORT || 5005
 
 
 const app = express()
+const server = http.createServer(app);
+const io = socketio(server);
 
 app.use(express.static('public'));
 
@@ -46,5 +52,41 @@ app.use(signUpRouter)
 app.use(signInrouter)
 app.use(signOutRouter)
 app.use(quoraRouter)
+app.use(chatRouter)
+
+io.on('connect', (socket) => {
+    socket.on('join', ({ name, room }, callback) => {
+      const { error, user } = addUser({ id: socket.id, name, room });
+  
+      if(error) return callback(error);
+  
+      socket.join(user.room);
+  
+      socket.emit('message', { user: 'admin', text: `${user.name}, welcome to room ${user.room}.`});
+      socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined!` });
+  
+      io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
+  
+      callback();
+    });
+  
+    socket.on('sendMessage', (message, callback) => {
+      const user = getUser(socket.id);
+  
+      io.to(user.room).emit('message', { user: user.name, text: message });
+  
+      callback();
+    });
+  
+    socket.on('disconnect', () => {
+      const user = removeUser(socket.id);
+  
+      if(user) {
+        io.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });
+        io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room)});
+      }
+    })
+  });
+  
 
 app.listen(port, ()=> console.log("listenig at " + port))

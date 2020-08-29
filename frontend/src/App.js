@@ -7,7 +7,8 @@ import Index from './components/index.js'
 import Question from './components/Question/Question.js'
 import Answer from './components/Answer/Answer'
 import Login from './components/Login/Login'
-
+import Chat from './components/Chat/Chat/Chat.js'
+import Join from './components/Chat/Join/Join.js'
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
                 <Route path="/qna" render={props => <Question {...props} /> } />
                 <Route path="/answer" render={props => <Answer {...props} /> } />
                 <Route exact path="/login" render={props => <Login {...props} /> } />
+                <Route path="/join" render={props => <Join {...props} /> } />
+                <Route path="/chat" render={props => <Chat {...props} /> } />
                 {/* <Route path="/login" render={props => <Login {...props} /> } />
                 <Route path="/student" render={props => <Student {...props} /> } /> */}
 

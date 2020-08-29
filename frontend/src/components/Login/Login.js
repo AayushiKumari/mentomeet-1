@@ -26,7 +26,7 @@ class Login extends Component{
 
     handleRegister = (values) => {
         console.log(values)
-        alert(JSON.stringify(values));
+        // alert(JSON.stringify(values));
         axios.post(`http://${window.location.hostname}:5005/signUp`, values)
         .then(response => {
 
@@ -43,7 +43,7 @@ class Login extends Component{
 
     handleLogin = (values) => {
         console.log(values)
-        alert(JSON.stringify(values));
+        // alert(JSON.stringify(values));
         axios.post(`http://${window.location.hostname}:5005/signIn`, values)
         .then(response => {
 

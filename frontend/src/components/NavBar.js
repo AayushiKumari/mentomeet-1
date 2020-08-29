@@ -35,7 +35,9 @@ class NavBar extends React.Component {
                             <div className="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdown">
                                 <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="#">Downloads</a>
                                 <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="#">Blogs</a>
-                                <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="#">Webinar</a>
+                                {localStorage.getItem('token') ? 
+                                    <a className="dropdown-item bg-white my-2 rounded shadow text-info" href={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName+JSON.parse(localStorage.getItem('user')).lastName}&room=General`}>Chat Rooms</a>
+                                :<></>}
                                 <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="#">Experience</a>
                             </div>
                         </li>
