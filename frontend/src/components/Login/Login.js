@@ -1,0 +1,315 @@
+import React, {Component} from "react"
+import {Link} from 'react-router-dom'
+import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Row, Label, Col, Container, Breadcrumb, BreadcrumbItem, Button, InputGroupText,  InputGroupAddon, InputGroup} from 'reactstrap';
+
+import brand from './brand.png'
+
+
+const required = (val) => val && val.length;
+
+
+class Login extends Component{
+    constructor(props){
+        super(props)
+        this.state = ({
+            register: false
+        })
+    }
+
+
+    onChangeHandler =(e)=>{
+        this.setState({
+            register: !this.state.register
+        })
+    }
+
+
+
+
+
+    render(){
+
+        let LoginDiv = (
+            
+                    <div className="container">
+                        <div className="row justify-content-center">
+                            <div className="col-md-8">
+                                <div className="card-group shadow">
+                                    <div className="card border-warning text-white">
+                                        <div className="card-body m-3">                                         
+                                        <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                                                <h3 className="text-warning mb-0">MentoMeet</h3>
+                                                <p className="text-muted font-weight-bold">Login in your account</p>
+                                                <InputGroup className="mb-3 d-block">                                            
+                                                    <Control.text  model=".email"
+                                                        type="email"
+                                                        id="email"
+                                                        name="email"
+                                                        placeholder="Email"
+                                                        className="form-control w-100"
+                                                        validators={{
+                                                            required
+                                                        }}                                                  
+                                                    />
+                                                    <Errors
+                                                        className="text-danger"
+                                                        show="touched"
+                                                        model=".email"
+                                                        messages={{
+                                                            required: 'This is a Required Field!'
+                                                        }}
+                                                    />
+                                                </InputGroup>
+                                                <InputGroup className="mb-3 d-block">                                            
+                                                    <Control.password  model=".password"
+                                                        id="password"
+                                                        name="password"
+                                                        placeholder="password"
+                                                        className="form-control w-100" 
+                                                        validators={{
+                                                            required
+                                                        }}                                                    
+                                                    />
+                                                    <Errors
+                                                        className="text-danger"
+                                                        show="touched"
+                                                        model=".password"
+                                                        messages={{
+                                                            required: 'This is a Required Field!'
+                                                        }}
+                                                    />
+                                                </InputGroup>
+                                                <InputGroup className="mb-3">
+                                                    <Button type="submit" block color="info">
+                                                            Login
+                                                    </Button>
+                                                </InputGroup>
+                                                
+                                                <div className="">
+                                                    <h6 className="text-muted mb-0">Don't have account??</h6>
+                                                    <a className="text-info font-weight-bold cursor-pointer" onClick={this.onChangeHandler}>register.</a>
+                                                </div>
+                                                
+                                            </LocalForm>
+                                        </div>
+                                    </div>
+                                    <div className="card d-none d-lg-block bg-info">
+                                        <div className="card-body text-white m-3">
+                                            <h3>MentoMeet</h3>
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled took a galley standard dummy text ever since the 1500s</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+        )
+
+        let RegisterDiv = (
+            
+                    <div className="container">
+                        <div className="row justify-content-center">
+                            <div className="col-md-7">
+                                <div className="card-group shadow">
+                                    <div className="card border-warning text-white">
+                                        <div className="card-body m-3">                                         
+                                            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                                                <h3 className="text-warning">MentoMeet</h3>
+                                                <p className="text-muted font-weight-bold">Welocome to new world</p>
+                                                <div className="d-flex mb-3 w-100">
+                                                    <InputGroup className="mr-1 d-block">                                            
+                                                        <Control.text  model=".fname"
+                                                            id="fname"
+                                                            name="fname"
+                                                            placeholder="First Name"
+                                                            className="form-control w-100"
+                                                            validators={{
+                                                                required
+                                                            }}                                                  
+                                                        />
+                                                        <Errors
+                                                            className="text-danger"
+                                                            show="touched"
+                                                            model=".fname"
+                                                            messages={{
+                                                                required: '*required'
+                                                            }}
+                                                        />
+                                                    </InputGroup>
+                                                    <InputGroup className="ml-1 d-block">                                            
+                                                        <Control.text  model=".lname"
+                                                            id="lname"
+                                                            name="lname"
+                                                            placeholder="Last Name"
+                                                            className="form-control w-100"
+                                                            validators={{
+                                                                required
+                                                            }}                                                  
+                                                        />
+                                                        <Errors
+                                                            className="text-danger"
+                                                            show="touched"
+                                                            model=".lname"
+                                                            messages={{
+                                                                required: '*required'
+                                                            }}
+                                                        />
+                                                    </InputGroup>
+                                                    
+                                                </div>
+                                                <div className="d-flex w-100 mb-3">
+                                                    <InputGroup className="mr-2 d-block">
+                                                        <Control.select
+                                                            model=".gender"
+                                                            id="gender"
+                                                            name="gender"
+                                                            className="custom-select w-100"
+                                                            validators={{
+                                                                required
+                                                            }}                                                
+                                                        >
+                                                            <option value="-1">gender..</option>
+                                                            <option value="Male">Male</option>
+                                                            <option value="Female">Female</option>
+                                                            <option value="Others">Others</option>
+                                                        </Control.select>
+                                                        <Errors
+                                                            className="text-danger"
+                                                            show="touched"
+                                                            model=".gender"
+                                                            messages={{
+                                                                required: '*required'
+                                                            }}
+                                                        />
+                                                    </InputGroup>
+                                                    <InputGroup clasName="d-block">
+                                                        <Control.select
+                                                            model=".category"
+                                                            id="category"
+                                                            name="category"
+                                                            className="custom-select w-100" 
+                                                            validators={{
+                                                                required
+                                                            }}                                                
+                                                        >
+                                                            <option value="-1">Categories..</option>
+                                                            <option value="Mentor">Mentor</option>
+                                                            <option value="Mentee">Mentee</option>
+                                                        </Control.select>
+                                                        <Errors
+                                                            className="text-danger"
+                                                            show="touched"
+                                                            model=".category"
+                                                            messages={{
+                                                                required: '*required'
+                                                            }}
+                                                        />
+                                                    </InputGroup>
+                                                </div>
+                                                <InputGroup className="mb-3 d-block">                                            
+                                                    <Control.text  model=".mobile"
+                                                        type="number"
+                                                        id="mobile"
+                                                        name="mobile"
+                                                        placeholder="Mobile"
+                                                        className="form-control w-100"
+                                                        validators={{
+                                                            required
+                                                        }}                                                  
+                                                    />
+                                                    <Errors
+                                                        className="text-danger"
+                                                        show="touched"
+                                                        model=".mobile"
+                                                        messages={{
+                                                            required: '*required'
+                                                        }}
+                                                    />
+                                                </InputGroup>
+                                                <InputGroup className="mb-3 d-block">                                            
+                                                    <Control.text  model=".email"
+                                                        type="email"
+                                                        id="email"
+                                                        name="email"
+                                                        placeholder="Email"
+                                                        className="form-control w-100"
+                                                        validators={{
+                                                            required
+                                                        }}                                                  
+                                                    />
+                                                    <Errors
+                                                        className="text-danger"
+                                                        show="touched"
+                                                        model=".email"
+                                                        messages={{
+                                                            required: '*required'
+                                                        }}
+                                                    />
+                                                </InputGroup>
+                                                <InputGroup className="mb-3 d-block">                                            
+                                                    <Control.password  model=".password"
+                                                        id="password"
+                                                        name="password"
+                                                        placeholder="Password"
+                                                        className="form-control w-100"
+                                                        validators={{
+                                                            required
+                                                        }}                                                  
+                                                    />
+                                                    <Errors
+                                                        className="text-danger"
+                                                        show="touched"
+                                                        model=".password"
+                                                        messages={{
+                                                            required: '*required'
+                                                        }}
+                                                    />
+                                                </InputGroup>
+                                                <InputGroup className="mb-3">
+                                                    <Button type="submit" block color="info">
+                                                            Register
+                                                    </Button>
+                                                </InputGroup>
+
+                                                <div className="text-center">
+                                                    <h6 className="text-muted mb-0">Already have an account??</h6>
+                                                    <a className="text-info font-weight-bold cursor-pointer" onClick={this.onChangeHandler}>Login.</a>
+                                                </div>
+                                                
+                                            </LocalForm>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        )
+
+
+
+
+        return(
+            <div>
+                <nav className="navbar shadow  navbar-expand sticky-top navbar-light bg-light">
+                    <a className="navbar-brand text-warning" href="/index"><img src={brand} alt="Brand" width="120"/></a>
+                    
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav ml-auto">
+                            <li className="nav-item mx-3 font-weight-bold different">
+                                <a className="nav-link text-info cursor-pointer login" onClick={this.onChangeHandler}>{this.state.register?"Register":"Login"}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div className="d-flex align-items-center " style={{height:"100vh"}}>
+                    {this.state.register ? RegisterDiv: LoginDiv}
+                </div>
+                
+            </div>
+        )
+    }
+}
+
+export default Login;
