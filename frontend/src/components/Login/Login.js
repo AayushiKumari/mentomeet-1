@@ -2,11 +2,12 @@ import React, {Component} from "react"
 import {Link} from 'react-router-dom'
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Row, Label, Col, Container, Breadcrumb, BreadcrumbItem, Button, InputGroupText,  InputGroupAddon, InputGroup} from 'reactstrap';
-
+import axios from 'axios'
 import brand from './brand.png'
 
 
 const required = (val) => val && val.length;
+const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val)
 
 
 class Login extends Component{
@@ -17,16 +18,56 @@ class Login extends Component{
         })
     }
 
-
     onChangeHandler =(e)=>{
         this.setState({
             register: !this.state.register
         })
     }
 
+    handleRegister = (values) => {
+        console.log(values)
+        alert(JSON.stringify(values));
+        axios.post(`http://${window.location.hostname}:5005/signUp`, values)
+        .then(response => {
 
+            console.log("Response is - ")
+            console.log(response)
+            this.setState({register:false})
 
+        }).catch(function(err){      
+            console.log("catch err is ");
+            console.log(err)  
+            alert("Alert of Error!")
+        });
+    }
 
+    handleLogin = (values) => {
+        console.log(values)
+        alert(JSON.stringify(values));
+        axios.post(`http://${window.location.hostname}:5005/signIn`, values)
+        .then(response => {
+
+            console.log("Response is - ")
+            console.log(response)
+            
+                if(response.status!== 401 && response.status !== 400 ){
+                   
+                    if(response.data.user.email) { 
+                        console.log(response.data);
+                        // console.log("Token is " + response.data.token)
+                        localStorage.setItem('token', response.data.token)
+                        localStorage.setItem('user',JSON.stringify(response.data.user))
+                        window.location.href="/"
+
+                    }
+                }
+
+        }).catch(function(err){      
+            console.log("catch err is ");
+            console.log(err)  
+            alert("Invalid Credentials.Please try Again!");
+        });
+    }
 
     render(){
 
@@ -38,7 +79,7 @@ class Login extends Component{
                                 <div className="card-group shadow">
                                     <div className="card border-warning text-white">
                                         <div className="card-body m-3">                                         
-                                        <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                                        <LocalForm onSubmit={(values) => this.handleLogin(values)}>
                                                 <h3 className="text-warning mb-0">MentoMeet</h3>
                                                 <p className="text-muted font-weight-bold">Login in your account</p>
                                                 <InputGroup className="mb-3 d-block">                                            
@@ -115,14 +156,14 @@ class Login extends Component{
                                 <div className="card-group shadow">
                                     <div className="card border-warning text-white">
                                         <div className="card-body m-3">                                         
-                                            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                                            <LocalForm onSubmit={(values) => this.handleRegister(values)}>
                                                 <h3 className="text-warning">MentoMeet</h3>
                                                 <p className="text-muted font-weight-bold">Welocome to new world</p>
                                                 <div className="d-flex mb-3 w-100">
                                                     <InputGroup className="mr-1 d-block">                                            
-                                                        <Control.text  model=".fname"
-                                                            id="fname"
-                                                            name="fname"
+                                                        <Control.text  model=".firstName"
+                                                            id="firstName"
+                                                            name="firstName"
                                                             placeholder="First Name"
                                                             className="form-control w-100"
                                                             validators={{
@@ -132,16 +173,16 @@ class Login extends Component{
                                                         <Errors
                                                             className="text-danger"
                                                             show="touched"
-                                                            model=".fname"
+                                                            model=".firstName"
                                                             messages={{
-                                                                required: '*required'
+                                                                required: 'Required! '
                                                             }}
                                                         />
                                                     </InputGroup>
                                                     <InputGroup className="ml-1 d-block">                                            
-                                                        <Control.text  model=".lname"
-                                                            id="lname"
-                                                            name="lname"
+                                                        <Control.text  model=".lastName"
+                                                            id="lastName"
+                                                            name="lastName"
                                                             placeholder="Last Name"
                                                             className="form-control w-100"
                                                             validators={{
@@ -151,9 +192,9 @@ class Login extends Component{
                                                         <Errors
                                                             className="text-danger"
                                                             show="touched"
-                                                            model=".lname"
+                                                            model=".lastName"
                                                             messages={{
-                                                                required: '*required'
+                                                                required: 'Required! '
                                                             }}
                                                         />
                                                     </InputGroup>
@@ -165,12 +206,13 @@ class Login extends Component{
                                                             model=".gender"
                                                             id="gender"
                                                             name="gender"
+                                                            defaultValue="Male"
                                                             className="custom-select w-100"
                                                             validators={{
                                                                 required
                                                             }}                                                
                                                         >
-                                                            <option value="-1">gender..</option>
+                                                            {/* <option value="-1">gender..</option> */}
                                                             <option value="Male">Male</option>
                                                             <option value="Female">Female</option>
                                                             <option value="Others">Others</option>
@@ -180,7 +222,7 @@ class Login extends Component{
                                                             show="touched"
                                                             model=".gender"
                                                             messages={{
-                                                                required: '*required'
+                                                                required: 'Required! '
                                                             }}
                                                         />
                                                     </InputGroup>
@@ -189,12 +231,13 @@ class Login extends Component{
                                                             model=".category"
                                                             id="category"
                                                             name="category"
+                                                            defaultValue="Mentee"
                                                             className="custom-select w-100" 
                                                             validators={{
                                                                 required
                                                             }}                                                
                                                         >
-                                                            <option value="-1">Categories..</option>
+                                                            {/* <option value="-1">Categories..</option> */}
                                                             <option value="Mentor">Mentor</option>
                                                             <option value="Mentee">Mentee</option>
                                                         </Control.select>
@@ -203,13 +246,13 @@ class Login extends Component{
                                                             show="touched"
                                                             model=".category"
                                                             messages={{
-                                                                required: '*required'
+                                                                required: 'Required! '
                                                             }}
                                                         />
                                                     </InputGroup>
                                                 </div>
                                                 <InputGroup className="mb-3 d-block">                                            
-                                                    <Control.text  model=".mobile"
+                                                    <Control.input  model=".mobile"
                                                         type="number"
                                                         id="mobile"
                                                         name="mobile"
@@ -224,7 +267,7 @@ class Login extends Component{
                                                         show="touched"
                                                         model=".mobile"
                                                         messages={{
-                                                            required: '*required'
+                                                            required: 'Required! '
                                                         }}
                                                     />
                                                 </InputGroup>
@@ -236,7 +279,7 @@ class Login extends Component{
                                                         placeholder="Email"
                                                         className="form-control w-100"
                                                         validators={{
-                                                            required
+                                                            required, validEmail
                                                         }}                                                  
                                                     />
                                                     <Errors
@@ -244,7 +287,8 @@ class Login extends Component{
                                                         show="touched"
                                                         model=".email"
                                                         messages={{
-                                                            required: '*required'
+                                                            required: 'Required! ',
+                                                            validEmail: ' Invalid Email!'
                                                         }}
                                                     />
                                                 </InputGroup>
@@ -263,7 +307,7 @@ class Login extends Component{
                                                         show="touched"
                                                         model=".password"
                                                         messages={{
-                                                            required: '*required'
+                                                            required: 'Required! '
                                                         }}
                                                     />
                                                 </InputGroup>

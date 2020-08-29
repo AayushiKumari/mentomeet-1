@@ -1,7 +1,7 @@
 
 
 function validator(req,res,next){
-    req.check('fullName', 'Name is required').notEmpty();
+    req.check('firstName', 'Name is required').notEmpty();
     req.check('email', 'Email must be between 3 to 32 characters')   //validate email
         
        

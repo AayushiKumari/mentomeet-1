@@ -1,12 +1,14 @@
-import Admin2 from './../../../../database/models/admin2/index.js'
+import User from './../../../../database/models/users/index.js'
 import DbErrorHandler from  '../../../helpers/errorHandlers/database/index.js'
 
 function signUp(req, res){
     console.log(req.body)
-    const admin2  = new Admin2(req.body)
+    const user  = new User(req.body)
     // console.log("User is - ");
     // console.log(user)
-    admin2.save((err, admin2)=>{
+    user.save((err, result)=>{
+        console.log("err is")
+        console.log(err)
         if(err){
             let errorMessage = DbErrorHandler(err)
             console.log(errorMessage)
@@ -15,7 +17,7 @@ function signUp(req, res){
             })
         }
         res.json({
-            admin2
+            result
         })
     })
 }

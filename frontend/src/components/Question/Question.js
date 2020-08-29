@@ -4,7 +4,7 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Row, Label, Col, Container, Breadcrumb, BreadcrumbItem, Button, InputGroupText,  InputGroupAddon, InputGroup} from 'reactstrap';
 import { Link, BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 
-
+import Navbar from './../NavBar.js'
 
 
 import AllQuestion from "./AllQuestion"
@@ -91,6 +91,8 @@ class Question extends Component {
 
     render() {
         return (
+            <>
+            <Navbar />
             <div className="my-4">
                 <div className="container-lg">
                     <div className="row">
@@ -345,7 +347,7 @@ class Question extends Component {
                     </div>
                 </div>
             </div>
-
+            </>
         )
     }
 }

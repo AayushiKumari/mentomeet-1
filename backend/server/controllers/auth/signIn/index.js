@@ -1,4 +1,4 @@
-import Admin2 from '../../../../database/models/admin2/index.js'
+import User from '../../../../database/models/users/index.js'
 import DbErrorHandler from  '../../../helpers/errorHandlers/database/index.js'
 import {generateToken} from '../../../helpers/tokenHandler/index.js'
 
@@ -8,7 +8,7 @@ function signIn(req, res){
    console.log("Req body - ");
    console.log(req.body)
 
-   Admin2.findOne({email},(err,user)=>{
+   User.findOne({email},(err,user)=>{
        console.log("user is " + user)
        
        if(err){
@@ -26,9 +26,9 @@ function signIn(req, res){
             let  token  =  generateToken(payload)
             res.cookie('t',token,{maxAge:9999})
 
-            const {_id,userId, fullName , email,role, type} = user
+            const {_id, firstName, lastName , email,role} = user
 
-            return res.send({token:token, user :{_id,userId,fullName,email,role, type}})
+            return res.send({token:token, user :{_id, firstName, lastName , email,role}})
        }
        else{
            res.status(401).json({

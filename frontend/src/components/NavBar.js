@@ -1,11 +1,17 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 
 import brand from '../assets/brand.png'
 
 class NavBar extends React.Component {
+    handleLogout = () => {
+        localStorage.removeItem('user');
+        localStorage.removeItem('token')
+    }
     render() {
         return (
             <nav className="navbar shadow  navbar-expand-lg sticky-top navbar-light bg-light">
+                {/* <Link className="navbar-brand text-warning" to="/index"><img src={brand} alt="Brand" width="120"/></Link> */}
                 <a className="navbar-brand text-warning" href="index"><img src={brand} alt="Brand" width="120"/></a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -33,9 +39,21 @@ class NavBar extends React.Component {
                                 <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="#">Experience</a>
                             </div>
                         </li>
-                        <li className="nav-item different mx-3 font-weight-bold">
-                            <a className="nav-link text-info login" href="login">LOGIN</a>
-                        </li>
+                        
+                            {localStorage.getItem('token') ? 
+                                <>
+                                    <li className="nav-item different mx-3 font-weight-bold">
+                                        <p className="nav-link text-info login">{JSON.parse(localStorage.getItem('user')).email}</p>  
+                                    </li>    
+                                    <li className="nav-item different mx-3 font-weight-bold">
+                                        <Link className=" nav-link text-info login" style={{textDecoration:"none"}} onClick={this.handleLogout}>Logout</Link> 
+                                    </li>
+                                </>
+                                :
+                                <Link className="nav-link text-info login" to="/login">Login</Link> 
+                            }   
+                            
+                            {/* <a className="nav-link text-info login" href="login">LOGIN</a> */}
                     </ul>
                 </div>
             </nav>
