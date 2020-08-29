@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import bodypParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import socketio from 'socket.io'
+import cors from 'cors'
 import morgan from 'morgan'
 import bookingRouter from './routes/bookings/index.js'
 
@@ -36,6 +37,8 @@ app.use(bodypParser.json())
 app.use(bodypParser.urlencoded({ extended: true }));
 app.use(cookieParser())
 
+app.use(cors());
+
 app.use(morgan('dev'))
 
 //to allow Cross origin requests!
@@ -56,6 +59,7 @@ app.use(chatRouter)
 
 io.on('connect', (socket) => {
     socket.on('join', ({ name, room }, callback) => {
+      console.log("JOIN")
       const { error, user } = addUser({ id: socket.id, name, room });
   
       if(error) return callback(error);
@@ -71,6 +75,7 @@ io.on('connect', (socket) => {
     });
   
     socket.on('sendMessage', (message, callback) => {
+      console.log("SENDMSG")
       const user = getUser(socket.id);
   
       io.to(user.room).emit('message', { user: user.name, text: message });
@@ -79,6 +84,7 @@ io.on('connect', (socket) => {
     });
   
     socket.on('disconnect', () => {
+      console.log("DISCONN")
       const user = removeUser(socket.id);
   
       if(user) {
@@ -89,4 +95,4 @@ io.on('connect', (socket) => {
   });
   
 
-app.listen(port, ()=> console.log("listenig at " + port))
+server.listen(port, ()=> console.log("listenig at " + port))

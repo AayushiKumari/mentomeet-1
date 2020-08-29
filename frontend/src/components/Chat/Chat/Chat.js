@@ -20,8 +20,8 @@ const Chat = ({ location }) => {
   const [users, setUsers] = useState('');
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
-  const ENDPOINT = 'https://project-chat-application.herokuapp.com/';
-
+  // const ENDPOINT = 'https://project-chat-application.herokuapp.com/';
+  const ENDPOINT = `http://${window.location.hostname}:5005/`;
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
 
@@ -29,7 +29,7 @@ const Chat = ({ location }) => {
 
     setRoom(room);
     setName(name)
-
+    
     socket.emit('join', { name, room }, (error) => {
       if(error) {
         alert(error);
@@ -77,27 +77,27 @@ const Chat = ({ location }) => {
             <hr />
             <CardBody>
               <Col md={12}>
-                <a style={{textDecoration:"none"}} href={`/chat?name=${JSON.parse(localStorage.getItem('user')).email}&room=General`}>
+                <a style={{textDecoration:"none"}} href={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName+JSON.parse(localStorage.getItem('user')).lastName}&room=General`}>
                   <Button style={{margin:"10px"}} block color="success" outline>General</Button>
                 </a>
               </Col>
               <Col md={12}>
-                <a style={{textDecoration:"none"}} href={`/chat?name=${JSON.parse(localStorage.getItem('user')).email}&room=Physics`}>
+                <a style={{textDecoration:"none"}} href={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName+JSON.parse(localStorage.getItem('user')).lastName}&room=Physics`}>
                   <Button style={{margin:"10px"}} block color="primary" outline>Physics</Button>
                 </a>
               </Col>
               <Col md={12}>
-                <a style={{textDecoration:"none"}} href={`/chat?name=${JSON.parse(localStorage.getItem('user')).email}&room=Chemistry`}>
+                <a style={{textDecoration:"none"}} href={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName+JSON.parse(localStorage.getItem('user')).lastName}&room=Chemistry`}>
                   <Button style={{margin:"10px"}} block color="info" outline>Chemistry</Button>
                 </a>
               </Col>
               <Col md={12}>
-                <a style={{textDecoration:"none"}} href={`/chat?name=${JSON.parse(localStorage.getItem('user')).email}&room=Biology`}>
+                <a style={{textDecoration:"none"}} href={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName+JSON.parse(localStorage.getItem('user')).lastName}&room=Biology`}>
                   <Button style={{margin:"10px"}} block color="warning" outline>Biology</Button>
                 </a>
               </Col>
               <Col md={12}>
-                <a style={{textDecoration:"none"}} href={`/chat?name=${JSON.parse(localStorage.getItem('user')).email}&room=Maths`}>
+                <a style={{textDecoration:"none"}} href={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName+JSON.parse(localStorage.getItem('user')).lastName}&room=Maths`}>
                   <Button style={{margin:"10px"}} block color="danger" outline>Maths</Button>
                 </a>
               </Col>
