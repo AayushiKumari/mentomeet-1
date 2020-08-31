@@ -51,7 +51,7 @@ var options = {
 
 var secureServer = https.createServer(options, app);
 
-secureServer.use(cors()); // is working for secure server
+// secureServer.use(cors()); // is working for secure server
 
 secureServer.listen(app.get('secPort'), ()=>{
   console.log("\nSECURE Server Listening on port: " + app.get('secPort') + "\n");
