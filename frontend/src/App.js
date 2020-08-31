@@ -20,7 +20,7 @@ function App() {
 
                 <Route path="/index" render={props => <Index {...props} /> } />
                 <Route path="/qna" render={props => <Question {...props} /> } />
-                <Route path="/answer" render={props => <Answer {...props} /> } />
+                <Route path="/answer/:id" render={props => <Answer {...props} /> } />
                 <Route exact path="/login" render={props => <Login {...props} /> } />
                 <Route path="/join" render={props => <Join {...props} /> } />
                 <Route path="/chat" render={props => <Chat {...props} /> } />

@@ -3,21 +3,26 @@ import mongoose from '../../../connect.js'
 
 var Schema = mongoose.Schema;
 
+const commentSchema = new Schema({
+  author:{
+    type: String,
+    required: true
+  },
+  comment: {
+    type: String,
+    required: true
+  },
+  date: { type: Date, default: Date.now}
+})
+
 const answerSchema = new Schema({   
   author:{
-    type: Schema.Types.ObjectId, 
-    ref: 'Admin2',
-    required: true
-  },//only author can edit this object //ref:User...
-  question:{
-    type: Schema.Types.ObjectId,
-    ref: 'Question',
-    required: true
-  },       
-  bodyContent: {
     type: String,
-    required: true,
-    maxlength: 100 
+    required: true
+  },//only author can edit this object //ref:User...       
+  answer: {
+    type: String,
+    required: true
   },
   images:{
     type: String,
@@ -27,6 +32,7 @@ const answerSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Admin2'
   }], //upvote fxn
+  comments: [commentSchema],
   date: { type: Date, default: Date.now}  
 });
 
@@ -35,8 +41,7 @@ const answerSchema = new Schema({
 
 var questionSchema = new Schema({   
   author:{
-    type: Schema.Types.ObjectId,
-    ref: 'Admin2',
+    type: String,
     required: true
   },
   question: { 
@@ -56,12 +61,16 @@ var questionSchema = new Schema({
   category: { 
     type: String, 
     default:'JEE', 
-    enum: ['CAREER','JEE','NEET','DEVELOPMENT']
+    enum: ['CAREER','JEE','NEET','DEVELOPMENT','OTHER']
   },
   likes: [{
     type: Schema.Types.ObjectId,
     ref: 'Admin2'
   }],
+  views: {
+    type: Number,
+    default: 0
+  },
   flag: {
     type: Boolean,
     default: false

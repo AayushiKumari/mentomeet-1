@@ -23,7 +23,7 @@ class NavBar extends React.Component {
                             <a className="nav-link text-warning" href="#">STUDENTS <span className="sr-only">(current)</span></a>
                         </li>
                         <li className="nav-item different mx-3 font-weight-bold">
-                            <a className="nav-link text-warning" href="qna">MENTORS</a>
+                            <a className="nav-link text-warning" href="#">MENTORS</a>
                         </li>
                         <li className="nav-item different mx-3 font-weight-bold">
                             <a className="nav-link text-warning" href="#about">ABOUT US</a>
@@ -33,7 +33,7 @@ class NavBar extends React.Component {
                             RESOURCES
                             </a>
                             <div className="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="#">Downloads</a>
+                                <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="/qna">QnA</a>
                                 <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="#">Blogs</a>
                                 {localStorage.getItem('token') ? 
                                     <a className="dropdown-item bg-white my-2 rounded shadow text-info" href={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName+JSON.parse(localStorage.getItem('user')).lastName}&room=General`}>Chat Rooms</a>
@@ -45,14 +45,17 @@ class NavBar extends React.Component {
                             {localStorage.getItem('token') ? 
                                 <>
                                     <li className="nav-item different mx-3 font-weight-bold">
-                                        <p className="nav-link text-info login">{JSON.parse(localStorage.getItem('user')).email}</p>  
+                                        <p className="nav-link text-info login mb-0">{JSON.parse(localStorage.getItem('user')).email}</p>  
                                     </li>    
                                     <li className="nav-item different mx-3 font-weight-bold">
-                                        <Link className=" nav-link text-info login" style={{textDecoration:"none"}} onClick={this.handleLogout}>Logout</Link> 
+                                        <Link className="nav-link text-info login" style={{textDecoration:"none"}} onClick={this.handleLogout}>Logout</Link> 
                                     </li>
                                 </>
                                 :
-                                <Link className="nav-link text-info login" to="/login">Login</Link> 
+                                <li className="nav-item different mx-3 font-weight-bold">
+                                    <Link className="nav-link text-info login" to="/login">Login</Link> 
+                                </li>
+                                 
                             }   
                             
                             {/* <a className="nav-link text-info login" href="login">LOGIN</a> */}

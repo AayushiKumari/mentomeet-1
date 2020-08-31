@@ -28,7 +28,7 @@ function signIn(req, res){
 
             const {_id, firstName, lastName , email,role} = user
 
-            return res.send({token:token, user :{_id, firstName, lastName , email,role}})
+            return res.send({token:token, user :{_id, firstName, lastName , email , role}})
        }
        else{
            res.status(401).json({

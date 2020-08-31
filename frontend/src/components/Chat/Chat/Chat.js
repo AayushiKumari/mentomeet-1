@@ -55,6 +55,7 @@ const Chat = ({ location }) => {
     }
   }
 
+
   return (
     <>
     <Navbar />

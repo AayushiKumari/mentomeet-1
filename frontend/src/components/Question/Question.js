@@ -4,7 +4,7 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Row, Label, Col, Container, Breadcrumb, BreadcrumbItem, Button, InputGroupText,  InputGroupAddon, InputGroup} from 'reactstrap';
 import { Link, BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 
-import Navbar from './../NavBar.js'
+import NavBarLog from './../NavBarLog.js'
 
 
 import AllQuestion from "./AllQuestion"
@@ -14,6 +14,7 @@ import UnAnswered from "./UnAnswered"
 import Routes from "../../Routes"
 import Axios from "axios"
 
+import {checktoken} from "../CommonFunc/common.js"
 
 const required = (val) => val && val.length;
 const validUrl = (val) => /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/i.test(val);
@@ -27,11 +28,22 @@ class Question extends Component {
             category: "JEE",
             selectedFile: null,
             tags: [],
-            question: []
+            question: [],
+            questionCount: ""
         }
     }
 
     componentDidMount() {
+        checktoken();
+
+        Axios.get(`http://${window.location.hostname}:5005/quora/question/count/`).then(count => {
+            this.setState({
+                questionCount: count.data
+            })
+        }).catch(error => {
+            console.log("axios error")
+            console.log(error)
+        })
 
         $(".custom-file-input").on("change", function () {
             var fileName = $(this).val().split("\\").pop();
@@ -72,27 +84,41 @@ class Question extends Component {
         console.log(this.state.selectedFile)
 
         const formData = new FormData();
+        formData.append("author", localStorage.getItem('user'));
         formData.append("question", values.question);
         formData.append("file", this.state.selectedFile);
-        formData.append("category", values.category);
+        formData.append("category", (values.category).toUpperCase());
         formData.append("tags", this.state.tags);
         console.log(formData);
 
-        Axios.post("http://localhost:5005/quora/question/5f3a6c1ec944801a08a6b2f1", formData).then(result => {
+        const token = localStorage.getItem('token');
+        console.log("token is " + `Bearer ${token}`)
+
+        Axios.post(`http://${window.location.hostname}:5005/quora/question/`, formData, {
+            headers: {
+                'Authorization': `Bearer ${token}` 
+            } 
+        }).then(result => {
             console.log(result)
             window.location.reload()
         }).catch(error => {
             console.log("axios error")
             console.log(error)
         })
-        debugger;
+    }
+
+    CategoryComponentHandler = (e)=>{
+        if(e.target.value !=0){
+            console.log(e.target.value)
+            window.location.href = "/qna/question/"+e.target.value;
+        }        
     }
 
 
     render() {
         return (
             <>
-            <Navbar />
+            <NavBarLog />
             <div className="my-4">
                 <div className="container-lg">
                     <div className="row">
@@ -101,11 +127,11 @@ class Question extends Component {
                                 <div className="d-flex justify-content-between mb-3 d-md-none">
                                     <button type="button" className="btn btn-info " data-toggle="modal" data-target="#questionModal">Ask Question</button>
                                     <div class="">
-                                        <select class="custom-select" id="inputGroupSelect01">
-                                            <option selected>Categories...</option>
-                                            <option value="1">JEE</option>
-                                            <option value="2">NEET</option>
-                                            <option value="3">Others</option>
+                                        <select class="custom-select" onChange={this.CategoryComponentHandler} >
+                                        <option value={0} selected>Categories...</option>
+                                            <option value="jee">JEE</option>
+                                            <option value="neet">NEET</option>
+                                            <option value="other">Others</option>
                                         </select>
                                     </div>
                                 </div>
@@ -113,16 +139,16 @@ class Question extends Component {
                                     <div className="nav-tabs-question d-flex justify-content-between">
                                         <div className="nav nav-tabs " id="nav-tab" role="tablist">
                                             <Link to="/qna" className={"nav-item text-dark py-1 border-0 nav-link " + (window.location.pathname === '/qna' ? 'active' : '')} id="nav-home-tab">All</Link>
-                                            <Link to="/qna/votes" className={"nav-item text-dark py-1 border-0 nav-link " + (window.location.pathname === '/qna/votes' ? 'active' : '')} id="nav-profile-tab" >Votes</Link>
+                                            <Link to="/qna/voted" className={"nav-item text-dark py-1 border-0 nav-link " + (window.location.pathname === '/qna/voted' ? 'active' : '')} id="nav-profile-tab" >Voted</Link>
                                             <Link to="/qna/unanswered" className={"nav-item text-dark py-1 border-0 nav-link " + (window.location.pathname === '/qna/unanswered' ? 'active' : '')} id="nav-contact-tab">UnAnswered</Link>
 
                                         </div>
                                         <div class="d-none d-md-block">
-                                            <select class="custom-select border-0 rounded-0 bg-warning text-white" id="inputGroupSelect01">
-                                                <option selected>Categories...</option>
-                                                <option value="1">JEE</option>
-                                                <option value="2">NEET</option>
-                                                <option value="3">Others</option>
+                                            <select class="custom-select border-0 rounded-0 bg-warning text-white" onChange={this.CategoryComponentHandler} >
+                                                <option value={0} selected>Categories...</option>
+                                                <option value="jee">JEE</option>
+                                                <option value="neet">NEET</option>
+                                                <option value="other">Others</option>
                                             </select>
                                         </div>
                                     </div>
@@ -157,13 +183,10 @@ class Question extends Component {
                                     <div className="card-body pb-0">
                                         <h5 className="card-title text-warning pb-2 border-bottom">Stats</h5>
                                         <div className="alert alert-dark py-2 px-3" role="alert">
-                                            <h6 className="mb-0">Question (25)</h6>
+                                            <h6 className="mb-0">Question ({this.state.questionCount})</h6>
                                         </div>
                                         <div className="alert alert-dark py-2 px-3" role="alert">
-                                            <h6 className="mb-0">Answers (40)</h6>
-                                        </div>
-                                        <div className="alert alert-dark py-2 px-3" role="alert">
-                                            <h6 className="mb-0">Best Answers (5)</h6>
+                                            <h6 className="mb-0">Answered (5)</h6>
                                         </div>
                                         <div className="alert alert-dark py-2 px-3" role="alert">
                                             <h6 className="mb-0">Tags (5)</h6>
@@ -256,7 +279,7 @@ class Question extends Component {
                                                 <option value="-1">Categories..</option>
                                                 <option value="JEE">JEE</option>
                                                 <option value="NEET">NEET</option>
-                                                <option value="Others">Others</option>
+                                                <option value="Other">Others</option>
                                             </Control.select>
                                             
                                         </Col>
