@@ -10,8 +10,8 @@ class NavBar extends React.Component {
         localStorage.removeItem('token')
     }
     render() {
-        localStorage.removeItem('user')
-        localStorage.removeItem('token')
+        // localStorage.removeItem('user')
+        // localStorage.removeItem('token')
         return (
             <nav className="navbar shadow  navbar-expand-lg sticky-top navbar-light bg-light">
                 {/* <Link className="navbar-brand text-warning" to="/index"><img src={brand} alt="Brand" width="120"/></Link> */}

@@ -24,6 +24,9 @@ var port = normalizePort(process.env.PORT || 5005);
 app.set('port', port);
 app.set('secPort', port+440);
 
+
+app.use(cors()); // is working for secure server
+
 /**
  * Create HTTP server.
  */
