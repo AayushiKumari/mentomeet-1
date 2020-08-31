@@ -15,6 +15,7 @@ import http from 'http'
 import https from 'https'
 import fs from 'fs'
 import path from 'path'
+import cors from 'cors'
 
 /**
  * Get port from environment and store in Express.
@@ -49,6 +50,8 @@ var options = {
 }
 
 var secureServer = https.createServer(options, app);
+
+secureServer.use(cors()); // is working for secure server
 
 secureServer.listen(app.get('secPort'), ()=>{
   console.log("\nSECURE Server Listening on port: " + app.get('secPort') + "\n");
