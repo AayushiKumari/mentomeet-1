@@ -15,6 +15,7 @@ import WordFromStudents from './WordFromStudents.js'
 
 
 function Index() {
+
   return (
     <div>
       <NavBar/>

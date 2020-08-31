@@ -21,7 +21,7 @@ import {addUser, removeUser, getUser, getUsersInRoom} from './controllers/chat/u
 
 import ExpressValidator from 'express-validator'
 
-const __dirname = path.resolve() // why __dirname is not working 
+const __dirname = path.resolve() 
 dotenv.config({path:path.resolve(__dirname , '.env')}) 
 const port  = process.env.PORT || 5005
 
@@ -30,6 +30,25 @@ const app = express()
 const server = http.createServer(app);
 const io = socketio(server);
 
+//to allow Cross origin requests!
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST")
+  next()
+  })
+
+
+app.use(cors()); // is working for secure server
+
+app.all('*', (req, res, next) => {
+  if(req.secure){
+    return next();
+  }else{
+    res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
+  }
+})
+
 app.use(express.static('public'));
 
 //third party middlwares 
@@ -37,17 +56,10 @@ app.use(bodypParser.json())
 app.use(bodypParser.urlencoded({ extended: true }));
 app.use(cookieParser())
 
-app.use(cors());
 
 app.use(morgan('dev'))
 
-//to allow Cross origin requests!
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*")
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
-    res.header("Access-Control-Allow-Methods", "GET, PUT, POST")
-    next()
-    })
+
 
 app.use(bookingRouter)
 app.use(ExpressValidator())  //validations of input by user , for example email validations and non-empty password validationss
@@ -94,5 +106,5 @@ io.on('connect', (socket) => {
     })
   });
   
-
-server.listen(port, ()=> console.log("listenig at " + port))
+export default app;
+// server.listen(port, ()=> console.log("listenig at " + port))
