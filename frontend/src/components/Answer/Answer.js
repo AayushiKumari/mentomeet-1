@@ -88,7 +88,7 @@ class CommentComponent extends Component{
         const token = localStorage.getItem('token');
         // console.log("token is " + `Bearer ${token}`)
 
-        Axios.post("http://localhost:5005/quora/question/"+this.state.qid+"/answer/"+this.state.aid+`/comment/${this.state.currUser._id}`, commentSchema, {
+        Axios.post(`http://${window.location.hostname}:5005/quora/question/`+this.state.qid+"/answer/"+this.state.aid+`/comment/${this.state.currUser._id}`, commentSchema, {
             headers: {
                 'Authorization': `Bearer ${token}` 
             } 
@@ -178,7 +178,7 @@ class AnswerComponent extends Component{
             qid: this.state.qid
         }
 
-        Axios.put(`http://localhost:5005/quora/like/question/answer/`, uSchema, {
+        Axios.put(`http://${window.location.hostname}:5005/quora/like/question/answer/`, uSchema, {
             headers: {
                 'Authorization': `Bearer ${token}` 
             } 
@@ -271,7 +271,7 @@ class Answer extends Component{
         const token = localStorage.getItem('token');
         // console.log("token is " + `Bearer ${token}`)
 
-        Axios.post(`http://localhost:5005/quora/answer/${this.state.currUser._id}/question/`+this.state.qid, formData, {
+        Axios.post(`http://${window.location.hostname}:5005/quora/answer/${this.state.currUser._id}/question/`+this.state.qid, formData, {
             headers: {
                 'Authorization': `Bearer ${token}` 
             } 
@@ -291,7 +291,7 @@ class Answer extends Component{
         const token = localStorage.getItem('token');
         // console.log("token is " + `Bearer ${token}`)
 
-        Axios.get("http://localhost:5005/quora/question/"+this.state.qid).then(questionData => {
+        Axios.get(`http://${window.location.hostname}:5005/quora/question/`+this.state.qid).then(questionData => {
             console.log(questionData);
             this.setState({
                 questionData: questionData.data,
@@ -306,7 +306,7 @@ class Answer extends Component{
         const vSchema ={
             qid: this.state.qid
         }
-        Axios.put("http://localhost:5005/quora/question/view/", vSchema, {
+        Axios.put(`http://${window.location.hostname}:5005/quora/question/view/`, vSchema, {
             headers: {
                 'Authorization': `Bearer ${token}` 
             } 

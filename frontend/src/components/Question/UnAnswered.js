@@ -15,7 +15,7 @@ class UnAnswered extends Component{
     }
 
     componentDidMount(){
-        Axios.get("http://localhost:5005/quora/unanswered/").then(unAnsData => {
+        Axios.get(`http://${window.location.hostname}:5005/quora/unanswered/`).then(unAnsData => {
             console.log(unAnsData);
             this.setState({
                 unAnsQuestion: unAnsData.data,

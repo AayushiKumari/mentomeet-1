@@ -13,7 +13,7 @@ class VotedAns extends Component{
     }
 
     componentDidMount(){
-        Axios.get("http://localhost:5005/quora/votedquestion/").then(votedQues => {
+        Axios.get(`http://${window.location.hostname}:5005/quora/votedquestion/`).then(votedQues => {
             console.log(votedQues);
             this.setState({
                 votedQuestion: votedQues.data,

@@ -14,7 +14,7 @@ class CategoryQuest extends Component{
     }
 
     componentDidMount(){
-        Axios.get("http://localhost:5005/quora/question/category/"+this.state.category).then(allQuest => {
+        Axios.get(`http://${window.location.hostname}:5005/quora/question/category/`+this.state.category).then(allQuest => {
             console.log(allQuest);
             this.setState({
                 allQuestion: allQuest.data,

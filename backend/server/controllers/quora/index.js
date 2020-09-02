@@ -52,7 +52,7 @@ export function newQuestion(req, res){
         }else{
             if(req.file){
                 console.log("file saved")
-                qSchema.images = "http://localhost:5005/"+req.file.filename;
+                qSchema.images = `http://${window.location.hostname}:5005/`+req.file.filename;
                 // Object.assign(qSchema, {images: "http://localhost:5005/questionImg/"+req.file.filename});
                 Question.create(qSchema).then(result => {
                     return res.send(result)
@@ -99,7 +99,7 @@ export function editQuestion(req, res){
         }else{
             if(req.file){
                 console.log("file saved")
-                qSchema.images = "http://localhost:5005/"+req.file.filename;
+                qSchema.images = `http://${window.location.hostname}:5005/`+req.file.filename;
                 // Object.assign(qSchema, {images: "http://localhost:5005/questionImg/"+req.file.filename});
 
                 Question.findOneAndUpdate(
@@ -256,7 +256,7 @@ export function answerToQuest(req, res){
         }else{
             if(req.file){
                 console.log("file saved")
-                Object.assign(aSchema, {images: "http://localhost:5005/"+req.file.filename});
+                Object.assign(aSchema, {images: `http://${window.location.hostname}:5005/`+req.file.filename});
 
                 Question.findByIdAndUpdate(
                     {_id:qid},
@@ -328,7 +328,7 @@ export function editAnswer(req, res){
         }else{
             if(req.file){
                 console.log("file saved")
-                aSchema.images = "http://localhost:5005/"+req.file.filename;
+                aSchema.images = `http://${window.location.hostname}:5005/`+req.file.filename;
                 Answer.findOneAndUpdate(
                     {_id: aid, author: uid}, 
                     aSchema,
