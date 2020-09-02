@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import $ from "jquery"
+import {Link} from 'react-router-dom'
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Row, Label, Col, Container, Breadcrumb, BreadcrumbItem, Button, InputGroupText,  InputGroupAddon, InputGroup} from 'reactstrap';
 import Axios from 'axios'
@@ -13,6 +14,51 @@ import {setQDate,checktoken} from "../CommonFunc/common.js"
 
 const required = (val) => val && val.length;
 
+class RelatedQuestion extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            category: this.props.category.cat,
+            qid: this.props.category.qid,
+            relatedQuest: [],
+            isDataReturned: false
+        }
+    }
+
+    componentDidMount(){
+        Axios.get(`http://${window.location.hostname}:5005/quora/relatedquestion/`+this.props.category.cat).then(questionData => {
+            console.log(questionData);
+            this.setState({
+                relatedQuest: questionData.data,
+                isDataReturned: true
+            })
+        }).catch(error => {
+            console.log("Axios error")
+            console.log(error)
+        })
+    }
+
+    render(){
+        return(
+            this.state.isDataReturned && this.state.relatedQuest.length>1?
+            <div>
+                {this.state.relatedQuest.map((eachQuest, index)=>{                    
+                    return(
+                        eachQuest._id === this.state.qid ? "" :
+                        <h6 className="small font-weight-bold mb-3">
+                            <a href={"/answer/"+eachQuest._id} className="text-decoration-none">{eachQuest.question}</a>
+                        </h6>
+                    )
+                })}
+            </div>
+            : <h6>No Related Questions</h6>
+        )
+    }
+
+}
+
+// ==============================================================================================================
+
 class CommentComponent extends Component{
     constructor(props){
         super(props)
@@ -25,10 +71,6 @@ class CommentComponent extends Component{
         }
     }
 
-    // componentDidMount{
-
-    // }
-
     onChange =(e)=> {
         this.setState({
             [e.target.name]: e.target.value
@@ -37,14 +79,14 @@ class CommentComponent extends Component{
 
     onSubmitHandler =(e)=> {
         e.preventDefault();
-        console.log(this.state.comment)
+        // console.log(this.state.comment)
         const commentSchema = {
             author : localStorage.getItem('user'),
             comment : this.state.comment
         }
 
         const token = localStorage.getItem('token');
-        console.log("token is " + `Bearer ${token}`)
+        // console.log("token is " + `Bearer ${token}`)
 
         Axios.post("http://localhost:5005/quora/question/"+this.state.qid+"/answer/"+this.state.aid+`/comment/${this.state.currUser._id}`, commentSchema, {
             headers: {
@@ -110,6 +152,8 @@ class CommentComponent extends Component{
     }
 }
 
+// CommentComponent end===========================================================================================
+
 class AnswerComponent extends Component{
     constructor(props){
         super(props)
@@ -123,8 +167,22 @@ class AnswerComponent extends Component{
     }
 
     Vote(event, aid){
-        console.log(aid)
-        Axios.post(`http://localhost:5005/quora/like/${this.state.currUser._id}/question/`+this.state.qid+"/answer/"+aid).then(result => {
+        // console.log(aid)
+
+        const token = localStorage.getItem('token');
+        // console.log("token is " + `Bearer ${token}`)
+
+        const uSchema = {
+            uid: this.state.currUser._id,
+            aid: aid,
+            qid: this.state.qid
+        }
+
+        Axios.put(`http://localhost:5005/quora/like/question/answer/`, uSchema, {
+            headers: {
+                'Authorization': `Bearer ${token}` 
+            } 
+        }).then(result => {
             console.log(result);
             if(result.data == "upvote"){
                 this.setState({
@@ -165,8 +223,8 @@ class AnswerComponent extends Component{
                         </div>
                     </div>                                        
                     <div>
-                        <p className="text-muted ">{this.state.answer.answer}</p>
-                        { this.state.answer.images !="no image"? <img class="card-img-top w-100" src={this.state.answer.images} alt="alternate image"/>: "" }
+                        <p className="text-muted mb-0">{this.state.answer.answer}</p>
+                        { this.state.answer.images !="no image"? <img class="card-img-top w-100 mt-3" src={this.state.answer.images} alt="alternate image"/>: "" }
                     </div>
                 </div>
                 <CommentComponent commentData={{"aid": this.state.answer._id, "qid": this.state.qid, "allComments": this.state.answer.comments}}/>
@@ -177,8 +235,7 @@ class AnswerComponent extends Component{
     }
 }
 
-
-
+// AnswerComponent end===========================================================================================
 
 
 class Answer extends Component{
@@ -201,9 +258,9 @@ class Answer extends Component{
         })
     }
     handleSubmit = (values) => {
-        console.log(values)
-        console.log("SelectedFile is ");
-        console.log(this.state.selectedFile)
+        // console.log(values)
+        // console.log("SelectedFile is ");
+        // console.log(this.state.selectedFile)
 
         const formData = new FormData();
         formData.append("author", localStorage.getItem('user'));
@@ -212,7 +269,7 @@ class Answer extends Component{
         console.log(formData);
 
         const token = localStorage.getItem('token');
-        console.log("token is " + `Bearer ${token}`)
+        // console.log("token is " + `Bearer ${token}`)
 
         Axios.post(`http://localhost:5005/quora/answer/${this.state.currUser._id}/question/`+this.state.qid, formData, {
             headers: {
@@ -231,6 +288,9 @@ class Answer extends Component{
 
         checktoken();
 
+        const token = localStorage.getItem('token');
+        // console.log("token is " + `Bearer ${token}`)
+
         Axios.get("http://localhost:5005/quora/question/"+this.state.qid).then(questionData => {
             console.log(questionData);
             this.setState({
@@ -243,7 +303,14 @@ class Answer extends Component{
             console.log(error)
         })
 
-        Axios.put("http://localhost:5005/quora/question/view/"+this.state.qid).then(viewsResult => {
+        const vSchema ={
+            qid: this.state.qid
+        }
+        Axios.put("http://localhost:5005/quora/question/view/", vSchema, {
+            headers: {
+                'Authorization': `Bearer ${token}` 
+            } 
+        }).then(viewsResult => {
             console.log(viewsResult);
         }).catch(error => {
             console.log("Axios error")
@@ -279,14 +346,14 @@ class Answer extends Component{
                                             <a href="#" class="bg-warning px-2  text-decoration-none text-white small rounded">{this.state.questionData.category}</a>
                                         </div> 
                                         <h5 class="card-title mb-0"><a className="text-decoration-none">{this.state.questionData.question}</a></h5>
-                                        <p className="card-text text-muted small mr-2">{setQDate(this.state.questionData.date)}</p>
+                                        <p className="card-text text-muted small mr-2 mb-0">{setQDate(this.state.questionData.date)}</p>
                                         
-                                        { this.state.questionData.images? <img class="card-img-top w-100" src={this.state.questionData.images} alt="alternate image"/>: "" }
+                                        { this.state.questionData.images? <img class="card-img-top w-100 my-3" src={this.state.questionData.images} alt="alternate image"/>: "" }
                                         
-                                        <div className="mt-3">
+                                        <div className="mt-1">
                                         {this.state.questionData.tags.map((tag, index)=>{
                                             return(
-                                                <a href="#" class="badge badge-warning mr-2">{tag}</a>
+                                                <a href="#" class="badge badge-warning mr-2">{tag.toUpperCase()}</a>
                                             )                                            
                                         })}                 
                                         </div>
@@ -308,10 +375,6 @@ class Answer extends Component{
 
                                 </div>
 
-                        
-
-                                {/* <AnswerComponent ansData={{"allAns": this.state.questionData.answers, "qid": this.state.qid}} /> */}
-
                                 
                             </div>
                             <div className="col-md-4">
@@ -323,33 +386,21 @@ class Answer extends Component{
                                             <div className="alert alert-dark py-2 px-3" role="alert">
                                                 <h6 className="mb-0">Answers ({this.state.questionData.answers.length})</h6>
                                             </div>
-                                            <div className="alert alert-dark py-2 px-3" role="alert">
+                                            {/* <div className="alert alert-dark py-2 px-3" role="alert">
                                                 <h6 className="mb-0">Best Answers (15)</h6>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                     <div className="card my-2">
                                         <div className="card-body pb-2">
                                             <h5 className="card-title text-warning pb-2 border-bottom">Related Questions</h5>
                                             <div>
-                                                <h6 className="small font-weight-bold mb-3">
-                                                    <a href="#" className="text-decoration-none">How much do web developers earn? What is their salary?</a>
-                                                </h6>
-                                                <h6 className="small font-weight-bold mb-3">
-                                                    <a href="#" className="text-decoration-none">Does Google force employees who have offers from Facebook to leave immediately?</a>
-                                                </h6>
-                                                <h6 className="small font-weight-bold mb-3">
+                                                <RelatedQuestion category={{"cat": this.state.questionData.category, "qid": this.state.qid}} />
+                                                
+                                                {/* <h6 className="small font-weight-bold mb-3">
                                                     <a href="#" className="text-decoration-none">How to evaluate whether a career coach is beneficial?</a>
-                                                </h6>
-                                                <h6 className="small font-weight-bold mb-3">
-                                                    <a href="#" className="text-decoration-none">Why are the British confused about us calling bread rolls “biscuits” when they call bread rolls “puddings”?</a>
-                                                </h6>
-                                                <h6 className="small font-weight-bold mb-3">
-                                                    <a href="#" className="text-decoration-none">How do I tell my new employer that I can’t use the computer they gave me?</a>
-                                                </h6>
-                                                <h6 className="small font-weight-bold mb-3">
-                                                    <a href="#" className="text-decoration-none">How to evaluate whether a career coach is beneficial?</a>
-                                                </h6>
+                                                </h6> */}
+
                                             </div>
                                         </div>
                                     </div>
@@ -411,19 +462,6 @@ class Answer extends Component{
                                         </Col>
                                     </Row>
                                 </LocalForm>
-
-                                    {/* <form>
-                                        <div class="form-group">
-                                            <textarea class="form-control" id="answer-text" rows="5" placeholder="Write Answer..." required></textarea>
-                                        </div>
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="customFile" />
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
-                                        </div>
-                                        <div className="my-3 text-center">
-                                            <button type="submit" class="btn btn-info w-100">Submit Question</button>
-                                        </div>
-                                    </form> */}
                                 </div>
                                 
                             </div>

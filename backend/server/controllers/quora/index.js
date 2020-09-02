@@ -3,6 +3,18 @@ import Answer from '../../../database/models/quora/answer/index.js';
 import mongoose from '../../../database/connect.js'
 import multer from "multer";
 
+
+function likesComparator(a, b){
+    var comp = 0;
+    if(a.likes.length > b.likes.length){
+        comp =  -1;
+    }else {
+        comp = 1
+    }
+
+    return comp
+}
+
 var storage = multer.diskStorage({
     destination: function(req, file, cb){
         cb(null, 'public/')
@@ -141,8 +153,7 @@ export function answerCount(req, res){
         return res.json(quest.answers.length)
     }).catch(error => {
         return res.json(error)
-    })
-    
+    })    
 }
 
 export function getAllQuestions(req, res){
@@ -161,12 +172,41 @@ export function getAllUnansQuestions(req, res){
     })
 }
 
+export function unAnsweredCount(req, res){
+    Question.countDocuments({answers:[]}).then(count => {        
+        return res.json(count)
+    }).catch(error => {
+        return res.json(error)
+    })    
+}
+
 export function getAllQuestByMaxLike(req, res){
     console.log("abc")
     Question.find()
     .select("author question images category tags date flag likes views")
-    .sort("-likes").then(quests=>{
-        return res.send(quests)
+    .sort("likes").then(quests=>{
+        var r = quests;
+        r.sort(likesComparator);        
+        return res.send(r)
+    }).catch(error => {
+        return res.send(error)
+    })
+}
+
+export function relatedQuestion(req, res){
+    let category = (req.params.category).toUpperCase();
+    Question.find({"category": category}).select("question likes category").then(quests=>{
+        
+        var r = quests.sort(likesComparator);        
+        return res.send(r.slice(0,5))
+    }).catch(error => {
+        return res.send(error)
+    })
+}
+export function hotQuestion(req, res){
+    Question.find({},{"likes": 1}).select("question likes").then(quests=>{        
+        var r = quests.sort(likesComparator);        
+        return res.send(r.slice(0,5))
     }).catch(error => {
         return res.send(error)
     })
@@ -193,40 +233,7 @@ export function getQuestByCategory(req, res){
     })
 }
 
-export function questLike(req, res){
-    let uid = req.params.uid
-    let qid = req.params.qid
-    Question.findOne({_id:qid, likes: uid}).then(ans => {
-        console.log(ans)
-        if(!ans){  //i.e. if null
-            console.log(ans)
-            console.log("not in liked");
-            Question.findByIdAndUpdate(
-                {_id:qid}, 
-                {$addToSet: {likes:uid}},
-                {new: true,useFindAndModify: false}).then(result=>{
-                console.log(result.likes)
-                return res.send("upvote");
-            }).catch(error=>{
-                return res.send(error);
-            })            
-        }
-        // else{
-        //     console.log("already exists")
-        //     Question.findByIdAndUpdate(
-        //         {_id:qid}, 
-        //         {$pull: {likes:uid}},
-        //         {new: true,useFindAndModify: false}).then(result=>{
-        //             console.log(result.likes)
-        //             return res.send("downvote");
-        //     }).catch(error=>{
-        //         return res.send(error);
-        //     })
-        // }
-    }).catch(error => {
-        return res.send(error)
-    })
-}
+
 
 export function answerToQuest(req, res){
     let qid = req.params.qid;
@@ -364,10 +371,45 @@ export function editAnswer(req, res){
     
 }
 
+export function questLike(req, res){
+    let uid = req.body.uid
+    let qid = req.body.qid
+    Question.findOne({_id:qid, likes: uid}).then(ans => {
+        console.log(ans)
+        if(!ans){  //i.e. if null
+            console.log(ans)
+            console.log("not in liked");
+            Question.findByIdAndUpdate(
+                {_id:qid}, 
+                {$addToSet: {likes:uid}},
+                {new: true,useFindAndModify: false}).then(result=>{
+                console.log(result.likes)
+                return res.send("upvote");
+            }).catch(error=>{
+                return res.send(error);
+            })            
+        }
+        // else{
+        //     console.log("already exists")
+        //     Question.findByIdAndUpdate(
+        //         {_id:qid}, 
+        //         {$pull: {likes:uid}},
+        //         {new: true,useFindAndModify: false}).then(result=>{
+        //             console.log(result.likes)
+        //             return res.send("downvote");
+        //     }).catch(error=>{
+        //         return res.send(error);
+        //     })
+        // }
+    }).catch(error => {
+        return res.send(error)
+    })
+}
+
 export function ansLikes(req, res){
-    let uid = req.params.uid
-    let aid = req.params.aid
-    let qid = req.params.qid
+    let uid = req.body.uid
+    let aid = req.body.aid
+    let qid = req.body.qid
     console.log(aid)
     Question.findById(qid).then(quest => {
         console.log("abc")
@@ -407,7 +449,7 @@ export function ansLikes(req, res){
 //views---------
 
 export function questionViews(req, res){
-    let qid = req.params.qid;
+    let qid = req.body.qid;
     Question.findByIdAndUpdate(
         {_id: qid}, 
         {$inc : {'views' : 1}},
@@ -451,6 +493,10 @@ export function commentOnAns(req, res){
         return res.send(error)
     })
 }
+
+// related----------------------------------------
+
+
 
 
 

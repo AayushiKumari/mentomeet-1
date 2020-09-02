@@ -20,6 +20,49 @@ const required = (val) => val && val.length;
 const validUrl = (val) => /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/i.test(val);
 
 
+class HotQuestion extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            // category: this.props.category.cat,
+            // qid: this.props.category.qid,
+            hotQuest: [],
+            isDataReturned: false
+        }
+    }
+
+    componentDidMount(){
+        Axios.get(`http://${window.location.hostname}:5005/quora/hotquestion/`).then(questionData => {
+            console.log(questionData);
+            this.setState({
+                hotQuest: questionData.data,
+                isDataReturned: true
+            })
+        }).catch(error => {
+            console.log("Axios error")
+            console.log(error)
+        })
+    }
+
+    render(){
+        return(
+            this.state.isDataReturned && this.state.hotQuest.length>1?
+            <div>
+                {this.state.hotQuest.map((eachQuest, index)=>{                    
+                    return(
+                        // eachQuest._id === this.state.qid ? "" :
+                        <h6 className="small font-weight-bold mb-3">
+                            <a href={"/answer/"+eachQuest._id} className="text-decoration-none">{eachQuest.question}</a>
+                        </h6>
+                    )
+                })}
+            </div>
+            : <h6>No Hot Questions</h6>
+        )
+    }
+
+}
+
 class Question extends Component {
     constructor(props) {
         super(props)
@@ -29,12 +72,23 @@ class Question extends Component {
             selectedFile: null,
             tags: [],
             question: [],
-            questionCount: ""
+            questionCount: 0,
+            unansweredCount: 0,
+            
         }
     }
 
     componentDidMount() {
         checktoken();
+
+        Axios.get(`http://${window.location.hostname}:5005/quora/unanswered/count/`).then(count => {
+            this.setState({
+                unansweredCount: count.data
+            })
+        }).catch(error => {
+            console.log("axios error")
+            console.log(error)
+        })
 
         Axios.get(`http://${window.location.hostname}:5005/quora/question/count/`).then(count => {
             this.setState({
@@ -44,6 +98,7 @@ class Question extends Component {
             console.log("axios error")
             console.log(error)
         })
+        
 
         $(".custom-file-input").on("change", function () {
             var fileName = $(this).val().split("\\").pop();
@@ -72,16 +127,16 @@ class Question extends Component {
             this.setState({
                 tags: modTag
             })
-            console.log(modTag)
+            // console.log(modTag)
             document.getElementById("tag").value = "";
         }
 
     }
 
     handleSubmit = (values) => {
-        console.log(values)
-        console.log("SelectedFile is ");
-        console.log(this.state.selectedFile)
+        // console.log(values)
+        // console.log("SelectedFile is ");
+        // console.log(this.state.selectedFile)
 
         const formData = new FormData();
         formData.append("author", localStorage.getItem('user'));
@@ -89,10 +144,10 @@ class Question extends Component {
         formData.append("file", this.state.selectedFile);
         formData.append("category", (values.category).toUpperCase());
         formData.append("tags", this.state.tags);
-        console.log(formData);
+        // console.log(formData);
 
         const token = localStorage.getItem('token');
-        console.log("token is " + `Bearer ${token}`)
+        // console.log("token is " + `Bearer ${token}`)
 
         Axios.post(`http://${window.location.hostname}:5005/quora/question/`, formData, {
             headers: {
@@ -105,11 +160,12 @@ class Question extends Component {
             console.log("axios error")
             console.log(error)
         })
+        
     }
 
     CategoryComponentHandler = (e)=>{
         if(e.target.value !=0){
-            console.log(e.target.value)
+            // console.log(e.target.value)
             window.location.href = "/qna/question/"+e.target.value;
         }        
     }
@@ -183,13 +239,10 @@ class Question extends Component {
                                     <div className="card-body pb-0">
                                         <h5 className="card-title text-warning pb-2 border-bottom">Stats</h5>
                                         <div className="alert alert-dark py-2 px-3" role="alert">
-                                            <h6 className="mb-0">Question ({this.state.questionCount})</h6>
+                                            <h6 className="mb-0">Questions ({this.state.questionCount})</h6>
                                         </div>
                                         <div className="alert alert-dark py-2 px-3" role="alert">
-                                            <h6 className="mb-0">Answered (5)</h6>
-                                        </div>
-                                        <div className="alert alert-dark py-2 px-3" role="alert">
-                                            <h6 className="mb-0">Tags (5)</h6>
+                                            <h6 className="mb-0">Answered ({this.state.questionCount - this.state.unansweredCount})</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -197,24 +250,7 @@ class Question extends Component {
                                     <div className="card-body pb-2">
                                         <h5 className="card-title text-warning pb-2 border-bottom">Hot Questions</h5>
                                         <div>
-                                            <h6 className="small font-weight-bold mb-3">
-                                                <a href="#" className="text-decoration-none">How much do web developers earn? What is their salary?</a>
-                                            </h6>
-                                            <h6 className="small font-weight-bold mb-3">
-                                                <a href="#" className="text-decoration-none">Does Google force employees who have offers from Facebook to leave immediately?</a>
-                                            </h6>
-                                            <h6 className="small font-weight-bold mb-3">
-                                                <a href="#" className="text-decoration-none">How to evaluate whether a career coach is beneficial?</a>
-                                            </h6>
-                                            <h6 className="small font-weight-bold mb-3">
-                                                <a href="#" className="text-decoration-none">Why are the British confused about us calling bread rolls “biscuits” when they call bread rolls “puddings”?</a>
-                                            </h6>
-                                            <h6 className="small font-weight-bold mb-3">
-                                                <a href="#" className="text-decoration-none">How do I tell my new employer that I can’t use the computer they gave me?</a>
-                                            </h6>
-                                            <h6 className="small font-weight-bold mb-3">
-                                                <a href="#" className="text-decoration-none">How to evaluate whether a career coach is beneficial?</a>
-                                            </h6>
+                                        <HotQuestion />
                                         </div>
                                     </div>
                                 </div>
@@ -274,13 +310,24 @@ class Question extends Component {
                                                 model=".category"
                                                 id="category"
                                                 name="category"
-                                                className="custom-select"                                                
+                                                className="custom-select"
+                                                validators={{
+                                                    required
+                                                }}                                                
                                             >
-                                                <option value="-1">Categories..</option>
+                                                <option value="">Categories..</option>
                                                 <option value="JEE">JEE</option>
                                                 <option value="NEET">NEET</option>
                                                 <option value="Other">Others</option>
                                             </Control.select>
+                                            <Errors
+                                                className="text-danger"
+                                                show="touched"
+                                                model=".category"
+                                                messages={{
+                                                    required: 'This is a Required Field!'
+                                                }}
+                                            />
                                             
                                         </Col>
                                     </Row>

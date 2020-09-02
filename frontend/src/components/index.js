@@ -12,6 +12,7 @@ import About from './About'
 import BeyondMentorship from './BeyondMentorship'
 import WhyChooseMentomeet from './WhyChooseMentomeet'
 import Footer from './Footer'
+import Mentor from './Mentor'
 // import WordFromStudents from './WordFromStudents.js'
 
 
@@ -23,7 +24,7 @@ function Index() {
       <CareerSolutionEveryone/>
       <WhyChooseUs/> 
       {/* <BlogDetailedPage/> */}
-      <BlogList/>
+      <Mentor/>
       <About/>
       <BeyondMentorship/>
       <Footer />

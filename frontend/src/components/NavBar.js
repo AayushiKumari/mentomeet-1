@@ -12,7 +12,7 @@ class NavBar extends React.Component {
         return (
             <nav className="navbar shadow  navbar-expand-lg sticky-top navbar-light bg-light">
                 {/* <Link className="navbar-brand text-warning" to="/index"><img src={brand} alt="Brand" width="120"/></Link> */}
-                <a className="navbar-brand text-warning" href="index"><img src={brand} alt="Brand" width="120"/></a>
+                <a className="navbar-brand text-warning" href="/index"><img src={brand} alt="Brand" width="120"/></a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -37,7 +37,7 @@ class NavBar extends React.Component {
                                 <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="#">Blogs</a>
                                 {localStorage.getItem('token') ? 
                                     <a className="dropdown-item bg-white my-2 rounded shadow text-info" href={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName+JSON.parse(localStorage.getItem('user')).lastName}&room=General`}>Chat Rooms</a>
-                                :<></>}
+                                :<><a className="dropdown-item bg-white my-2 rounded shadow text-info" href="/login">Chats</a></>}
                                 <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="#">Experience</a>
                             </div>
                         </li>

@@ -19,8 +19,16 @@ class EachQuestion extends Component{
 
     Vote(event, qid){
         const token = localStorage.getItem('token');
-        console.log("token is " + `Bearer ${token}`)
-        Axios.post(`http://${window.location.hostname}:5005/quora/like/${this.state.currUser._id}/question/`+qid).then(result => {
+        // console.log("token is " + `Bearer ${token}`)
+        const uSchema = {
+            uid: this.state.currUser._id,
+            qid: qid
+        }
+        Axios.put(`http://${window.location.hostname}:5005/quora/like/question/`, uSchema, {
+            headers: {
+                'Authorization': `Bearer ${token}` 
+            } 
+        }).then(result => {
             console.log(result);
             if(result.data == "upvote"){
                 this.setState({

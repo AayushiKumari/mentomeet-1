@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import queryString from 'query-string';
 import io from "socket.io-client";
 import {Col, Row, Container, Card, CardHeader, CardBody, Button} from 'reactstrap'
-import Navbar from './../../NavBar.js'
+import NavBarLog from './../../NavBarLog'
 import {Link} from 'react-router-dom'
 
 import TextContainer from '../TextContainer/TextContainer';
@@ -58,7 +58,7 @@ const Chat = ({ location }) => {
 
   return (
     <>
-    <Navbar />
+    <NavBarLog />
     <Container fluid>
       <Row>
         <Col md={6}>
