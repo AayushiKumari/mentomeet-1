@@ -15,6 +15,10 @@ import signOutRouter from './routes/auth/signOut/index.js'
 
 import quoraRouter from './routes/quora/index.js'
 import chatRouter from './routes/chat/index.js'
+import blogRouter from './routes/blog/index.js'
+import mentorRouter from './routes/mentor/index.js'
+import menteeRouter from './routes/mentee/index.js'
+
 import {addUser, removeUser, getUser, getUsersInRoom} from './controllers/chat/users.js'
 
 // var quoraRouter = require('./routes/quora/quora.route.js');
@@ -56,7 +60,9 @@ app.use(signInrouter)
 app.use(signOutRouter)
 app.use(quoraRouter)
 app.use(chatRouter)
-
+app.use(blogRouter)
+app.use(mentorRouter)
+app.use(menteeRouter)
 io.on('connect', (socket) => {
     socket.on('join', ({ name, room }, callback) => {
       console.log("JOIN")

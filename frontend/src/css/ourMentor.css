@@ -1,0 +1,139 @@
+#career-solution-everyone {
+    font-size: 16px;
+  }
+  #career-solution-everyone h1 {
+    color: orange;
+    font-size: 3.5em;
+    font-weight: 900;
+    line-height: 0.8em;
+  }
+  #career-solution-everyone #everyone {
+    font-size: 3em;
+    margin-top: 0em;
+    line-height: 1em;
+  }
+  .big-brother {
+    height: 300px;
+  }
+  
+  .search-box {
+    height: 30px;
+    width: 230px;
+    background-color: "#fff";
+    border: 2px solid darkturquoise;
+    border-radius: 15px;
+    padding-left: 15px;
+  }
+  .search-box .fa-search {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 20px;
+    color: "black";
+  }
+  .sm-brother {
+    width: 230px;
+    height: 100%;
+    border: 1px solid grey;
+    border-radius: 2rem;
+  }
+  .sm-brother h2 {
+    color: grey;
+    font-weight: 900;
+    margin: 7px auto;
+  }
+  .li-items {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    margin: auto;
+  }
+  
+  .rating {
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    position: absolute;
+    left: 0px;
+    right: 94px;
+  }
+  .li-items p {
+    margin-top: -37px;
+    font-size: 2rem;
+  }
+  .exploreButton {
+    color: grey;
+    font-size: 2rem;
+    font-weight: 700;
+    align-self: center;
+    padding: 0.2rem 3.7rem;
+    margin-bottom: 15px;
+    background-color: white;
+    border-radius: 2rem;
+    border: 2px solid grey;
+  }
+  .explore {
+    color: grey;
+    font-size: 1rem;
+    font-weight: 700;
+    align-self: center;
+    padding: 0.2rem 1.7rem;
+    margin-bottom: 15px;
+    background-color: white;
+    border-radius: 1rem;
+    border: 2px solid grey;
+  }
+  .progress {
+    color: orange;
+    font-size: 1rem;
+    font-weight: 700;
+    align-self: center;
+    padding: 1.2rem 1.7rem;
+    margin-bottom: 15px;
+    background-color: white;
+    border-radius: 1rem;
+    border: 2px solid orange;
+    margin: 0px 152px;
+  }
+  .line {
+    height: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(19, 2, 2);
+    border: 0 none;
+  }
+  .explore-inner {
+    margin-left: 142px;
+    color: orange;
+    margin-top: -18px;
+    font-size: 1rem;
+    font-weight: 700;
+    align-self: center;
+    padding-top: 34px;
+    margin-bottom: 1px;
+    background-color: orange;
+    border-radius: 1rem;
+    border: 1px solid orange;
+    margin-right: 132px;
+  }
+  .explore:hover {
+    text-decoration: none;
+  }
+  .orange {
+    color: orange;
+  }
+  @media (max-width: 768px) {
+    #career-solution-everyone {
+      font-size: 12px;
+    }
+  }
+  @media (max-width: 576px) {
+    #career-solution-everyone {
+      font-size: 10px;
+    }
+  }
+  

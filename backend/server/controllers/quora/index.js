@@ -21,6 +21,10 @@ var storage = multer.diskStorage({
     },
     filename: function(req, file, cb){
         cb(null, Date.now()+'-'+file.originalname)
+    },
+   // onFileUploadStart: file => !file.mimetype.match(/^image\//),
+    limits: {
+     fileSize: 1024 * 1024 * 10   // 10 MB
     }
 })
 var upload = multer({
@@ -52,7 +56,7 @@ export function newQuestion(req, res){
         }else{
             if(req.file){
                 console.log("file saved")
-                qSchema.images = `http://${window.location.hostname}:5005/`+req.file.filename;
+                qSchema.images = `http://${req.hostname}:5005/`+req.file.filename;
                 // Object.assign(qSchema, {images: "http://localhost:5005/questionImg/"+req.file.filename});
                 Question.create(qSchema).then(result => {
                     return res.send(result)
