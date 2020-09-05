@@ -14,22 +14,22 @@ export default function Tab(props){
         <div className={classForTab} id={props.data.id} role="tabpanel" aria-labelledby={props.data.areaLabelledBy}>
            <NavPost data={{
                title:'This is the first post',
-               imgUrl:iftekhaRiyad,
+            //    imgUrl:iftekhaRiyad,
                date:"February 10, 1996"
                }}/>
            <NavPost data={{
                title:'This is the Second post',
-               imgUrl:iftekhaRiyad,
+             //  imgUrl:iftekhaRiyad,
                date:"January 21, 1997"
                }}/>
             <NavPost data={{
                title:'This is the third post',
-               imgUrl:iftekhaRiyad,
+              // imgUrl:iftekhaRiyad,
                date:"May 1, 2020"
                }}/>
             <NavPost data={{
                title:'This is the fourth post',
-               imgUrl:iftekhaRiyad,
+              // imgUrl:iftekhaRiyad,
                date:"September 3, 2002"
                }}/>
        </div>

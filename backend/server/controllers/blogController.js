@@ -87,19 +87,19 @@ export function isquerypresent (req, res, next) {
 export function blog_list (req, res,next){
     async.parallel({
         jee_blogs: function (callback) {
-            Blog.find({verification_status:false,category:'JEE'},'author title body_image tag created_at minute_read  url ').sort({Date:1}).limit(3)
+            Blog.find({verification_status:false,category:'JEE'},'author title body_image tag created_at minute_read  url ').sort({Date:1})
                 .exec(callback)
         },
         neet_blogs: function (callback) {
-            Blog.find({verification_status:false,category:'NEET'},'author title body_image tag created_at minute_read  url ').sort({Date:1}).limit(3)
+            Blog.find({verification_status:false,category:'NEET'},'author title body_image tag created_at minute_read  url ').sort({Date:1})
                 .exec(callback)
         },
         career_blogs: function (callback) {
-            Blog.find({verification_status:false,category:'CAREER'},'author title body_image tag created_at minute_read  url ').sort({Date:1}).limit(3)
+            Blog.find({verification_status:false,category:'CAREER'},'author title body_image tag created_at minute_read  url ').sort({Date:1})
                 .exec(callback)
         },
         development_blogs: function (callback) {
-            Blog.find({verification_status:false,category:'DEVELOPMENT'},'author title body_image tag created_at minute_read  url ').sort({Date:1}).limit(3)
+            Blog.find({verification_status:false,category:'DEVELOPMENT'},'author title body_image tag created_at minute_read  url ').sort({Date:1})
                 .exec(callback)
         },
                               

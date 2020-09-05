@@ -3,8 +3,7 @@ import React from 'react';
 import './css/App.css';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
-import BlogDetailedPage from './components/BlogPostDetailed/BlogDetailedPage'
-import BlogList from './components/BlogList/BlogList.js'
+import BlogList from './components/Blog/BlogList.js'
 import MentorList from './components/Mentor/MentorList'
 import MentorCreateForm from './components/Mentor/MentorCreateForm';
 import MenteeCreateForm from './components/Mentee/MenteeCreateForm';
