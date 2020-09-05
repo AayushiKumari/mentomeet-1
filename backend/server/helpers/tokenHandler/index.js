@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-const PrivateKey = process.env.PRIVATE_JWT_KEY
+const PrivateKey = '12345-67890-09876-54321'
 
 export function generateToken(payload){
     let token

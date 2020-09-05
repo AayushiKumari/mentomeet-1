@@ -2,11 +2,11 @@ import expressJwt from 'express-jwt'
 function authorizer(){
     console.log("we are checking authorizer")
     return expressJwt({
-        secret:process.env.PRIVATE_JWT_KEY,
+        secret:'12345-67890-09876-54321',//
         userProperty:'auth'
     })
 }
-
+//process.env.PRIVATE_JWT_KEY
 export const isAuth = (req, res, next) => {
     console.log("We are checking isAuth")
     // console.log(req.auth,req.body.user)

@@ -20,25 +20,36 @@ class NavBar extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item different mx-3 font-weight-bold">
-                            <a className="nav-link text-warning" href="#">STUDENTS <span className="sr-only">(current)</span></a>
-                        </li>
-                        <li className="nav-item different mx-3 font-weight-bold">
-                            <a className="nav-link text-warning" href="#">MENTORS</a>
-                        </li>
-                        <li className="nav-item different mx-3 font-weight-bold">
                             <a className="nav-link text-warning" href="#about">ABOUT US</a>
-                        </li>                        
+                        </li>
+                        <li className="nav-item different mx-3 font-weight-bold dropdown">
+                            <a className="nav-link text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            STUDENTS
+                            </a>
+                            <div className="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdown">
+                                <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="/mentee">BE A MENTEE</a>
+                                </div>
+                        </li>     
+                        <li className="nav-item different mx-3 font-weight-bold dropdown">
+                            <a className="nav-link text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            MENTORS
+                            </a>
+                            <div className="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdown">
+                                <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="/mentor">BE A MENTOR</a>
+                                <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="/mentors">OUR MENTORS</a>
+                                </div>
+                        </li>
                         <li className="nav-item different mx-3 font-weight-bold dropdown">
                             <a className="nav-link text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             RESOURCES
                             </a>
                             <div className="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdown">
                                 <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="/qna">QnA</a>
-                                <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="#">Blogs</a>
+                                <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="/blogs">Blogs</a>
                                 {localStorage.getItem('token') ? 
                                     <a className="dropdown-item bg-white my-2 rounded shadow text-info" href={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName+JSON.parse(localStorage.getItem('user')).lastName}&room=General`}>Chat Rooms</a>
                                 :<><a className="dropdown-item bg-white my-2 rounded shadow text-info" href="/login">Chats</a></>}
-                                <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="#">Experience</a>
+                                <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="/blog">Create Blog</a>
                             </div>
                         </li>
                         
