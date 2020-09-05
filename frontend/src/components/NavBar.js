@@ -36,7 +36,10 @@ class NavBar extends React.Component {
                             </a>
                             <div className="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdown">
                                 <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="/mentor">BE A MENTOR</a>
+                                <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="/profile">MY PROFILE</a>
                                 <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="/mentors">OUR MENTORS</a>
+                                <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="/blogdetail">DUMMY BLOG DETAIL</a>
+
                                 </div>
                         </li>
                         <li className="nav-item different mx-3 font-weight-bold dropdown">

@@ -1,0 +1,33 @@
+#profile-card {
+  text-align: center;
+}
+
+.card-img-top {
+  width: 80%;
+  margin: auto;
+}
+
+body {
+  background: rgba(0,0,0,0.04);
+}
+
+.hidden {
+  display: none;
+}
+
+#posts-jumbotron {
+  padding-top: 12px;
+}
+
+#posts-top-menu {
+  display: flex;
+}
+
+#posts-top-menu .right-buttons {
+  margin-left: auto;
+}
+
+.posts-card {
+  margin-top: 12px
+}
+
