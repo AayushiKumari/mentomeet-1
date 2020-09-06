@@ -1,0 +1,41 @@
+#footer {
+    background: rgba(0, 0, 0, 0.02);
+    color: #45505b;
+    font-size: 14px;
+    padding: 30px 0;
+}
+
+#footer .social-links {
+    list-style-type: none;
+    padding: 12px 0 12px 12px;
+    font-size: larger;
+    text-align: left;
+    margin: auto;
+}
+
+#footer .social-links li {
+    padding: 4px;
+}
+
+
+#footer .join-us {
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    flex-direction: column;
+}
+
+#footer .contact-details {
+    text-align: center;
+    padding: 24px 12px;
+    font-size: 20px;
+}
+
+#footer .join-us-form {
+    display: flex;
+}
+
+#footer .join-us-form button {
+    border: none;
+    border-radius: 0;
+}
