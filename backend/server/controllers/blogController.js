@@ -5,6 +5,17 @@ import Comment from '../../database/models/Comment.js'
 import multer from "multer"
 import async from 'async'
 
+function likesComparator(a, b){
+    var comp = 0;
+    if(a.likes.length > b.likes.length){
+        comp =  -1;
+    }else {
+        comp = 1
+    }
+
+    return comp
+}
+
 var storage = multer.diskStorage({
     destination: function(req, file, cb){
         cb(null, 'public/')
@@ -84,6 +95,18 @@ export function isquerypresent (req, res, next) {
 //give a option of "see more "option to see all blogs category wise using query
 //fetching all blogs of all categories (top 3 of every )
 //endpoint=/blogs
+
+export function allBlogs(req, res){
+    Blog.find().select("author body_image body_text category tag title likes date").sort({date:-1}).then(result=>{
+        if(result){
+            return res.send(result)
+        }
+    }).catch(error=>{
+        return res.send(error)
+    })
+}
+
+
 export function blog_list (req, res,next){
     async.parallel({
         jee_blogs: function (callback) {
@@ -103,6 +126,38 @@ export function blog_list (req, res,next){
                 .exec(callback)
         },
                               
+    }, function (err, results) {
+        if (err) { return next(err); } // Error in API usage.
+        if (results.jee_blogs == null ||results.neet_blogs == null||
+            results.career_blogs==null||results.development_blogs== null
+            ) { // No results.
+            var err = new Error('Blogs not found');
+            err.status = 404;
+            return next(err);
+        }
+        res.send({jee_blogs: results.jee_blogs, neet_blogs: results.neet_blogs,
+            career_blogs:results.career_blogs,development_blogs:results.development_blogs });
+            });
+
+}
+export function blog_list_count (req, res,next){
+    async.parallel({
+        jee_blogs: function (callback) {
+            Blog.countDocuments({category:'JEE'})
+                .exec(callback)
+        },
+        neet_blogs: function (callback) {
+            Blog.countDocuments({category:'NEET'})
+                .exec(callback)
+        },
+        career_blogs: function (callback) {
+            Blog.countDocuments({category:'CAREER'})
+                .exec(callback)
+        },
+        development_blogs: function (callback) {
+            Blog.countDocuments({category:'DEVELOPMENT'})
+                .exec(callback)
+        },                              
     }, function (err, results) {
         if (err) { return next(err); } // Error in API usage.
         if (results.jee_blogs == null ||results.neet_blogs == null||
@@ -176,52 +231,42 @@ export function get_blog_create(req, res,next){
 export function post_blog_create 
     // Process request after validation and sanitization.
     (req, res)  {
-        upload(req, res, function (err) {
         // Extract the validation errors from a request.
-        var blog = new Blog(
-            {//handle author using req.user._id
+        var blogSchema = {//handle author using req.user._id
               // author_name:req.user.first_name+" "+req.user.last_name,
+              author: req.body.author,
                 title: req.body.title,
                 body_text: req.body.body_text,
                 body_image: "",
                 category: req.body.category,
                 minute_read: req.body.minute_read,
                 tag:req.body.tag,
-            }
-        );
-        if (err instanceof multer.MulterError) {
-            console.log("Checking error from isntance of multer")
-            console.log(err);
-            return res.status(500).json(err)
-        } else if (err) {
-            console.log("Checking error")
-            console.log(err);
-            return res.status(500).json(err)
-        }else{
+            };
+        
             if(req.file){
                 console.log("file saved")
-                blog.body_image = "http://localhost:5005/"+req.file.filename;
+                blogSchema.body_image = "http://localhost:5005/"+req.file.filename;
                 // Object.assign(qSchema, {images: "http://localhost:5005/questionImg/"+req.file.filename});
-                blog.save((err,result)=>{
-                    if (err) { res.send(err); }
-                    else { res.send(result);}
-                    //res.redirect(theBlog.url)
-               })
+                Blog.create(blogSchema).then(result => {
+                    return res.send(result)
+                }).catch(error => {
+                    return res.send(error)
+                })
             }else{
                 console.log("no file")
-                blog.save((err,result)=>{
-                    if (err) {res.send(result); }
-                    else { res.send(result);console.log(result)}
-                    //res.redirect(theBlog.url)
-               })
+                Blog.create(blogSchema).then(result => {
+                    return res.send(result)
+                }).catch(error => {
+                    return res.send(error)
+                })
             }
-        }
+        
         
             // Data from form is valid. Update the record.
             
         
            
-        })
+        
 }
 
 
@@ -342,4 +387,154 @@ export function post_upvote_comment(req,res,next){ //validation need?also make e
         if(err)return next(err);
         else res.send(result)
     });
+}
+
+
+
+
+
+
+//===================================================================
+
+export function blogLikes(req, res){
+    let uid = req.body.uid
+    let bid = req.body.bid
+    console.log(bid)
+    console.log(uid)
+    Blog.findOne({_id:bid, likes: uid}).then(blog => {
+        console.log(blog)
+        if(!blog){  //i.e. if null
+            console.log(blog)
+            console.log("not in liked");
+            Blog.findByIdAndUpdate(
+                {_id:bid}, 
+                {$addToSet: {likes:uid}},
+                {new: true,useFindAndModify: false}).then(result=>{
+                console.log(result.likes)
+                return res.send("upvote");
+            }).catch(error=>{
+                return res.send(error);
+            })            
+        }
+       
+    }).catch(error => {
+        console.log("errrrrr")
+        console.log(error)
+        return res.send(error)
+    })
+}
+
+export function blogLikessss(req, res){
+    let uid = req.body.uid
+    let bid = req.body.bid
+    console.log(bid)
+    Blog.findById(bid).then(blog => {
+        console.log("abc")
+        if(blog!=null){
+            console.log("xyz")
+            console.log(blog.likes)
+            if(!(blog.likes).includes(uid)){
+                blog.likes.push(uid);
+            }else{
+                return res.send("already liked")
+            }            
+            quest.save().then(result => {
+                return res.send("upvote")
+            }).catch(error => {
+                return res.send(error)
+            })
+        }else{
+            return res.send("blog not found")
+        }
+            
+    }).catch(error => {
+        return res.send(error)
+    })
+}
+
+//views---------
+
+export function blogViews(req, res){
+    let bid = req.body.bid;
+    Blog.findByIdAndUpdate(
+        {_id: bid}, 
+        {$inc : {'views' : 1}},
+        {new: true,useFindAndModify: false}).then(result => {
+            if(result!=null){
+                return res.send("view increased")
+            }
+            return res.send("no result")
+    }).catch(error => {
+        return res.send(error)
+    })
+}
+
+
+// comments------------------------------------
+
+export function LikedBlog(req, res){
+    Blog.find({},{"likes": 1}).select("title likes").then(blogs=>{        
+        var r = blogs.sort(likesComparator);        
+        return res.send(r.slice(0,5))
+    }).catch(error => {
+        return res.send(error)
+    })
+}
+
+export function getBlogById(req, res){
+    const bid = req.params.bid;
+    console.log(bid)
+    Blog.findById(bid)
+    .select("author body_image body_text category tag title likes comments date views").then(result=>{
+        return res.send(result);
+    }).catch(error => {
+        return res.send(error);
+    })
+}
+
+export function getBlogByCategory(req, res){
+    const category = (req.params.category).toUpperCase();
+    console.log(category)
+    Blog.find({category: category})
+    .select("author body_image body_text category tag title likes comments date views").sort({date:-1}).then(result=>{
+        return res.send(result);
+    }).catch(error => {
+        return res.send(error);
+    })
+}
+export function getBlogByTag(req, res){
+    const tag = (req.params.tag).toUpperCase();
+    console.log(tag)
+    Blog.find({tag: tag})
+    .select("author body_image body_text category tag title likes comments date views").sort({date:-1}).then(result=>{
+        return res.send(result);
+    }).catch(error => {
+        return res.send(error);
+    })
+}
+
+export function commentOnBlog(req, res){
+    let bid = req.params.bid;
+    const commentSchema = {
+        author : req.body.author,
+        comment: req.body.comment
+    }
+    Blog.findById(bid).then(blog => {
+        console.log(blog)
+        if(blog!=null){
+            console.log("xyz")
+            console.log(blog.comments)
+            blog.comments.push(commentSchema);
+          
+            blog.save().then(result => {
+                return res.send(result)
+            }).catch(error => {
+                return res.send(error)
+            })
+        }else{
+            return res.send("blog not found")
+        }
+    }).catch(error => {
+        return res.send(error)
+    })
 }

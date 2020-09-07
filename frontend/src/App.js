@@ -5,11 +5,13 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import BlogDetailedPage from './components/Blog/BlogDetailedPage.js'
 import BlogList from './components/Blog/BlogList.js'
+import BlogLists from './components/Blog/BlogLists.js'
 import MentorList from './components/Mentor/MentorList'
 import MentorCreateForm from './components/Mentor/MentorCreateForm';
 import MentorProfile from './components/Mentor/MentorProfile/MentorProfile.js'
 import MenteeCreateForm from './components/Mentee/MenteeCreateForm';
 import BlogCreateForm from './components/Blog/BlogCreateForm';
+import BlogDetail from './components/Blog/BlogDetail';
 
 
 
@@ -30,9 +32,11 @@ function App() {
                
                {/* blogs,mentors,mentees */}
                <Route path="/blogdetail" render={props => <BlogDetailedPage {...props} /> } />
-                <Route path="/blogs" render={props => <BlogList {...props} /> } />
+               <Route path="/blogs/view/:bid" render={props => <BlogDetail {...props} /> } />
+                <Route path="/blogs" render={props => <BlogLists {...props} /> } />
+                <Route path="/bloglist" render={props => <BlogList {...props} /> } />
+                {/* <Route path="/createblog" render={props => <BlogCreateForm {...props} /> } /> */}
                 <Route path="/mentors" render={props => <MentorList {...props} /> } />
-                <Route path="/blog" render={props => <BlogCreateForm {...props} /> } />
                 <Route path="/mentor" render={props => <MentorCreateForm {...props} /> } />
                 <Route path="/profile" render={props => <MentorProfile {...props} /> } />
                 <Route path="/mentee" render={props => <MenteeCreateForm {...props} /> } />

@@ -84,7 +84,7 @@ const NavbarExample = (props) => {
       </Navbar>
     </div>
   );
-}     
+}      
 
 class BlogList extends React.Component {
   constructor(props) {

@@ -1,8 +1,10 @@
 import express from 'express'
 //import blogController from  ''post_blog_create,post_blog_update,
-import {get_blog_create,post_blog_create,post_blog_update,blog_list, blog_detail,isquerypresent,
-get_blog_update, get_blog_delete, post_blog_delete,post_comment_onBlog,post_upvote_blog,post_upvote_comment} 
+import {get_blog_create,allBlogs,post_blog_create,post_blog_update,blog_list, blog_detail,isquerypresent,
+get_blog_update, get_blog_delete, post_blog_delete,post_comment_onBlog,post_upvote_blog,post_upvote_comment,
+getBlogById, blogViews, commentOnBlog, blogLikes, blog_list_count, getBlogByCategory, getBlogByTag, LikedBlog} 
 from './../../controllers/blogController.js'
+import multer from "multer"
 const router  = express.Router()
 import {blogValidator,commentValidator} from '../../helpers/validators/blogValidator/index.js'
 //authorizers
@@ -24,14 +26,32 @@ import authorizer from '../../helpers/authorizers/index.js'
 //   minute_read: { type: Number, min: 0,max: 60,default:5},
 
 //   verification_status: { type: Boolean,  default: false,},//upvote will be handled in seprate document,for now ok
+var storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, 'public/')
+    },
+    filename: function(req, file, cb){
+        cb(null, Date.now()+'-'+file.originalname)
+    },
+   // onFileUploadStart: file => !file.mimetype.match(/^image\//),
+    limits: {
+     fileSize: 1024 * 1024 * 5   // 5 MB
+    }
+})
+var upload = multer({
+    storage: storage
+})
 
-router.post('/blog',blogValidator,post_blog_create);
+router.post('/blog', upload.single('file'),  blogValidator, post_blog_create);
 //requred(title,body_text,category) optional(body_image,tag,minute_read),need authenticate
 
+
+
 router.get('/blogs',isquerypresent,blog_list); 
+ 
 //get all blog category wise
 
-router.get('/blogs/:id',blog_detail)
+// router.get('/blogs/:id',blog_detail)
 //blog detail
 
 router.get('/blogs/:id/update',get_blog_update);
@@ -55,4 +75,18 @@ router.post('/blogs/:id/upvoteBlog',post_upvote_blog)
 router.post('/blogs/:blogId/:commentId/upvoteComment',post_upvote_comment)
 //location(blogController,blogValidator)
 //upvote comment field(user(req.user),comment(req.params.commentId))
+
+router.get('/blogs/count/',blog_list_count);
+router.get('/allblogs', allBlogs); 
+router.get('/blogs/liked/', LikedBlog); 
+router.get('/blogs/:category', getBlogByCategory); 
+router.get('/blogs/tag/:tag', getBlogByTag); 
+router.get('/blog/:bid', getBlogById)
+router.get('/blog/view/:bid', getBlogById)
+router.post('/blog/comment/:bid', commentOnBlog)
+router.put('/blog/likes/', authorizer(), blogLikes)
+router.put('/blog/views/', authorizer(), blogViews)
+
+
+
 export default router

@@ -21,7 +21,7 @@ class NavBarLog extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item different mx-3 font-weight-bold">
-                            <a className="nav-link text-warning" href="#">Blogs</a>
+                            <a className="nav-link text-warning" href="/blogs">Blogs</a>
                         </li>
                         <li className="nav-item different mx-3 font-weight-bold">
                             <a className="nav-link text-warning" href="/qna">QnA</a>

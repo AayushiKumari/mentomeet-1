@@ -52,7 +52,6 @@ class NavBar extends React.Component {
                                 {localStorage.getItem('token') ? 
                                     <a className="dropdown-item bg-white my-2 rounded shadow text-info" href={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName+JSON.parse(localStorage.getItem('user')).lastName}&room=General`}>Chat Rooms</a>
                                 :<><a className="dropdown-item bg-white my-2 rounded shadow text-info" href="/login">Chats</a></>}
-                                <a className="dropdown-item bg-white my-2 rounded shadow text-info" href="/blog">Create Blog</a>
                             </div>
                         </li>
                         
