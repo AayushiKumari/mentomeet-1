@@ -332,7 +332,6 @@ class Answer extends Component{
 
         return(
             <div>
-                <NavBarLog />
             { this.state.isDataReturned ? 
             
                 <div className="my-4">

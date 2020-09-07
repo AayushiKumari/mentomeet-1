@@ -174,7 +174,6 @@ class Question extends Component {
     render() {
         return (
             <>
-            <NavBarLog />
             <div className="my-4">
                 <div className="container-lg">
                     <div className="row">
