@@ -498,7 +498,7 @@ class MentorCreateForm extends React.Component {
                   required
                 />
               </div>
-              <div class="col-sm-6 d-flex align-items-center justify-content-center">
+              <div className="col-sm-6 d-flex align-items-center justify-content-center">
                 <label htmlFor="end_time">end time* </label>
                 <input
                   name="end_time"

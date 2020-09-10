@@ -101,14 +101,20 @@ export function mentor_detail  (req, res, next) {
                               
     }, function (err, results) {
         if (err) { return next(err); } // Error in API usage.
+
+        // CURRENTLY COMMENTED WITH ABHISHEK.... AS ERROR IN LOGIC
         // if (results.detail == null ||results.myblogs == null ||results.myfollowers == null
         //     ) { // No results.
         //     var err = new Error('mentor not found');
         //     err.status = 404;
         //     return next(err);
         // }
-        res.send({detail: results.detail, myblogs: results.myblogs,myfollowers:results.myfollowers });
-            });
+        res.send({
+            detail: results.detail,
+            myblogs: results.myblogs,
+            myfollowers:results.myfollowers
+        });
+    });
 
 };
 

@@ -37,7 +37,9 @@ class MentorProfile extends React.Component {
           title: 'Title 4',
           date: 'August 23'
         }
-      ]
+      ],
+      error: null,
+      isLoaded: false
     }
 
     this.toggleAllPosts = this.toggleAllPosts.bind(this);
@@ -62,6 +64,70 @@ class MentorProfile extends React.Component {
     // State variables can be found in the constructor and you will have to just call setState after the fetch
     // And the render will auctomatically happen!!
     console.log("Fetch user data for userId", userId);
+
+    const endpoint = `http://${window.location.hostname}:5005/mentors/${userId}`;
+    // CSRF Token if needed
+
+
+    // API request in react 
+    // URL: https://reactjs.org/docs/faq-ajax.html
+
+    fetch(endpoint)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log("Response data of mentors came", result);
+
+          // Now add the data as required and update the state
+          const authorName = result.detail.firstName + ' ' + result.detail.lastName;
+          const authorDescription = result.detail.about_me;
+          const posts = result.myblogs;
+
+          // Add more field as to show accordingly
+          // TODO check for all the details
+
+          // SAMPLE DATA currently on which it is working
+          /*
+          {
+            "detail": {
+              "history": [],
+              "_id": "5f59c4a01c395963834a2d79",
+              "email": "p@p.com",
+              "salt": "Salt",
+              "hashedPassword": "Hash",
+              "gender": "Male",
+              "category": "Mentor",
+              "firstName": "p",
+              "lastName": "s",
+              "mobile": 9988776655,
+              "createdAt": "2020-09-10T06:16:00.361Z",
+              "updatedAt": "2020-09-10T06:16:00.361Z",
+              "__v": 0
+            },
+            "myblogs": [],
+            "myfollowers": 0
+          }
+          */
+
+          this.setState({
+            isLoaded: true,
+            authorName: authorName,
+            authorDescription: authorDescription,
+            posts: posts
+          });
+
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+
   }
 
   componentDidMount() {
@@ -75,8 +141,9 @@ class MentorProfile extends React.Component {
     if (match.params.id) {
       this.updateProfileData(match.params.id);
     } else {
-      const uId = JSON.parse(localStorage.getItem('user'));
+      const uId = JSON.parse(localStorage.getItem('user'))._id;
       console.log("My User Id", uId)
+      this.updateProfileData(uId);
     }
 
   }
@@ -91,7 +158,6 @@ class MentorProfile extends React.Component {
 
     const { match } = this.props;
     // match.params.id - The user Id for other users
-    console.log("The id", match.params.id)
     // If the id does not exist this means open the current user profile
 
     let updateBtn = '';
@@ -102,7 +168,7 @@ class MentorProfile extends React.Component {
       // This is the user profile, user can update the form
       updateBtn = (
         <div style={{ margin: "8px 0 20px 0" }}>
-           <Link to="/mentor">Update Profile</Link>
+          <Link to="/mentor">Update Profile</Link>
         </div>
       )
     }
@@ -111,10 +177,10 @@ class MentorProfile extends React.Component {
       const post = posts[i];
 
       var toHide = "hidden";
-      if(showAllPosts){
+      if (showAllPosts) {
         toHide = "";
       }
-      if(i<3){
+      if (i < 3) {
         toHide = "";
       }
 
