@@ -313,6 +313,16 @@ class MentorCreateForm extends React.Component {
     // Also perform some checcks like phone is a number or not
   }
 
+ 
+  componentDidMount() {
+    // Here we will update the user details of the currently logged in User
+    // Se get the userId of the user from the token storage and then
+    // Fetch the data and then update the current state
+    // A suggestion (NOt necessary), show a loading sign or somthing using the react state until the aPI request succeeds
+    // Take care that fetch is asynchronous
+    console.log("START WRITING CODE IN componentDidMount")
+  }
+
   render() {
 
     const isValidFbLink = this.state.fb_link.valid;
@@ -329,7 +339,7 @@ class MentorCreateForm extends React.Component {
       <Fragment>
         <div className="container" style={{ marginTop: "24px", marginBottom: "48px" }}>
 
-          <h3 style={{ textAlign: "center" }}>Register as a Mentor</h3>
+          <h3 style={{ textAlign: "center" }}>Update Mentor Profile</h3>
 
           <form
             id="create-mentor-form"

@@ -37,7 +37,11 @@ function App() {
             <Route path="/mentors" render={props => <MentorList {...props} />} />
             <Route path="/blog" render={props => <BlogCreateForm {...props} />} />
             <Route path="/mentor" render={props => <MentorCreateForm {...props} />} />
+
+            {/* Using the same Mentor Profile component, with different options changed in the file */}
+            <Route path="/profile/:id" render={props => <MentorProfile {...props} />} />
             <Route path="/profile" render={props => <MentorProfile {...props} />} />
+            
             <Route path="/mentee" render={props => <MenteeCreateForm {...props} />} />
             {/* <Route path="/qna" render={props => <Question {...props} /> } /> */}
 

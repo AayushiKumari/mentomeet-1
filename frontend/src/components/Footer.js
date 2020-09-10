@@ -17,7 +17,8 @@ class Footer extends React.Component {
     super(props);
     this.state = {
       openPrivacy: false,
-      openTC: false
+      openTC: false,
+      newsLetterEmail: ''
     }
   }
 
@@ -44,6 +45,10 @@ class Footer extends React.Component {
     this.setState({
       openPrivacy: true
     })
+  }
+
+  handleSubmit = () => {
+    
   }
 
   render() {
