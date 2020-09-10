@@ -214,7 +214,7 @@ class AnswerComponent extends Component{
                             
                         </div>
                         <div>
-                            <h4 className="vote-btn dfdsf text-info cursor-pointer" >
+                            <h4 className="vote-btn text-info cursor-pointer" >
                                 {this.state.answer.likes.includes(this.state.currUser._id) ? 
                                     <i class="far fa-arrow-alt-circle-up text-warning"></i>
                                     : <i class={"far fa-arrow-alt-circle-up " + this.state.vote } onClick={(e)=>this.Vote(e, this.state.answer._id)}></i>
@@ -223,7 +223,7 @@ class AnswerComponent extends Component{
                         </div>
                     </div>                                        
                     <div>
-                        <p className="text-muted mb-0">{this.state.answer.answer}</p>
+                        <p className="text-muted mb-0" style={{"letterSpacing":"1px","whiteSpace":"pre-wrap"}}>{this.state.answer.answer}</p>
                         { this.state.answer.images !="no image"? <img class="card-img-top w-100 mt-3" src={this.state.answer.images} alt="alternate image"/>: "" }
                     </div>
                 </div>

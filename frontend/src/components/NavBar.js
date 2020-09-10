@@ -46,6 +46,7 @@ class NavBar extends React.Component {
               <a className="nav-link text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 RESOURCES
                             </a>
+
               <div className="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdown">
                 <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/qna">QnA</Link>
                 <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/blogs">Blogs</Link>

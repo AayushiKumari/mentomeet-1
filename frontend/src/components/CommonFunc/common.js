@@ -4,9 +4,9 @@ export function setQDate(date){
     const difference = Math.abs(currDate - qDate);
     var date = "" ;
     if (difference < 60) {
-        date = Math.floor(difference) + ' seconds ago';
+        date = Math.floor(difference) + ' sec ago';
     } else if (difference < 3600 && difference > 60) {
-        date = Math.floor(difference / 60) + ' minutes ago';
+        date = Math.floor(difference / 60) + ' mins ago';
     }else if (difference < 86400 && difference > 3600) {
         date = Math.floor(difference / 3600) + ' hrs ago';
     }else if (difference < 31536000 && difference > 86400) {

@@ -226,6 +226,7 @@ export function getAnsByQId(req, res){
         return res.send(error);
     })
 }
+
 export function getQuestByCategory(req, res){
     const category = (req.params.category).toUpperCase();
     console.log(category)

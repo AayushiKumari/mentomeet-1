@@ -1,7 +1,9 @@
 import validator from 'express-validator'
 const { body } = validator
 export function blogValidator(req, res, next){
-    req.check('minute_read').optional().isInt(),     
+  console.log(req.body)
+    req.check('author').withMessage('author is required.')     
+    req.check('minute_read').optional({nullable: true}),     
     req.check('category').isIn(['JEE', 'NEET','CAREER','DEVELOPMENT']).withMessage('category name must be specified.'),
     req.check('title').isLength({ min: 1 }).trim().withMessage('title name must be specified.'),
        // .isAlphanumeric().withMessage('title has non-alphanumeric characters.'),
