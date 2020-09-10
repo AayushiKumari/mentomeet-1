@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import ImageUploader from 'react-images-upload';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+// import ImageUploader from 'react-images-upload';
+// import ReactQuill from 'react-quill';
+// import 'react-quill/dist/quill.snow.css';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Row, Label, Col, Container, Breadcrumb, BreadcrumbItem, Button, InputGroupText,  InputGroupAddon, InputGroup} from 'reactstrap';
 import Axios from "axios"

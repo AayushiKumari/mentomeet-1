@@ -3,6 +3,7 @@ import Mentor from '../../database/models/Mentor.js'
 import Mentor_review from '../../database/models/Mentor_review.js'
 import Follow from '../../database/models/Follow.js'
 import multer from 'multer'
+import User from '../../database/models/users/index.js'
 
 import async from 'async'
 
@@ -86,7 +87,7 @@ export function mentor_detail  (req, res, next) {
 //todo-number of followers and follow button working
     async.parallel({
         detail: function (callback) {
-            Mentor.findById(req.params.id)
+            User.findById(req.params.id)
                 .exec(callback)
         },
         myblogs: function (callback) {
@@ -100,12 +101,12 @@ export function mentor_detail  (req, res, next) {
                               
     }, function (err, results) {
         if (err) { return next(err); } // Error in API usage.
-        if (results.detail == null ||results.myblogs == null ||results.myfollowers == null
-            ) { // No results.
-            var err = new Error('mentor not found');
-            err.status = 404;
-            return next(err);
-        }
+        // if (results.detail == null ||results.myblogs == null ||results.myfollowers == null
+        //     ) { // No results.
+        //     var err = new Error('mentor not found');
+        //     err.status = 404;
+        //     return next(err);
+        // }
         res.send({detail: results.detail, myblogs: results.myblogs,myfollowers:results.myfollowers });
             });
 
