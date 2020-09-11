@@ -138,7 +138,7 @@ class Login extends Component{
                                     <div className="card d-none d-lg-block bg-info">
                                         <div className="card-body text-white m-3">
                                             <h3>MentoMeet</h3>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled took a galley standard dummy text ever since the 1500s</p>
+<p>Meet your true mentors through MentoMeet. We introduce you to the world of true mentorship and building blocks for a strong foundations to your bright future. Let us come together to creat a great teaching and learning experience for both students and mentors.</p>
                                         </div>
                                     </div>
                                 </div>

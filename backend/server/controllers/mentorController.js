@@ -133,7 +133,7 @@ export function post_mentor_create(req, res)
         // Extract the validation errors from a request.
         // Create Mentor object with escaped and trimmed data (and the old id!)
         var mentor = new Mentor(
-            {   //user:req.user
+            {   //user:req.user.firstname
                 // first_name:"user.fast",
                 // last_name: "user.last",
                 //profile_picture: req.file

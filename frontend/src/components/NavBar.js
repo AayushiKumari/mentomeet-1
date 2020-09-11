@@ -59,7 +59,7 @@ class NavBar extends React.Component {
                             {localStorage.getItem('token') ? 
                                 <>
                                     <li className="nav-item different mx-3 font-weight-bold">
-                                        <p className="nav-link text-info login mb-0">{JSON.parse(localStorage.getItem('user')).email}</p>  
+                                        <p className="nav-link text-info login mb-0">{JSON.parse(localStorage.getItem('user')).firstName}</p>  
                                     </li>    
                                     <li className="nav-item different mx-3 font-weight-bold">
                                         <Link className="nav-link text-info login" style={{textDecoration:"none"}} onClick={this.handleLogout}>Logout</Link> 

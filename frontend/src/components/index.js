@@ -26,9 +26,9 @@ function Index() {
       {/* <BlogDetailedPage/> */}
       <Mentor/>
       <About/>
-      <BeyondMentorship/>
-      <Footer />
-      {/* <WhyChooseMentomeet/> */}
+      <BeyondMentorship/>     
+      <WhyChooseMentomeet/>
+       <Footer />
     </div>
   )
 }

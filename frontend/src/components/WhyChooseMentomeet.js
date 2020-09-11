@@ -5,10 +5,10 @@ import '../sass/WhyChooseMentomeet.scss'
 import whyMentomeet from '../assets/img/Why Mentomeet@2x.png'
 import vLine from '../assets/img/Rectangle 42@2x.png'
 import vLineS from '../assets/img/Rectangle 44.png'
-import teachers from '../assets/img/20+Teachers.png'
-import mentors from '../assets/img/50+Mentors.png'
-import solution from '../assets/img/100%Solution.png'
-import students from '../assets/img/200+Students.png'
+import teachers from '../assets/final assets/100%Free.png'
+import mentors from '../assets/final assets/mentors.png'
+import solution from '../assets/final assets/solutions.png'
+import students from '../assets/final assets/soln.png'
 
 
 export default function WhyChooseMentomeet(){
