@@ -8,6 +8,7 @@ dotenv.config({path:path.resolve(__dirname , `.env`)})
 
 //db connection
 //process.env.DATABASE_URI
+// mongodb://127.0.0.1:27017/onlineMentor
 mongoose.connect(
   'mongodb+srv://ajay123a:bugatti123@ajaycluster.7vrgr.mongodb.net/mentomeet?retryWrites=true&w=majority',//
     {useNewUrlParser: true}

@@ -58,7 +58,6 @@ const Chat = ({ location }) => {
 
   return (
     <>
-    <NavBarLog />
     <Container fluid>
       <Row>
         <Col md={6}>

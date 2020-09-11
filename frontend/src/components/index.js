@@ -3,7 +3,6 @@ import React from 'react';
 import './../css/App.css';
 
 import WhyChooseUs from '../components/WhyChooseUs'
-import NavBar from '../components/NavBar'
 import Home from '../components/Home'
 import CareerSolutionEveryone from "../components/CareerSolutionEveryone"
 import BlogDetailedPage from '../components/Blog/BlogDetailedPage'
@@ -19,7 +18,6 @@ import Mentor from './Mentor'
 function Index() {
   return (
     <div>
-      <NavBar/>
       <Home/>
       <CareerSolutionEveryone/>
       <WhyChooseUs/> 

@@ -336,7 +336,7 @@ class Login extends Component{
 
         return(
             <div>
-                <nav className="navbar shadow  navbar-expand sticky-top navbar-light bg-light">
+                {/* <nav className="navbar shadow  navbar-expand sticky-top navbar-light bg-light">
                     <a className="navbar-brand text-warning" href="/index"><img src={brand} alt="Brand" width="120"/></a>
                     
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -346,8 +346,8 @@ class Login extends Component{
                             </li>
                         </ul>
                     </div>
-                </nav>
-                <div className="d-flex align-items-center " style={{height:"100vh"}}>
+                </nav> */}
+                <div className="d-flex align-items-center " style={{height:"80vh"}}>
                     {this.state.register ? RegisterDiv: LoginDiv}
                 </div>
                 

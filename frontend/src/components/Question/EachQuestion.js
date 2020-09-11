@@ -51,7 +51,7 @@ class EachQuestion extends Component{
                         <a href="#" class="bg-warning px-2  text-decoration-none text-white small rounded">{this.state.sQuestion.category}</a>
                     </div>
                     <h5 class="card-title"><Link to={"/answer/"+this.state.sQuestion._id} className="text-decoration-none">{this.state.sQuestion.question}</Link></h5>
-                    { this.state.sQuestion.images? <img class="card-img-top w-100" src={this.state.sQuestion.images} alt="alternate image"/>: "" }
+                    { this.state.sQuestion.images? <img class="card-img-top w-100" src={this.state.sQuestion.images} alt="alternate image" style={{"width":"100%", "maxHeight":"24rem"}} />: "" }
                     <div className="mt-3">
                         {this.state.sQuestion.tags.map((tag, index) => {
                             return(
