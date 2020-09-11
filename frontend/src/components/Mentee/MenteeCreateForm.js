@@ -1,16 +1,20 @@
 import React, { Fragment } from 'react';
 //import ImageUploader from 'react-images-upload';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col } from 'react-bootstrap';
+
+
 class MenteeCreateForm extends React.Component {
   constructor(props) {
     super(props);
-   // this.onDrop = this.onDrop.bind(this);
+    // this.onDrop = this.onDrop.bind(this);
     this.state = {
-   // body_image: [],
+      // body_image: [],
       standard: {
         value: '',
         valid: true
-      },  
+      },
       subject: {
         value: '',
         valid: true
@@ -18,38 +22,38 @@ class MenteeCreateForm extends React.Component {
       coaching: {
         value: '',
         valid: true
-      },      
+      },
       category: {
         value: 'JEE',
         valid: true
       },
-    //   rank: {
-    //     value: '',
-    //     valid: true
-    //   },
-    //   availability_time: {
-    //     value: '',
-    //     valid: true
-    //   },
-    //   fb_link: {
-    //     value: '',
-    //     valid: true
-    //   },
-    //   linkedin_link: {
-    //     value: '',
-    //     valid: true
-    //   }
+      //   rank: {
+      //     value: '',
+      //     valid: true
+      //   },
+      //   availability_time: {
+      //     value: '',
+      //     valid: true
+      //   },
+      //   fb_link: {
+      //     value: '',
+      //     valid: true
+      //   },
+      //   linkedin_link: {
+      //     value: '',
+      //     valid: true
+      //   }
     }
 
     // Binding to class
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-//   onDrop(body_image) {
-//     this.setState({
-//         body_image: this.state.body_image.concat(image),
-//     });
-// }
+  //   onDrop(body_image) {
+  //     this.setState({
+  //         body_image: this.state.body_image.concat(image),
+  //     });
+  // }
 
   handleChange(event) {
     const name = event.target.name;
@@ -78,7 +82,7 @@ class MenteeCreateForm extends React.Component {
 
         // check for the correct email
         var isValid = true;
-        if (value.trim().length > 100||value.trim().length<1) {
+        if (value.trim().length > 100 || value.trim().length < 1) {
           isValid = false;
         }
         this.setState({
@@ -92,9 +96,9 @@ class MenteeCreateForm extends React.Component {
       case 'standard':
 
         var isValid = true;
-          if (value<0||value>13||value.trim().length<1) {
-            isValid = false;
-          }
+        if (value < 0 || value > 13 || value.trim().length < 1) {
+          isValid = false;
+        }
         this.setState({
           standard: {
             value: value,
@@ -116,7 +120,7 @@ class MenteeCreateForm extends React.Component {
         });
         break;
 
-      
+
     }
   }
 
@@ -134,16 +138,17 @@ class MenteeCreateForm extends React.Component {
 
     fetch(endpoint, lookupOptions)
       .then(response => {
-        if(response.status!== 401 && response.status !== 400 ){
-                   
-          if(response) { 
-          alert("Good job!  Successfully added as a mentee")
-          console.log("Response came", response.text());} 
-          //  window.location.href="/"
-//catch bad request
+        if (response.status !== 401 && response.status !== 400) {
+
+          if (response) {
+            alert("Good job!  Successfully added as a mentee")
+            console.log("Response came", response.text());
           }
-      else { console.log(response.text());alert(":(' please check your inputs") }    
-         // window.location.href= '/mentors/'+response.text()._id
+          //  window.location.href="/"
+          //catch bad request
+        }
+        else { console.log(response.text()); alert(":(' please check your inputs") }
+        // window.location.href= '/mentors/'+response.text()._id
       })
       .catch(error => {
         console.log("Error in makePostRequest", error);
@@ -165,8 +170,8 @@ class MenteeCreateForm extends React.Component {
     const isValidStandard = this.state.standard.valid;
     const category = this.state.category.value;
     const isValidCategory = this.state.category.valid;
-    const allAreValid = isValidSubject  & isValidCoaching & isValidStandard & isValidCategory ;
-    
+    const allAreValid = isValidSubject & isValidCoaching & isValidStandard & isValidCategory;
+
     if (allAreValid) {
       // Now this means all are valid field
       // We are good to go and make a post request
@@ -175,7 +180,7 @@ class MenteeCreateForm extends React.Component {
       reqBody['coaching'] = coaching;
       reqBody['standard'] = standard;
       reqBody['category'] = category;
-    //  reqBody['language'] = ['English'];
+      //  reqBody['language'] = ['English'];
 
       this.makePostRequest(reqBody);
 
@@ -197,89 +202,106 @@ class MenteeCreateForm extends React.Component {
 
     return (
       <Fragment>
-        <form
-          id="create-mentor-form"
-          onSubmit={this.handleSubmit}
-        >
-            {/* Select class */}
-          <div className="form-group">
-            <label htmlFor="standard">Class/Year*</label>
-            <input
-              name="standard"
-              type="number"
-              placeholder="Enter Class/year "
-              className={`form-control ${isValidStandard ? '' : 'is-invalid'}`}
-              onChange={this.handleChange}
-              required
-            />
-              
-            {/*feedback here*/}
-            {isValidStandard ? null : <div className='invalid-feedback'>class Must be in correct range </div>}
-          </div>
-
-         
-
-          {/* subject  */}
-          <div className="form-group">
-            <label htmlFor="subject"> Subject*</label>
-            <select
-              name="subject"
-              placeholder="Enter subject"
-              className={`form-control ${isValidSubject ? '' : 'is-invalid'}`}
-              onChange={this.handleChange}
-              required
-            >  <option value="">choose subject for help </option>
-              <option value="PHYSICS">PHYSICS</option>
-              <option value="CHEMESTRY">CHEMESTRY</option>
-              <option value="MATHS">MATHS</option>
-              <option value="BIOLOGY">BIOLOGY</option>
-              <option value="PCM">PCM</option>
-              <option value="PCB">PCB</option>
-            </select>
-            {/*feedback here*/}
-            {isValidSubject ? null : <div className='invalid-feedback'>choose from given</div>}
-          </div>
+        <Container>
+          <h3 style={{ textAlign: "center", margin: "12px 0" }}>Register as Mentee</h3>
+          <form
+            id="create-mentor-form"
+            onSubmit={this.handleSubmit}
+          >
 
 
-          {/* Input coaching */}
-          <div className="form-group">
-            <label htmlFor="coaching">Your Coaching*</label>
-            <input
-              name="coaching"
-              type="text"
-              placeholder="Enter coaching"
-              className={`form-control ${isValidCoaching ? '' : 'is-invalid'}`}
-              onChange={this.handleChange}
-              required
-            />
-            {/*feedback here*/}
-            {isValidCoaching ? null : <div className='invalid-feedback'>Must be less than 100 characters</div>}
-          </div>
-    
-          {/* Select category */}
-          <div className="form-group">
-            <label htmlFor="category">Category*</label>
-            <select
-              name="category"
-              placeholder="Enter category"
-              className={`form-control ${isValidCategory ? '' : 'is-invalid'}`}
-              onChange={this.handleChange}
-              required
-            > <option value="">Choose Field</option>
-              <option value="JEE">JEE</option>
-              <option value="NEET">NEET</option>
-              <option value="CAREER">CAREER</option>
-              <option value="DEVELOPMENT">DEVELOPMENT</option>
-            </select>
-            {/*feedback here*/}
-            {isValidCategory ? null : <div className='invalid-feedback'>Must be less than 100 characters</div>}
-          </div>
-         
-          {/* Submit button */}
-          <button type="submit" className="btn btn-success btn-block">
-            Submit
-          </button>
-        </form>
+            <Row>
+              <Col sm={6}>
+                {/* Select class */}
+                <div className="form-group">
+                  <label htmlFor="standard">Class/Year*</label>
+                  <input
+                    name="standard"
+                    type="number"
+                    placeholder="Enter Class/year "
+                    className={`form-control ${isValidStandard ? '' : 'is-invalid'}`}
+                    onChange={this.handleChange}
+                    required
+                  />
+
+                  {/*feedback here*/}
+                  {isValidStandard ? null : <div className='invalid-feedback'>class Must be in correct range </div>}
+                </div>
+              </Col>
+              <Col sm={6}>
+                {/* subject  */}
+                <div className="form-group">
+                  <label htmlFor="subject"> Subject*</label>
+                  <select
+                    name="subject"
+                    placeholder="Enter subject"
+                    className={`form-control ${isValidSubject ? '' : 'is-invalid'}`}
+                    onChange={this.handleChange}
+                    required
+                  >  <option value="">choose subject for help </option>
+                    <option value="PHYSICS">PHYSICS</option>
+                    <option value="CHEMESTRY">CHEMESTRY</option>
+                    <option value="MATHS">MATHS</option>
+                    <option value="BIOLOGY">BIOLOGY</option>
+                    <option value="PCM">PCM</option>
+                    <option value="PCB">PCB</option>
+                  </select>
+                  {/*feedback here*/}
+                  {isValidSubject ? null : <div className='invalid-feedback'>choose from given</div>}
+                </div>
+              </Col>
+            </Row>
+
+
+
+
+
+
+
+            {/* Input coaching */}
+            <div className="form-group">
+              <label htmlFor="coaching">Your Coaching*</label>
+              <input
+                name="coaching"
+                type="text"
+                placeholder="Enter coaching"
+                className={`form-control ${isValidCoaching ? '' : 'is-invalid'}`}
+                onChange={this.handleChange}
+                required
+              />
+              {/*feedback here*/}
+              {isValidCoaching ? null : <div className='invalid-feedback'>Must be less than 100 characters</div>}
+            </div>
+
+            {/* Select category */}
+            <div className="form-group">
+              <label htmlFor="category">Category*</label>
+              <select
+                name="category"
+                placeholder="Enter category"
+                className={`form-control ${isValidCategory ? '' : 'is-invalid'}`}
+                onChange={this.handleChange}
+                required
+              > <option value="">Choose Field</option>
+                <option value="JEE">JEE</option>
+                <option value="NEET">NEET</option>
+                <option value="CAREER">CAREER</option>
+                <option value="DEVELOPMENT">DEVELOPMENT</option>
+              </select>
+              {/*feedback here*/}
+              {isValidCategory ? null : <div className='invalid-feedback'>Must be less than 100 characters</div>}
+            </div>
+
+            {/* Submit button */}
+            <div className="form-group">
+              <button type="submit" className="btn btn-info btn-block">
+                Submit
+              </button>
+            </div>
+
+          </form>
+
+        </Container>
       </Fragment>
     )
   }
