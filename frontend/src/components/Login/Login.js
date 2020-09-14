@@ -57,8 +57,9 @@ class Login extends Component{
                         // console.log("Token is " + response.data.token)
                         localStorage.setItem('token', response.data.token)
                         localStorage.setItem('user',JSON.stringify(response.data.user))
+                        
                         window.location.href="/"
-
+                        console.log(localStorage.getItem('user'));
                     }
                 }
 
@@ -228,9 +229,9 @@ class Login extends Component{
                                                     </InputGroup>
                                                     <InputGroup clasName="d-block">
                                                         <Control.select
-                                                            model=".category"
-                                                            id="category"
-                                                            name="category"
+                                                            model=".role"
+                                                            id="role"
+                                                            name="role"
                                                             defaultValue="Mentee"
                                                             className="custom-select w-100" 
                                                             validators={{
@@ -244,7 +245,7 @@ class Login extends Component{
                                                         <Errors
                                                             className="text-danger"
                                                             show="touched"
-                                                            model=".category"
+                                                            model=".role"
                                                             messages={{
                                                                 required: 'Required! '
                                                             }}

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 //import ImageUploader from 'react-images-upload';
-
+import $ from 'jquery' 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -26,34 +26,14 @@ class MenteeCreateForm extends React.Component {
       category: {
         value: 'JEE',
         valid: true
-      },
-      //   rank: {
-      //     value: '',
-      //     valid: true
-      //   },
-      //   availability_time: {
-      //     value: '',
-      //     valid: true
-      //   },
-      //   fb_link: {
-      //     value: '',
-      //     valid: true
-      //   },
-      //   linkedin_link: {
-      //     value: '',
-      //     valid: true
-      //   }
+      },isLoaded:false,error:null
+      
     }
 
     // Binding to class
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-  //   onDrop(body_image) {
-  //     this.setState({
-  //         body_image: this.state.body_image.concat(image),
-  //     });
-  // }
 
   handleChange(event) {
     const name = event.target.name;
@@ -124,12 +104,12 @@ class MenteeCreateForm extends React.Component {
     }
   }
 
-  makePostRequest = (data) => {
-    const endpoint = `http://${window.location.hostname}:5005/mentee`;
+  makePostRequest = (data,userId) => {
+    const endpoint = `http://${window.location.hostname}:5005/mentee/${userId}`;
     // CSRF Token if needed
 
     let lookupOptions = {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
@@ -143,8 +123,9 @@ class MenteeCreateForm extends React.Component {
           if (response) {
             alert("Good job!  Successfully added as a mentee")
             console.log("Response came", response.text());
+            window.location.href="/profile"
           }
-          //  window.location.href="/"
+          //  
           //catch bad request
         }
         else { console.log(response.text()); alert(":(' please check your inputs") }
@@ -181,8 +162,8 @@ class MenteeCreateForm extends React.Component {
       reqBody['standard'] = standard;
       reqBody['category'] = category;
       //  reqBody['language'] = ['English'];
-
-      this.makePostRequest(reqBody);
+      const userId =JSON.parse(localStorage.getItem('user'))._id
+      this.makePostRequest(reqBody,userId);
 
     } else {
       alert('Check all fields are valid');
@@ -192,7 +173,66 @@ class MenteeCreateForm extends React.Component {
 
     // Also perform some checcks like phone is a number or not
   }
+  updateProfileData = (userId) => {
+    console.log("Fetch user data for userId", userId);
+   // if(Role ==='Mentor'){
+    const endpoint = `http://${window.location.hostname}:5005/profile/${userId}`;  
+    fetch(endpoint)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log("Response data of mentors came", result);
+       
+         if(result.history.length>0){
 
+            const standard = result.history[0].standard;
+            const coaching = result.history[0].coaching;
+            const category = result.history[0].category;
+            const subject = result.history[0].subject;
+            this.setState({
+              //mentee specific
+              standard:{value:standard,valid:true},coaching:{value:coaching,valid:true},
+              category:{value:category,valid:true},subject:{value:subject,valid:true},
+            
+          });
+          $(document).ready(function() { 
+            $('#standard').val(standard);
+            $('#subject').val(subject);
+            $('#category').val(category);
+            $('#coaching').val(coaching);
+          });
+          
+         }
+        //  const fullName = result.firstName+" "+result.lastName;
+        //   const email = result.email;   
+          
+         
+
+        },
+         (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+
+
+    
+    
+  }
+  componentDidMount() {
+    console.log("Component did mount in menteeProfile");
+
+    // match.params.id - The user Id for other users
+    // If the id does not exist this means open the current user profile
+    if(localStorage.getItem('user')){
+      //const Role=   JSON.parse(localStorage.getItem('user')).role
+      const uId = JSON.parse(localStorage.getItem('user'))._id;
+      console.log("My User Id", uId)
+      this.updateProfileData(uId);
+    }
+   }
   render() {
 
     const isValidSubject = this.state.subject.valid;
@@ -216,11 +256,13 @@ class MenteeCreateForm extends React.Component {
                 <div className="form-group">
                   <label htmlFor="standard">Class/Year*</label>
                   <input
+                  id="standard"
                     name="standard"
                     type="number"
                     placeholder="Enter Class/year "
                     className={`form-control ${isValidStandard ? '' : 'is-invalid'}`}
                     onChange={this.handleChange}
+                    value={this.state.standard.value}
                     required
                   />
 
@@ -233,6 +275,7 @@ class MenteeCreateForm extends React.Component {
                 <div className="form-group">
                   <label htmlFor="subject"> Subject*</label>
                   <select
+                  id="subject"
                     name="subject"
                     placeholder="Enter subject"
                     className={`form-control ${isValidSubject ? '' : 'is-invalid'}`}
@@ -251,17 +294,11 @@ class MenteeCreateForm extends React.Component {
                 </div>
               </Col>
             </Row>
-
-
-
-
-
-
-
             {/* Input coaching */}
             <div className="form-group">
               <label htmlFor="coaching">Your Coaching*</label>
               <input
+              id="coaching"
                 name="coaching"
                 type="text"
                 placeholder="Enter coaching"
@@ -277,6 +314,7 @@ class MenteeCreateForm extends React.Component {
             <div className="form-group">
               <label htmlFor="category">Category*</label>
               <select
+              id="category"
                 name="category"
                 placeholder="Enter category"
                 className={`form-control ${isValidCategory ? '' : 'is-invalid'}`}

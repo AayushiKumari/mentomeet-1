@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import ImageUploader from 'react-images-upload';
+import $ from 'jquery' 
 
 class MentorCreateForm extends React.Component {
   constructor(props) {
@@ -49,19 +50,22 @@ class MentorCreateForm extends React.Component {
       linkedin_link: {
         value: '',
         valid: true
+      },
+      about_me: {
+        value: '',
+        valid: true
       }
     }
 
     // Binding to class
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleImageChange = this.handleImageChange.bind(this);
+    this.onFileChangeHandler = this.onFileChangeHandler.bind(this);
   }
-  handleImageChange(event) {
-    console.log(event.target.files[0])
+  
+  onFileChangeHandler = (e) => {
     this.setState({
-      profile_picture: event.target.files[0],
-      loaded: 0,
+        profile_picture: e.target.files[0]
     })
   }
   handleChange(event) {
@@ -74,8 +78,8 @@ class MentorCreateForm extends React.Component {
 
         // Check for the required condition
         var isValid = true;
-        //var res = value.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-        if (value.trim().length > 200) {
+        var res = value.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+        if (value.trim().length > 200|| !res) {
           isValid = false;
         }
 
@@ -89,11 +93,11 @@ class MentorCreateForm extends React.Component {
         break;
 
       case 'linkedin_link':
-
+        var res = value.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
         // Now check for all the required checks
         var isValid = true;
         // var res = value.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-        if (value.trim().length > 200) {
+        if (value.trim().length > 200|| !res) {
           isValid = false;
         }
 
@@ -116,7 +120,7 @@ class MentorCreateForm extends React.Component {
         }
 
         this.setState({
-          about_me: {
+          expertise: {
             value: value,
             valid: isValid
           }
@@ -219,15 +223,25 @@ class MentorCreateForm extends React.Component {
           }
         })
         break;
+      case 'about_me':
+
+          // about_me will be always true
+        this.setState({
+          about_me: {
+            value: value,
+            valid: true
+                }
+              });
+        break;  
     }
   }
 
-  makePostRequest = (data) => {
-    const endpoint = `http://${window.location.hostname}:5005/mentor`;
+  makePostRequest = (data,userId) => {
+    const endpoint = `http://${window.location.hostname}:5005/mentor/${userId}`;
     // CSRF Token if needed
 
     let lookupOptions = {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
@@ -241,8 +255,9 @@ class MentorCreateForm extends React.Component {
           if (response) {
             alert("Good job!  Successfully added as a mentor")
             console.log("Response came", response.text());
+            window.location.href="/profile"
           }
-          //   window.location.href="/"
+          //   
 
         }
         else { console.log(response.text()); alert(":(' please check your inputs") }
@@ -256,8 +271,8 @@ class MentorCreateForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log("Handling form submit");
-
+    console.log("Handling form submit",localStorage.getItem('user'));
+    
     const profile_picture = this.state.profile_picture;
     // Here we will also check if he has filled all or not
     // Here we will also finally check that all number entries are numbers
@@ -288,6 +303,7 @@ class MentorCreateForm extends React.Component {
       // Now this means all are valid field
       // We are good to go and make a post request
       var reqBody = {};
+      reqBody['about_me']=this.state.about_me.value
       reqBody['profile_picture'] = profile_picture;
       reqBody['fb_link'] = fb_link;
       reqBody['linkedin_link'] = linkedin_link;
@@ -298,11 +314,10 @@ class MentorCreateForm extends React.Component {
       reqBody['college'] = college;
       reqBody['year'] = year;
       reqBody['college_type'] = college_type;
-      reqBody['category'] = category;
       reqBody['rank'] = rank;
-      //  reqBody['language'] = ['English'];
-
-      this.makePostRequest(reqBody);
+      reqBody['category'] = category;
+      const userId=JSON.parse(localStorage.getItem('user'))._id
+      this.makePostRequest(reqBody,userId);
 
     } else {
       alert('Check all fields are valid');
@@ -314,14 +329,85 @@ class MentorCreateForm extends React.Component {
   }
 
  
-  componentDidMount() {
-    // Here we will update the user details of the currently logged in User
-    // Se get the userId of the user from the token storage and then
-    // Fetch the data and then update the current state
-    // A suggestion (NOt necessary), show a loading sign or somthing using the react state until the aPI request succeeds
-    // Take care that fetch is asynchronous
-    console.log("START WRITING CODE IN componentDidMount")
+  updateProfileData = (userId) => {
+    console.log("Fetch user data for userId", userId);
+   // if(Role ==='Mentor'){
+    const endpoint = `http://${window.location.hostname}:5005/profile/${userId}`;  
+    fetch(endpoint)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log("Response data of mentors came", result);
+       
+         if(result.history.length>0){
+
+          const profile_picture = result.history[0].profile_picture;
+          // const fullName = result.firstName+" "+result.lastName;
+          // const email = result.email;          
+          const branch = result.history[0].branch;
+          const year = result.history[0].year;
+          const category = result.history[0].category;
+          const college = result.history[0].college;
+          const college_type = result.history[0].college_type;          
+          const rank = result.history[0].rank;
+          const expertise = result.history[0].expertise;
+          const start_time = result.history[0].start_time;
+          const end_time = result.history[0].end_time;
+          const fb_link = result.history[0].fb_link;
+          const linkedin_link = result.history[0].linkedin_link;
+          const about_me = result.history[0].about_me;
+            this.setState({
+              //mentee specific
+              branch:{value:branch,valid:true},year:{value:year,valid:true},
+              college:{value:college,valid:true},college_type:{value:college_type,valid:true},
+              rank:{value:rank,valid:true},expertise:{value:expertise,valid:true},
+              start_time:{value:start_time,valid:true},end_time:{value:end_time,valid:true},
+              fb_link:{value:fb_link,valid:true},linkedin_link:{value:linkedin_link,valid:true},
+              about_me:{value:about_me,valid:true},
+              category:{value:category,valid:true},
+            
+          });
+          $(document).ready(function() { 
+            $('#branch').val(branch);
+            $('#college_type').val(college_type);
+            $('#college').val(college);
+            $('#year').val(year);
+            $('#expertise').val(expertise);
+            $('#rank').val(rank);
+            $('#start_time').val(start_time);
+            $('#end_time').val(end_time);
+            $('#fb_link').val(fb_link);
+            $('#linkedin_link').val(linkedin_link);
+            $('#about_me').val(about_me);
+           $('#category').val(category);
+          });
+          
+         }
+        },
+         (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+
+
+    
+    
   }
+  componentDidMount() {
+    console.log("Component did mount in mentorProfile");
+
+    // match.params.id - The user Id for other users
+    // If the id does not exist this means open the current user profile
+    if(localStorage.getItem('user')){
+      //const Role=   JSON.parse(localStorage.getItem('user')).role
+      const uId = JSON.parse(localStorage.getItem('user'))._id;
+      console.log("My User Id", uId)
+      this.updateProfileData(uId);
+    }
+   }
 
   render() {
 
@@ -350,10 +436,11 @@ class MentorCreateForm extends React.Component {
             <div className="form-group">
               <label htmlFor="profile_picture">Upload Profile picture</label><br />
               <input
+              id="profile_picture"
                 name="profile_picture"
                 type="file"
                 placeholder="Select image"
-                onChange={this.handleImageChange}
+                onChange={this.onFileChangeHandler}
               />
             </div>
 
@@ -365,6 +452,7 @@ class MentorCreateForm extends React.Component {
                 <div className="form-group">
                   <label htmlFor="year">Year*</label>
                   <select
+                  id="year"
                     name="year"
                     placeholder="Enter Year*"
                     className={`form-control ${isValidYear ? '' : 'is-invalid'}`}
@@ -388,6 +476,7 @@ class MentorCreateForm extends React.Component {
                 <div className="form-group">
                   <label htmlFor="branch">Branch</label>
                   <input
+                  id="branch"
                     name="branch"
                     type="text"
                     placeholder="Enter branch"
@@ -406,6 +495,7 @@ class MentorCreateForm extends React.Component {
             <div className="form-group">
               <label htmlFor="college">Your college*</label>
               <input
+              id="college"
                 name="college"
                 type="text"
                 placeholder="Enter college*"
@@ -424,9 +514,10 @@ class MentorCreateForm extends React.Component {
                 <div className="form-group">
                   <label htmlFor="college-type">College Type*</label>
                   <select
+                  id="college_type"
                     name="college_type"
                     placeholder="Enter college type*"
-                    className={`form-control ${isValidCategory ? '' : 'is-invalid'}`}
+                    className={`form-control ${isValidCollegeType ? '' : 'is-invalid'}`}
                     onChange={this.handleChange}
                     required
                   >
@@ -442,12 +533,13 @@ class MentorCreateForm extends React.Component {
                 </div>
               </div>
               <div className="col-sm-4">
-                {/* Select category */}
+                {/* Select college */}
                 <div className="form-group">
                   <label htmlFor="category">Category*</label>
                   <select
+                  id="category"
                     name="category"
-                    placeholder="Enter category*"
+                    placeholder="Enter Category*"
                     className={`form-control ${isValidCategory ? '' : 'is-invalid'}`}
                     onChange={this.handleChange}
                   >
@@ -457,7 +549,7 @@ class MentorCreateForm extends React.Component {
                     <option value="DEVELOPMENT">DEVELOPMENT</option>
                   </select>
                   {/*feedback here*/}
-                  {isValidCategory ? null : <div className='invalid-feedback'>Must be less than 100 characters</div>}
+                  {isValidCategory ? null : <div className='invalid-feedback'>Must be Proper</div>}
                 </div>
 
 
@@ -467,9 +559,10 @@ class MentorCreateForm extends React.Component {
                 <div className="form-group">
                   <label htmlFor="rank">Rank</label>
                   <input
+                  id="rank"
                     name="rank"
                     type="number"
-                    placeholder="Enter branch"
+                    placeholder="Enter  JEE/NEET Rank"
                     className={`form-control ${isValidRank ? '' : 'is-invalid'}`}
                     onChange={this.handleChange}
                   />
@@ -491,6 +584,7 @@ class MentorCreateForm extends React.Component {
               <div className="col-sm-6 d-flex align-items-center justify-content-center">
                 <label htmlFor="start_time">start time* </label>
                 <input
+                id="start_time"
                   name="start_time"
                   type="time"
                   className={`form-control`}
@@ -501,6 +595,7 @@ class MentorCreateForm extends React.Component {
               <div className="col-sm-6 d-flex align-items-center justify-content-center">
                 <label htmlFor="end_time">end time* </label>
                 <input
+                id="end_time"
                   name="end_time"
                   type="time"
                   className={`form-control`}
@@ -516,6 +611,7 @@ class MentorCreateForm extends React.Component {
             <div className="form-group">
               <label htmlFor="expertise">choose expertise</label>
               <select
+              id="expertise"
                 name="expertise"
                 placeholder="Enter expertise"
                 className={`form-control ${isValidExpertise ? '' : 'is-invalid'}`}
@@ -533,12 +629,26 @@ class MentorCreateForm extends React.Component {
               {isValidExpertise ? null : <div className='invalid-feedback'>choose from given</div>}
             </div>
 
+            {/* AboutMe  */}
+            <div className="form-group">
+              <label htmlFor="about_me">Your Descriptions/achievements</label>
+              <input
+              id="about_me"
+                name="about_me"
+                type="textarea"
+                placeholder="Your Descriptions"
+                onChange={this.handleChange}
+                rows={5} cols={15}
+              />
+            </div>
+
             <div className="row">
               <div className="col-sm-6">
                 {/* fb  Name */}
                 <div className="form-group">
-                  <label htmlFor="fb_link">FB Prfile</label>
+                  <label htmlFor="fb_link">FB Profile</label>
                   <input
+                  id="fb_link"
                     name="fb_link"
                     placeholder="Enter FB Link"
                     className={`form-control ${isValidFbLink ? '' : 'is-invalid'}`}
@@ -553,6 +663,7 @@ class MentorCreateForm extends React.Component {
                 <div className="form-group">
                   <label htmlFor="linkedin_link">Linkedin Profile</label>
                   <input
+                  id="linkedin_link"
                     name="linkedin_link"
                     placeholder="Enter linkedin link"
                     className={`form-control ${isValidLinkedInLink ? '' : 'is-invalid'}`}

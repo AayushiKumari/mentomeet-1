@@ -68,7 +68,7 @@ class BlogCreateForm extends React.Component {
         selectedFile: e.target.files[0]
     })
   }
-
+                
   handleSubmit = (values) => {
     // console.log(values)
     // console.log("SelectedFile is ");

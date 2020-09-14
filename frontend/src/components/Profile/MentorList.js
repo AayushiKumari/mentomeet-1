@@ -3,7 +3,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import TextField from "@material-ui/core/TextField";
 import AccessAlarmIcon from "@material-ui/icons/AccessAlarm";
 import Rating from "@material-ui/lab/Rating";
-import { Avatar } from "@material-ui/core";
+import { Avatar} from "@material-ui/core";
 import "../../css/ourMentor.css";
 import { withStyles } from "@material-ui/core/styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -194,12 +194,15 @@ class OurMentor extends React.Component {
       // Make this later in whatever order you want
       for (let i = mentorType.length - 1; i >= 0; i--) {
         const mentor = mentorType[i];
+        // profile url- /profile/{mentor._id}
+        // img-mentor.history[0].profile_picture
+        // Expertise-mentor.history[0].expertise,mentor.history[0].start_time,mentor.history[0].end_time
 
         tempArray.push(
           // TODO this data needs to be added more if want to show
           <MentorTile
-            name={mentor.first_name}
-            description={"IITR"+" online"}
+            name={mentor.firstName+mentor._id} 
+            description={mentor.history[0].year +mentor.history[0].college}
             imgSrc="https://homepages.cae.wisc.edu/~ece533/images/tulips.png"
           />
         )
