@@ -2,6 +2,7 @@ import Blog from '../../database/models/Blog.js'
 import Mentee from '../../database/models/Mentee.js'
 import Upvote from '../../database/models/Upvote.js'
 import Comment from '../../database/models/Comment.js'
+import User from '../../database/models/users/index.js'
 
 //var async = require('async');
 
@@ -41,24 +42,24 @@ export function get_mentee_create (req, res,next){
 export function post_mentee_create
    
  (req, res, next) {
-   var mentee = new Mentee(
+   var history = [
             {
-               //user:req.user,mentor:req.params.id
-               first_name: "req.user.firstname",//req.body.first_name
-               last_name: "req.user.lastname",//req.body.last_name
-              // phone: 9950875406,//req.user.phone
-            //  //email: req.user.email,
-               standard: req.body.standard,               
-               coaching: req.body.coaching,
-               category: req.body.category,
-               subject:req.body.subject,
+                standard: req.body.standard,               
+                coaching: req.body.coaching,
+                category: req.body.category,
+                subject:req.body.subject,
             }
-        );
+   ]
             // Data from form is valid. Update the record.
-            mentee.save((err,result)=>{
+            User.findByIdAndUpdate(req.params.id,  {history:history}, function (err, result){
                 if (err) {console.log(err); return next(err); }
-                // Successful - redirect to genre detail page.
-                else {res.send(result);console.log(result);}
+                if (result == null) { // No results.
+                    var err = new Error('Mentee not found');
+                    err.status = 404;
+                    return next(err);
+                }
+                res.send(result);
+                console.log(result);
                 //res.redirect(theMentee.url);
             })
                 
@@ -94,16 +95,15 @@ export function post_mentee_update
         // Create Mentee object with escaped and trimmed data (and the old id!)
         var mentee = new Mentee(
             {//user:req.user._id,mentor:req.params.id
+                user:req.body.user,
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
                 phone: req.body.phone,
-               // email: req.user.email,
+                email:req.body.email,
                 standard: req.body.standard,               
-                
+                coaching: req.body.coaching,
                 category: req.body.category,
-                subject:req.body.subject,
-                need_notes:req.body.need_notes,
-                coaching: req.body.coaching,                
+                subject:req.body.subject,               
                 _id: req.params.id
             }
         );

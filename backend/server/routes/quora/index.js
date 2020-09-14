@@ -23,7 +23,7 @@ quoraRouter.put('/quora/answer/:aid/user/:uid', editAnswer)
 // likes---
 quoraRouter.put('/quora/like/question/', authorizer(), questLike)
 quoraRouter.put('/quora/like/question/answer/', authorizer(), ansLikes)
-
+            
 //comments---------
 quoraRouter.post('/quora/question/:qid/answer/:aid/comment/:uid/', authorizer(), commentOnAns)
 

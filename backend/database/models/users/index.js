@@ -19,7 +19,7 @@ const User = new Schema({
         type: String,
         required: true
     },
-    category:{
+    role:{
         type:String,
         required: true
     },

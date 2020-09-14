@@ -4,7 +4,7 @@ export function mentorValidator(req, res,next){
     //   //  .isAlphanumeric().withMessage('First name has non-alphanumeric characters.'),
     // req.check('last_name').isLength({ min: 1 }).trim().withMessage('last name must be specified.'),
       //  .isAlphanumeric().withMessage('last name has non-alphanumeric characters.'),
-    //req.check('profile_picture').isImage().withMessage('please select a picture') ,   
+    req.check('about_me').optional().trim() ,   
     req.check('language').optional().isArray({ max: 3}).withMessage('max 3 languages must be specified.'),
     req.check('college').isLength({ min: 1 }).trim().withMessage('college name must be specified.'),
     req.check('college_type').trim().isIn(['IIT','NIT','AIIMS','IIIT','OTHER']),

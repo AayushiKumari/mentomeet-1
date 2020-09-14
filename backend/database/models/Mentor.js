@@ -22,6 +22,7 @@ var mentorSchema = new Schema({
   language: { type: Array, max:3,default: ['English']},
   start_time: { type: String, maxlength: 100,required: true},
   end_time: { type: String, maxlength: 100,required: true},
+  about_me: { type: String,maxlength: 2500,},
 //documents for verifying
   college_id: { type: String, },//file field make  required: true
   resume:{ type: String},//file

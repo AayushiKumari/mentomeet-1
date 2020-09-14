@@ -8,7 +8,7 @@ import multer from "multer"
 const router  = express.Router()
 import {blogValidator,commentValidator} from '../../helpers/validators/blogValidator/index.js'
 //authorizers
-import {isAuth} from '../../helpers/authorizers/index.js'
+//import {isAuth} from '../../helpers/authorizers/index.js'
 import authorizer from '../../helpers/authorizers/index.js'
 //router.get('/blog',get_blog_create);no use 
 //router.get('/blogs/:id/delete',get_blog_delete);
@@ -42,7 +42,7 @@ var upload = multer({
     storage: storage
 })
 
-router.post('/blog', upload.single('file'),  blogValidator, post_blog_create);
+router.post('/blog', upload.single('file'),  authorizer(),blogValidator, post_blog_create);
 //requred(title,body_text,category) optional(body_image,tag,minute_read),need authenticate
 
 
