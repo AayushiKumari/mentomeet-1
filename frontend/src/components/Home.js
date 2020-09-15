@@ -1,7 +1,9 @@
 import React from 'react'
-import achive from '../assets/img/Group 6@2x.png'
-import talk from '../assets/img/Group 7@2x.png'
 import teacher from '../assets/img/Rectangle 6@2x.png'
+
+import achive from '../assets/final assets/Group 6@2x.png'
+import talk from '../assets/final assets/Group 7@2x.png'
+
 import video from '../assets/img/Rectangle 15@2x.png'
 import mic from '../assets/img/Rectangle 14@2x.png'
 import greaterThen from '../assets/img/Rectangle 13.png'
@@ -17,13 +19,15 @@ export default function Home(){
                 <div id='row' className='col-12 col-sm-6 order-2 order-sm-1 row'>
                     <div className='col position-relative d-flex aling-items-center justify-content-center'>
                         <img className='d-block w-100' src={achive}></img>
-                        <img id='video' className='position-absolute' src={video}></img>
+                        <a href="#" >  <img id='video' className='position-absolute' href="#" src={video}></img>
+                        </a> 
                     </div>
                     <div className='col d-flex aling-items-center justify-content-center position-relative'>
                         <img className='d-block w-100' src={talk}></img>
-                        <img id='mic' className='position-absolute' src={mic}></img>
-                    </div>
-                    <img id='greaterThen' className='d-none d-sm-block position-absolute' src={greaterThen}></img>
+                       <a href="#" > <img id='mic' className='position-absolute' href="#" src={mic}></img>
+                    </a></div>
+                   <img id='greaterThen' className='d-none d-sm-block position-absolute' src={greaterThen}></img>
+                    
                 </div>
                  
                 <div className='col-12 col-sm-6 order-1 order-sm-2 d-flex flex-sm-row aling-items-center justify-content-center justify-content-sm-end'>
@@ -34,7 +38,7 @@ export default function Home(){
                 </div>
                 
             </div>
-            <a id='btn-register' className='d-none d-sm-block mx-auto mt-4' href='#'>REGISTER</a>
+            <a id='btn-register' className='d-none d-sm-block mx-auto mt-4' href='/login'>REGISTER</a>
         </div>
         
     )

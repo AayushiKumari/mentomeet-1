@@ -14,21 +14,21 @@ export default function BeyondMentorship(){
                 <div className='col-12 col-md  d-flex justify-content-center'>
                     <div className='square px-1 pb-5 d-flex flex-column justify-content-end align-items-center'>
                         <img className='d-block' src={community} alt='team icon'></img>
-                        <p className='d-block'><span className='orange'>C</span>ommunity <br></br> Buildup</p>
+                        <p className='d-block'>Community <br></br> Buildup</p>
                     </div>
 
                 </div>
                 <div className='col-12 col-md mt-4 mt-md-0 d-flex justify-content-center'>
                     <div className='square px-1 pb-5 d-flex flex-column justify-content-end align-items-center'>
                         <img src={qa} alt='journey icon'></img>
-                        <p><span className='orange'>O</span>pen <span className='orange'>Q</span> & <span className='orange'>A</span></p>
+                        <p>Open Q & A</p>
                     </div>
                 
                 </div>
                 <div className='col-12 mt-4 mt-md-0 col-md d-flex justify-content-center'>
                     <div className='square px-1 pb-5 d-flex flex-column justify-content-end align-items-center'>
                         <img src={seminar} alt='goal icon'></img>
-                        <p><span className='orange'>S</span>eminar</p>
+                        <p>Seminar</p>
                     </div>
                 
                 </div>

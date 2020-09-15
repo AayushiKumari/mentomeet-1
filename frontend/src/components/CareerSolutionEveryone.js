@@ -1,6 +1,5 @@
 import React from 'react'
 import '../css/CareerSolutionEveryone.css'
-
 export default function CareerSolutionEveryone(){
     return(
         <div id='career-solution-everyone' className='container-lg  py-4'>
@@ -12,13 +11,23 @@ export default function CareerSolutionEveryone(){
                         <h2 className='d-block'>IIT-JEE</h2>
                         <div>
                             <div className='li-item'>
-                                <div className='bullet' ></div><p>Personal Guidance</p>
+                                <div className='bullet' ></div><p>One to one Advice</p>
+                            </div>
+                            <div className='li-item'>
+                                <div></div><p>24X7 Assistance</p>
+                            </div>
+                            <div className='li-item'>
+                                <div className='bullet' ></div><p>Logical Learning</p>
                             </div>
                             <div className='li-item'>
                                 <div></div><p>Mentors From IIT/NIT</p>
                             </div>
+                            <div className='li-item'>
+                                <div className='bullet' ></div><p>Study Material</p>
+                            </div>
+                            
                         </div>
-                        <a href='#' className='explore d-block' src='#'><span className='orange' >E</span>xplore</a>
+                        <a href='/mentors' className='explore d-block' src='#'>Explore</a>
                     </div>
                 </div>
                 <div className='big-brother col-md-4 mt-4 mt-sm-0 col-12 col-sm-6 d-flex align-items-center justify-content-center'>
@@ -26,16 +35,22 @@ export default function CareerSolutionEveryone(){
                         <h2 className='d-block'>NEET</h2>
                         <div>
                             <div className='li-item'>
-                                <div className='bullet' ></div><p>AIIMS</p>
+                                <div className='bullet' ></div><p>Mentors From AIIMS</p>
                             </div>
                             <div className='li-item'>
-                                <div></div><p>How To Prepare</p>
+                                <div></div><p>Time Management</p>
                             </div>
                             <div className='li-item'>
-                                <div></div><p>Queries</p>
+                                <div></div><p>One to One Advice</p>
+                            </div>
+                            <div className='li-item'>
+                                <div></div><p>24X7 Assistance</p>
+                            </div>
+                            <div className='li-item'>
+                                <div></div><p>Study Material</p>
                             </div>
                         </div>
-                        <a href='#' className='explore d-block' src='#'><span className='orange' >E</span>xplore</a>
+                        <a href='/mentors' className='explore d-block' src='#'>Explore</a>
                     </div>
                 </div>
                 <div className='big-brother col-md-4 mt-4 mt-md-0 col-12 d-flex align-items-center justify-content-center'>
@@ -46,19 +61,17 @@ export default function CareerSolutionEveryone(){
                                 <div className='bullet' ></div><p>Personal Guidance</p>
                             </div>
                             <div className='li-item'>
-                                <div></div><p>Mentors From IIT/NIT</p>
+                                <div></div><p>Mentors From IIT/NIT/AIIMS</p>
+                            </div>
+                    
+                            <div className='li-item'>
+                                <div></div><p>Skill Development</p>
                             </div>
                             <div className='li-item'>
-                                <div></div><p>AIIMS</p>
-                            </div>
-                            <div className='li-item'>
-                                <div></div><p>How To Prepare</p>
-                            </div>
-                            <div className='li-item'>
-                                <div></div><p>Queries</p>
+                                <div></div><p>Doubt Clearing</p>
                             </div>
                         </div>
-                        <a href='#' className='explore d-block' src='#'><span className='orange' >E</span>xplore</a>
+                        <a href='/mentors' className='explore d-block' src='#'>Explore</a>
                     </div>
                 </div>
             </div>

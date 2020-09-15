@@ -2,8 +2,7 @@ import User from '../../../../database/models/users/index.js'
 import DbErrorHandler from  '../../../helpers/errorHandlers/database/index.js'
 import {generateToken} from '../../../helpers/tokenHandler/index.js'
 
-function signIn(req, res){
-    
+function signIn(req, res){    
    let {email,password} = req.body
    console.log("Req body - ");
    console.log(req.body)
@@ -26,9 +25,10 @@ function signIn(req, res){
             let  token  =  generateToken(payload)
             res.cookie('t',token,{maxAge:9999})
 
-            const {_id, firstName, lastName , email,role} = user
-
-            return res.send({token:token, user :{_id, firstName, lastName , email , role}})
+            const {_id, firstName, lastName , email} = user
+            const role=user.role
+            const mobile=user.mobile
+            return res.send({token:token, user :{_id, firstName, lastName , email , role,mobile}})
        }
        else{
            res.status(401).json({

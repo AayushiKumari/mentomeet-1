@@ -14,33 +14,33 @@ export default function WhyChooseUs(){
                 <div  className='bg-brother col-lg-3 col-12 col-sm-6 d-flex align-items-center justify-content-center'>
                     <div className='s-brother py-2  px-4 d-flex flex-column align-items-center justify-content-center'>
                         <img className='d-block ' src={destination} alt='destination'></img>
-                         <p className='d-block'><span className='orange' >O</span>ne Destination For All Guidance</p>
+                         <p className='d-block'>One Stop Solution</p>
                     </div>
                 </div>
                 <div className='bg-brother col-lg-3 mt-5 mt-sm-0 col-12 col-sm-6 d-flex align-items-center justify-content-center'>
                     <div className='s-brother  py-2  px-4 d-flex flex-column align-items-center justify-content-center'>
                         <img className='d-block ' src={hastleFree} alt='destination'></img>
-                        <p className='d-block'><span className='orange' >H</span>assle Free</p>
+                        <p className='d-block'>Hassle Free</p>
                     </div>
                 </div>
                 <div className='bg-brother col-lg-3 mt-5 mt-lg-0 col-12 col-sm-6 d-flex align-items-center justify-content-center'>
                     <div className='s-brother py-2  px-4 d-flex flex-column align-items-center justify-content-center'>
                         <img className='d-block ' src={videoCall} alt='destination'></img>
-                        <p className='d-block'><span className='orange' >V</span>ideo Call Professionals</p>
+                        <p className='d-block'>Video Call With Exports</p>
                      </div>
                 </div>
                 <div className='bg-brother col-lg-3 mt-5 mt-lg-0 col-12 col-sm-6 d-flex align-items-center justify-content-center'>
                     <div className='s-brother py-2  px-4 d-flex flex-column align-items-center justify-content-center'>
                         <img className='d-block ' src={askQueries} alt='destination'></img>
-                        <p className='d-block'><span className='orange' >A</span>sk Your Queries</p>
+                        <p className='d-block'>Ask Your Queries</p>
                      </div>
                 </div>
             </div>
-          <a className='d-block mx-auto' id='btn-speak' href='#'><span className='orange' >S</span>peak <span className='orange' >T</span>o <span className='orange' >U</span>s</a>
+          <a className='d-block mx-auto' id='btn-speak' href='/mentors'>Speak To Us</a>
       </Container>
 
 //    <div classNameName='container' id="why-choose-us">
-//       <div classNameName='row '>
+//       <div classNameName='row '
 //          <div className='col-12 col-sm-6 col-md-6 col-lg py-0 py-lg-5  square d-flex flex-column align-items-center justify-content-center' >
 //          <img className='d-block ' src={destination} alt='destination'></img>
 //    //              <p className='d-block'><span className='orange' >O</span>ne Destination For All Guidance</p>

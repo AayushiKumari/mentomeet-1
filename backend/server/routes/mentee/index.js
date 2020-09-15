@@ -3,7 +3,8 @@ import menteeValidator from '../../helpers/validators/menteeValidator/index.js'
 import {get_mentee_create,post_mentee_create,post_mentee_update,mentee_list, mentee_detail,
     get_mentee_update, get_mentee_delete, post_mentee_delete} 
     from './../../controllers/menteeController.js'
-
+import authorizer from '../../helpers/authorizers/index.js'
+    
 const router  = express.Router()
 //router.get('/mentee',get_mentee_create)
 
@@ -21,8 +22,8 @@ const router  = express.Router()
 // need_notes: { type:Boolean, default: false},
 router.get('/mentees',mentee_list)
 //to get all mentees
-
-router.post('/mentee',menteeValidator,post_mentee_create)
+//,authorizer()
+router.put('/mentee/:id',menteeValidator,post_mentee_create)
 //req(first_name,last_name,coaching,class,category,subject)optional(phone,email,need_notes)
 
 router.get('/mentees/:id',mentee_detail)
@@ -31,7 +32,7 @@ router.get('/mentees/:id',mentee_detail)
 router.get('/mentees/:id/update',get_mentee_update)
 //get mentee details to update mentee
 
-router.post('/mentees/:id/update',menteeValidator,post_mentee_update)
+router.put('/mentees/:id/update',menteeValidator,post_mentee_update)
 //post mentee update
 
 //router.get('/mentees/:id/delete',get_mentee_delete) //no need of this for

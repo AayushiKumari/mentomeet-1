@@ -54,11 +54,11 @@ export function isquerypresent (req, res, next) {
 export function mentor_list (req, res, next) {
         async.parallel({
             jee_mentors: function (callback) {
-                Mentor.find({verification_status:false,category:'JEE'}).sort({college_type:1})
+                User.find({"history.category":"JEE",role:'Mentor'})
                     .exec(callback)
             },
             neet_mentors: function (callback) {
-                Mentor.find({verification_status:false,category:'NEET'}).sort({college_type:1})
+                User.find({role:'Mentor',"history.category":'NEET'})
                     .exec(callback)
             },
                                   
@@ -75,6 +75,18 @@ export function mentor_list (req, res, next) {
     
     };
 //dummy function to update fields ,not used in end points
+export function user_detail(req, res, next){
+    User.findById(req.params.id,  (err, result)=>{
+        if (err) { return next(err); }
+        if (result == null) { // No results.
+            var err = new Error('user not found');
+            err.status = 404;
+            return next(err);
+        }
+        res.send(result);
+    })
+}
+
 export function mentors_update(req, res,next)  {
             Mentor.updateMany({expertise:[]},{$set:{category:"NEET"}},(err, results)=>{
                 if(err) { return next(err)}
@@ -83,40 +95,40 @@ export function mentors_update(req, res,next)  {
 } 
 
 //here fetching details,mentor blogs(recent 3),and total followers
-export function mentor_detail  (req, res, next) {
-//todo-number of followers and follow button working
-    async.parallel({
-        detail: function (callback) {
-            User.findById(req.params.id)
-                .exec(callback)
-        },
-        myblogs: function (callback) {
-            Blog.find({author: req.params.id},'title body_text body_image created_at tag').sort({Date: 1}).limit(3)//convert into most popular
-            .exec(callback)
-        },
-        myfollowers: function (callback) {
-            Follow.find({followed_mentor: req.params.id}).countDocuments()//convert into most popular
-            .exec(callback)
-        },
+// export function mentor_detail  (req, res, next) {
+// //todo-number of followers and follow button working
+//     async.parallel({
+//         detail: function (callback) {
+//             Mentor.findOne({user:req.params.id},)
+//                 .exec(callback)
+//         },
+//         myblogs: function (callback) {
+//             Blog.find({author: req.params.id},'title body_text body_image created_at tag').sort({Date: 1}).limit(3)//convert into most popular
+//             .exec(callback)
+//         },
+//         myfollowers: function (callback) {
+//             Follow.find({followed_mentor: req.params.id}).countDocuments()//convert into most popular
+//             .exec(callback)
+//         },
                               
-    }, function (err, results) {
-        if (err) { return next(err); } // Error in API usage.
+//     }, function (err, results) {
+//         if (err) { return next(err); } // Error in API usage.
 
-        // CURRENTLY COMMENTED WITH ABHISHEK.... AS ERROR IN LOGIC
-        // if (results.detail == null ||results.myblogs == null ||results.myfollowers == null
-        //     ) { // No results.
-        //     var err = new Error('mentor not found');
-        //     err.status = 404;
-        //     return next(err);
-        // }
-        res.send({
-            detail: results.detail,
-            myblogs: results.myblogs,
-            myfollowers:results.myfollowers
-        });
-    });
+//         // CURRENTLY COMMENTED WITH ABHISHEK.... AS ERROR IN LOGIC
+//         // if (results.detail == null ||results.myblogs == null ||results.myfollowers == null
+//         //     ) { // No results.
+//         //     var err = new Error('mentor not found');
+//         //     err.status = 404;
+//         //     return next(err);
+//         // }
+//         res.send({
+//             detail: results.detail,
+//             myblogs: results.myblogs,
+//             myfollowers:results.myfollowers
+//         });
+//     });
 
-};
+// };
 
 
 // export function mentor_detail=(req,res,next)=> {
@@ -139,29 +151,26 @@ export function post_mentor_create(req, res)
  upload(req, res, function (err) {
         // Extract the validation errors from a request.
         // Create Mentor object with escaped and trimmed data (and the old id!)
-        var mentor = new Mentor(
-            {   //user:req.user
-                // first_name:"user.fast",
-                // last_name: "user.last",
-                //profile_picture: req.file
-                //phone: "pho",
-               // email: "email",
-                branch: req.body.branch,
+        var history = 
+            [{
+                profile_picture:"",
+                branch:req.body.branch,
                 language: req.body.language,               
                 college:req.body.college,
                 college_type: req.body.college_type,
                 year: req.body.year,
                 category: req.body.category,
                 rank:req.body.rank,
-                expertise: req.body.expertise,
                 start_time: req.body.start_time,
                 end_time: req.body.end_time,
                 fb_link: req.body.fb_link,
                 linkedin_link: req.body.linkedin_link,
+                expertise: req.body.expertise,
+                //college_id: req.body.college_id,  
+                about_me:req.body.about_me,   
                 //college_id: req.file.college_id,
                 //add additional req
-            }
-        );
+            }]
         if (err instanceof multer.MulterError) {
             console.log("Checking error from isntance of multer")
             console.log(err);
@@ -173,18 +182,32 @@ export function post_mentor_create(req, res)
         }else{
             if(req.file){
                 console.log("file saved")
-                mentor.profile_picture = "http://localhost:5005/"+req.file.filename;
-                mentor.save((err,result)=>{
+                history[profile_picture] = `http://${req.hostname}:5005/`+req.file.filename;
+                User.findByIdAndUpdate(req.params.id,  {history:history}, function (err, result){
                     if (err) { res.send(err); }
-                    else { res.send(result);console.log(result)}
+                    if (result == null) { // No results.
+                        var err = new Error('Mentor not found');
+                        err.status = 404;
+                        return next(err);
+                    }
+                    
+                        //console.log(req.user);
+                        res.send(result);
+                        console.log(result)
                     //res.redirect(theBlog.url)
                })
             }else{
                 console.log("no file")
-                mentor.save((err,result)=>{
+                User.findByIdAndUpdate(req.params.id,  {history:history}, function (err, result){
                     if (err) {res.send(result); }
-                    else { res.send(result);console.log(result)}
-                    //res.redirect(theBlog.url)
+                    if (result == null) { // No results.
+                        var err = new Error('Mentor not found');
+                        err.status = 404;
+                        return next(err);
+                    }
+                    
+                    res.send(result);
+                    console.log(history)
                })
             }
         }
@@ -192,8 +215,6 @@ export function post_mentor_create(req, res)
             
         })
     }
-
-
 
 export function get_mentor_update (req, res,next){
     Mentor.findById(req.params.id, function (err, result) {
@@ -215,14 +236,14 @@ export function post_mentor_update
     (req, res, next) {
 
        var mentor = new Mentor(
-            {//user:req.user
-                first_name: "req.body.first_name",
-                last_name: "req.body.last_name",
-              //  phone: req.body.phone,
+            {user:req.body.user,
+                first_name: req.body.firstName,
+                last_name: req.body.lastName,
+                phone: req.body.mobile,
                 branch: req.body.branch,
                 language: req.body.language,
-               // email: req.user.email,
-               //profile_picture=req.files
+                email: req.body.email,
+              // profile_picture="",
                 college:req.body.college,
                 college_type: req.body.college_type,
                 year: req.body.year,
@@ -233,7 +254,8 @@ export function post_mentor_update
                 fb_link: req.body.fb_link,
                 linkedin_link: req.body.linkedin_link,
                 expertise: req.body.expertise,
-                //college_id: req.body.college_id,               
+                //college_id: req.body.college_id,  
+                about_me:req.body.about_me,             
                 _id: req.params.id
             }
         );

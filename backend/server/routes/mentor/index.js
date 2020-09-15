@@ -1,9 +1,12 @@
 import express from 'express'
 import {mentorValidator,mentorReviewValidator} from '../../helpers/validators/mentorValidator/index.js'
-import {get_mentor_create,post_mentor_create,post_mentor_update,mentor_list, mentor_detail,isquerypresent,
-    get_mentor_update, get_mentor_delete, post_mentor_delete,post_mentor_review,post_follow_mentor} 
+import {get_mentor_create,post_mentor_create,post_mentor_update,mentor_list,isquerypresent,
+    get_mentor_update, get_mentor_delete, post_mentor_delete,post_mentor_review,post_follow_mentor,user_detail} 
     from './../../controllers/mentorController.js'
-const router  = express.Router()
+import {isAuth, isAdmin1, isAdmin2} from '../../helpers/authorizers/index.js'
+import authorizer from '../../helpers/authorizers/index.js'
+    
+    const router  = express.Router()
 
 
 //router.get('/mentor',get_mentor_create);
@@ -34,20 +37,20 @@ const router  = express.Router()
 // //dynamic  attribytes,need fxns
 //   verification_status: { type: Boolean, default: false },//account verification,only admin can change status 
 //   call_count: { type: Number, default:0 },
-
-router.post('/mentor',mentorValidator,post_mentor_create);//CreateMentorPostRequestHandler
+//,authorizer(),isAuth
+router.put('/mentor/:id',mentorValidator,post_mentor_create);//CreateMentorPostRequestHandler
 // req field(first_name,last_name,year,college_type,college,category,language,availability_time(string for now)) optional(about me,rank,social_media_urls,expertise,college_id(fileFild),resume(fileField))
-
+        
 router.get('/mentors',isquerypresent,mentor_list);
 //to get all mentors
 
-router.get('/mentors/:id',mentor_detail)
+router.get('/profile/:id',user_detail)
 //individual mentor details
 
 router.get('/mentors/:id/update',get_mentor_update);
 //get mentor details to what to update
 
-router.post('/mentors/:id/update',mentorValidator,post_mentor_update);
+router.put('/mentors/:id/update',mentorValidator,post_mentor_update);
 //post mentor update 
 
 router.post('/mentors/:id/delete',post_mentor_delete);

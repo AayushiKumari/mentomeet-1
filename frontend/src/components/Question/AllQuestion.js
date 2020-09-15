@@ -36,7 +36,7 @@ class AllQuestion extends Component{
         return(
             this.state.isDataReturned ?             
                 <div>
-                    {this.state.allQuestion.map((data, index) => {
+                    {this.state.allQuestion.map((data,  index) => {
                         return(
                             <EachQuestion question={{"eachQuest": data}}/>
                             
