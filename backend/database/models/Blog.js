@@ -25,7 +25,7 @@ var blogSchema = new Schema({
   tag:{ type: String, default:'EXAM',enum:['PHYSICS','CHEMESTRY','MATHS','PCM','PCB','BIOLOGY','JEE-EXAM',
   'JEE-ADVANCED','AIIMS','NEET-EXAM','EXAM','JEE-11','JEE-12','JEE-DROPPER','NEET-DROPPER','DEV-BLOG' ]},
   //tag is broader than category and for now to make it easy only one tag we can add most appropriate.
-  category: { type: String, default:'JEE', enum: ['CAREER','JEE','NEET','DEVELOPMENT']},//ie. category jee,neet,webd,career counseling
+  category: { type: String, default:'JEE', enum: ['CAREER','JEE','NEET']},//ie. category jee,neet,webd,career counseling
   minute_read: { type: Number, min: 0,max: 60,default:5},
   verification_status: { type: Boolean,  default: false,},//upvote will be handled in seprate document,for now ok
   date: { type: Date, default: Date.now},

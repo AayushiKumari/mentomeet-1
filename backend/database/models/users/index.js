@@ -23,6 +23,10 @@ const User = new Schema({
         type:String,
         required: true
     },
+    category:{
+        type:String,
+        required: true
+    },
     mobile:{
         type: Number,
         required: true

@@ -252,7 +252,32 @@ class Login extends Component{
                                                         />
                                                     </InputGroup>
                                                 </div>
-                                                <InputGroup className="mb-3 d-block">                                            
+                                                <InputGroup clasName="mb-3 d-block">
+                                                    <Control.select
+                                                        model=".category"
+                                                        id="category"
+                                                        name="category"
+                                                        defaultValue="JEE"
+                                                        className="custom-select w-100" 
+                                                        validators={{
+                                                            required
+                                                        }}                                                
+                                                    >
+                                                        {/* <option value="-1">Categories..</option> */}
+                                                        <option value="JEE">JEE</option>
+                                                        <option value="NEET">NEET</option>
+                                                        <option value="CAREER">CAREER</option>
+                                                    </Control.select>
+                                                    <Errors
+                                                        className="text-danger"
+                                                        show="touched"
+                                                        model=".category"
+                                                        messages={{
+                                                            required: 'Required! '
+                                                        }}
+                                                    />
+                                                </InputGroup>
+                                                <InputGroup className="mb-3 mt-3 d-block">                                            
                                                     <Control.input  model=".mobile"
                                                         type="number"
                                                         id="mobile"

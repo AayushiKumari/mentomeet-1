@@ -88,7 +88,11 @@ class BlogCreateForm extends React.Component {
     
     console.log("token is " + `Bearer ${token}`)
     
-    Axios.post(`http://localhost:5005/blog`, formData).then(result => {
+    Axios.post(`http://localhost:5005/blog`, formData, {
+        headers: {
+            'Authorization': `Bearer ${token}` 
+        } 
+    }).then(result => {
         console.log(result)
         window.location.reload()
     }).catch(error => {
@@ -226,6 +230,9 @@ class BlogCreateForm extends React.Component {
                             name="minute_read"
                             placeholder="Minute read between 0 to 60 mins"
                             className="form-control"
+                            validators={{
+                                required
+                            }}
                         />
                         <Errors
                             className="text-danger"

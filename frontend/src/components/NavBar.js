@@ -6,7 +6,9 @@ import brand from '../assets/brand.png'
 class NavBar extends React.Component {
   handleLogout = () => {
     localStorage.removeItem('user');
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
+    window.location.href = "/index"
+    // window.location.href = "/login"
   }
   render() {
     return (
@@ -42,12 +44,18 @@ class NavBar extends React.Component {
                             </a>
 
               <div className="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdown">
+                {localStorage.getItem('token') ?
                 <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/qna">QnA</Link>
+                :<Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/login">QnA</Link>
+                }
+                {localStorage.getItem('token') ?
                 <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/blogs">Blogs</Link>
+                :<Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/login">Blogs</Link>
+                }
                 {localStorage.getItem('token') ?
                   <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName + JSON.parse(localStorage.getItem('user')).lastName}&room=General`}>Chat Rooms</Link>
-                  : <><Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/login">Chats</Link></>}
-                <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/blog">Create Blog</Link>
+                  : <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/login">Chats</Link>}
+                {/* <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/blog">Create Blog</Link> */}
               </div>
             </li>
 

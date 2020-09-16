@@ -5,7 +5,7 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Row, Label, Col, Container, Breadcrumb, BreadcrumbItem, Button, InputGroupText,  InputGroupAddon, InputGroup} from 'reactstrap';
 import { Link, BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 
-import NavBarLog from './../NavBarLog.js'
+// import NavBarLog from './../NavBarLog.js'
 import Routes from "./BlogRoutes.js"
 import BlogCreateForm from "./BlogCreateForm"
 
@@ -102,7 +102,6 @@ class BlogLists extends Component{
         return(
             this.state.isDataReturned?
             <>
-            <NavBarLog />
             <div className="my-4">
                 <div className="container-lg">
                     <div className="row">
@@ -129,10 +128,11 @@ class BlogLists extends Component{
                                 <nav>
                                     <div className="nav-tabs-question d-flex justify-content-between">
                                         <div className="nav nav-tabs " id="nav-tab" role="tablist">
+                                            <a href="/blogs" className={"nav-item text-dark py-1 px-2 px-sm-3 border-0 nav-link " + (window.location.pathname === '/blogs' ? 'active' : '')} id="nav-home-tab">ALL</a>
                                             <a href="/blogs/jee" className={"nav-item text-dark py-1 px-2 px-sm-3 border-0 nav-link " + (window.location.pathname === '/blogs/jee' ? 'active' : '')} id="nav-home-tab">JEE</a>
                                             <a href="/blogs/neet" className={"nav-item text-dark py-1 px-2 px-sm-3 border-0 nav-link " + (window.location.pathname === '/blogs/neet' ? 'active' : '')} id="nav-profile-tab" >NEET</a>
                                             <a href="/blogs/career" className={"nav-item text-dark py-1 px-2 px-sm-3 border-0 nav-link " + (window.location.pathname === '/blogs/career' ? 'active' : '')} id="nav-contact-tab">CAREER</a>
-                                            <a href="/blogs/development" className={"nav-item text-dark py-1 px-2 px-sm-3 border-0 nav-link " + (window.location.pathname === '/blogs/development' ? 'active' : '')} id="nav-contact-tab">DEVELOPMENT</a>
+                                            {/* <a href="/blogs/development" className={"nav-item text-dark py-1 px-2 px-sm-3 border-0 nav-link " + (window.location.pathname === '/blogs/development' ? 'active' : '')} id="nav-contact-tab">DEVELOPMENT</a> */}
 
                                         </div>
                                         <div class="d-none d-md-block">

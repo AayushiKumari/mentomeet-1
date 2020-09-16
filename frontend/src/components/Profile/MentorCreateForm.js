@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import ImageUploader from 'react-images-upload';
 import $ from 'jquery' 
+import Axios from 'axios';
 
 class MentorCreateForm extends React.Component {
   constructor(props) {
@@ -303,21 +304,87 @@ class MentorCreateForm extends React.Component {
       // Now this means all are valid field
       // We are good to go and make a post request
       var reqBody = {};
-      reqBody['about_me']=this.state.about_me.value
-      reqBody['profile_picture'] = profile_picture;
-      reqBody['fb_link'] = fb_link;
-      reqBody['linkedin_link'] = linkedin_link;
-      reqBody['expertise'] = expertise;
-      reqBody['branch'] = branch;
-      reqBody['start_time'] = start_time;
-      reqBody['end_time'] = end_time;
-      reqBody['college'] = college;
-      reqBody['year'] = year;
-      reqBody['college_type'] = college_type;
-      reqBody['rank'] = rank;
-      reqBody['category'] = category;
+      const formData = new FormData();
+      formData.append("about_me", this.state.about_me.value);
+      formData.append("fb_link", fb_link);
+      formData.append("linkedin_link", linkedin_link);
+      formData.append("file", profile_picture);
+      formData.append("category", category);
+      formData.append("expertise", expertise);
+      formData.append("branch", branch);
+      formData.append("start_time", start_time);
+      formData.append("end_time", end_time);
+      formData.append("college", college);
+      formData.append("year", year);
+      formData.append("rank", rank);
+      formData.append("college_type", college_type);
+      console.log(formData);
+
+      // reqBody['about_me']=this.state.about_me.value
+      // reqBody['profile_picture'] = profile_picture;
+      // reqBody['fb_link'] = fb_link;
+      // reqBody['linkedin_link'] = linkedin_link;
+      // reqBody['expertise'] = expertise;
+      // reqBody['branch'] = branch;
+      // reqBody['start_time'] = start_time;
+      // reqBody['end_time'] = end_time;
+      // reqBody['college'] = college;
+      // reqBody['year'] = year;
+      // reqBody['college_type'] = college_type;
+      // reqBody['rank'] = rank;
+      // reqBody['category'] = category;
       const userId=JSON.parse(localStorage.getItem('user'))._id
-      this.makePostRequest(reqBody,userId);
+      // this.makePostRequest(reqBody,userId);
+      // const endpoint = `http://${window.location.hostname}:5005/mentor/${userId}`;
+    // CSRF Token if needed
+
+
+    Axios.put(`http://${window.location.hostname}:5005/mentor/${userId}`, formData).then(response => {
+      if (response.status !== 401 && response.status !== 400) {
+
+        if (response) {
+          alert("Good job!  Successfully added as a mentor")
+          // console.log("Response came", response.text());
+          window.location.href="/profile"
+        }
+        //   
+
+      }
+      else { console.log(response.text()); alert(":(' please check your inputs") }
+      // window.location.href= '/mentors/'+response.text()._id
+    })
+    .catch(error => {
+      console.log("Error in makePostRequest", error);
+      alert("An error occured, please try again");
+    });
+
+    // let lookupOptions = {
+    //   method: "PUT",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify(data)
+    // }
+
+    // fetch(endpoint, lookupOptions)
+    //   .then(response => {
+    //     if (response.status !== 401 && response.status !== 400) {
+
+    //       if (response) {
+    //         alert("Good job!  Successfully added as a mentor")
+    //         console.log("Response came", response.text());
+    //         window.location.href="/profile"
+    //       }
+    //       //   
+
+    //     }
+    //     else { console.log(response.text()); alert(":(' please check your inputs") }
+    //     // window.location.href= '/mentors/'+response.text()._id
+    //   })
+    //   .catch(error => {
+    //     console.log("Error in makePostRequest", error);
+    //     alert("An error occured, please try again");
+    //   });
 
     } else {
       alert('Check all fields are valid');

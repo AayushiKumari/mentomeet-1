@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import BlogDetailedPage from './components/Blog/BlogDetailedPage.js'
 import BlogList from './components/Blog/BlogList.js'
 import BlogLists from './components/Blog/BlogLists.js'
-import MentorList from './components/Profile/MentorList'
+import MentorLists from './components/Profile/Mentor/MentorLists'
 import MentorCreateForm from './components/Profile/MentorCreateForm';
 import MyProfile from './components/Profile/MyProfile/MyProfile.js'
 import OtherProfile from './components/Profile/OtherProfile/OtherProfile.js'
@@ -41,7 +41,7 @@ function App() {
             <Route path="/blogs" render={props => <BlogLists {...props} />} />
             <Route path="/bloglist" render={props => <BlogList {...props} />} />
             {/* <Route path="/createblog" render={props => <BlogCreateForm {...props} /> } /> */}
-            <Route path="/mentors" render={props => <MentorList {...props} />} />
+            <Route path="/mentors" render={props => <MentorLists {...props} />} />
             <Route path="/mentor" render={props => <MentorCreateForm {...props} />} />
             {/* Using the same  Profile component, with different options changed in the file and it Myprofile and other profile */}
             <Route path="/profile/:id" render={props => <OtherProfile {...props} />} />

@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Card, Jumbotron } from 'react-bootstrap';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 
-
+import {checktoken} from "../../CommonFunc/common.js"
 
 import './App.css';
 import { cssNumber } from 'jquery';
@@ -150,6 +150,7 @@ class MyProfile extends React.Component {
 
   componentDidMount() {
     console.log("Component did mount in mentorProfile");
+    checktoken();
 
     const { match } = this.props;
     // match.params.id - The user Id for other users

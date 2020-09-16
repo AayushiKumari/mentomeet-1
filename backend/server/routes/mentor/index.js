@@ -1,7 +1,8 @@
 import express from 'express'
 import {mentorValidator,mentorReviewValidator} from '../../helpers/validators/mentorValidator/index.js'
 import {get_mentor_create,post_mentor_create,post_mentor_update,mentor_list,isquerypresent,
-    get_mentor_update, get_mentor_delete, post_mentor_delete,post_mentor_review,post_follow_mentor,user_detail} 
+    get_mentor_update, get_mentor_delete, post_mentor_delete,post_mentor_review,post_follow_mentor,user_detail,
+     allMentors, getMentorByCategory} 
     from './../../controllers/mentorController.js'
 import {isAuth, isAdmin1, isAdmin2} from '../../helpers/authorizers/index.js'
 import authorizer from '../../helpers/authorizers/index.js'
@@ -38,7 +39,7 @@ import authorizer from '../../helpers/authorizers/index.js'
 //   verification_status: { type: Boolean, default: false },//account verification,only admin can change status 
 //   call_count: { type: Number, default:0 },
 //,authorizer(),isAuth
-router.put('/mentor/:id',mentorValidator,post_mentor_create);//CreateMentorPostRequestHandler
+router.put('/mentor/:id', post_mentor_create);//CreateMentorPostRequestHandler
 // req field(first_name,last_name,year,college_type,college,category,language,availability_time(string for now)) optional(about me,rank,social_media_urls,expertise,college_id(fileFild),resume(fileField))
         
 router.get('/mentors',isquerypresent,mentor_list);
@@ -65,6 +66,10 @@ router.post('/mentors/:id/mentorReview',mentorReviewValidator,post_mentor_review
 router.post('/mentors/:id/followMentor',post_follow_mentor);
 //location mentor controller,validator
 //req fields(mentor(req.params.id),user(req.user))
+
+router.get('/allmentors', allMentors);
+router.get('/mentors/:category', getMentorByCategory);
+
 
 export default router
 
