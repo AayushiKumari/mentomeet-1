@@ -2,10 +2,7 @@ import React from "react";
 import {Link} from 'react-router-dom'
 import {
     Button,
-    // Input,
-    // InputGroupAddon,
-    // InputGroupText,
-    // InputGroup,
+    Alert,
     Container,
     Row,
     Col
@@ -65,9 +62,9 @@ class Mentor extends React.Component {
 
     render() {
         return (
-            <div className="section section-team text-center title" style={{background:"white", color:"white", border:"5px solid white", borderRadius:"10px"}}>
+            <div className="section section-team text-center title" style={{background:"white", color:"white", border:"5px solid white", borderRadius:"10px"}} id="team">
           <Container>
-            <h1 className="title font-weight-bold text-warning">Mentors</h1>
+            <h1 className="title font-weight-bold text-warning">Our Team</h1>
             <div className="team"  style={{zIndex:"-100"}} >
               <Row  style={{zIndex:"-100"}} >
                 {arr.map(teamMember=> {
@@ -122,6 +119,15 @@ class Mentor extends React.Component {
                   );
                 })}
       
+              </Row>
+              <hr />
+              <Row style={{color:"black", textAlign:"center"}}>
+                <Col md={12}>
+                 
+                </Col>
+                <Col>
+                  <Alert color="success"> <h3>Join us. </h3>Let's make stuff together,we are looking for talented and passionate creative people to join our Team.</Alert>
+                </Col>
               </Row>
               
             </div>

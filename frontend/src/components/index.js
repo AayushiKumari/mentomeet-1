@@ -22,8 +22,9 @@ function Index() {
       <CareerSolutionEveryone/>
       <WhyChooseUs/> 
       {/* <BlogDetailedPage/> */}
-      <Mentor/>
+      
       <About/>
+      <Mentor/>
       <BeyondMentorship/>     
       <WhyChooseMentomeet/>
        <Footer />
