@@ -38,7 +38,7 @@ class EachMentor extends Component{
                             <div className="team-player">
                                 <div className="flip-box flip-box-team">
                                 <div className="flip-box-inner flip-box-inner-team" style={{opacity:"1"}}>
-                                    <div className="flip-box-front" style={{backgroundColor:"rgb(245 245 245)",opacity:"1"}}>
+                                    <div className="flip-box-front" style={{backgroundColor:"rgba(0,0,0,0)",opacity:"1"}}>
                                     <img
                                         alt={this.state.mentor.firstName}
                                         className="rounded-circle img-fluid img-raised"

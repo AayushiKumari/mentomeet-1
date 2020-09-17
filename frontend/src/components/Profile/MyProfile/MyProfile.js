@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Card, Jumbotron } from 'react-bootstrap';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { ListGroup, ListGroupItem, Badge} from 'reactstrap';
 
 import {checktoken} from "../../CommonFunc/common.js"
 
@@ -80,8 +80,8 @@ class MyProfile extends React.Component {
       .then(res => res.json())
       .then(
         (result) => {
-          console.log("Response data of mentors came", result);
-        
+          console.log("Response data :", result);
+          console.log(result.firstName)
          var profileFilled=true;
          if(result.history.length==0){
           profileFilled=false;
@@ -89,7 +89,8 @@ class MyProfile extends React.Component {
             profileFilled:profileFilled
           })
          }
-         if (Role==='Mentor'&& profileFilled){
+        console.log(result)
+         if ((result.role==='Mentor'||result.category==='Mentor')&& profileFilled){
           const profile_picture = result.history[0].profile_picture;
           const fullName = result.firstName+" "+result.lastName;
           const email = result.email;          
@@ -116,9 +117,10 @@ class MyProfile extends React.Component {
           });
           
          }
-         else if((Role==='Mentee'&& profileFilled)) {
+         else if(((result.role==='Mentee'||result.category==='Mentee')&& profileFilled)) {
           const fullName = result.firstName+" "+result.lastName;
           const email = result.email;   
+          const profile_picture = result.history[0].profile_picture;
           const standard = result.history[0].standard;
           const coaching = result.history[0].coaching;
           const category = result.history[0].category;
@@ -129,6 +131,7 @@ class MyProfile extends React.Component {
             email:email,
             role:'Mentee',
             //mentee specific
+            profile_picture:profile_picture,
             standard:standard,coaching:coaching,category:category,subject:subject,
             
           });
@@ -235,8 +238,8 @@ class MyProfile extends React.Component {
         <Container fluid id="faculty-main-content">
           <Row>
             <Col sm={3}>
-              <Card id="profile-card">
-                <Card.Img variant="top" src="/logo512.png" />
+              <Card id="profile-card" style={{paddingTop:"20px"}}>
+                <Card.Img variant="top" style={{borderRadius:"50%", width:"150px", height:"150px"}} src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture} />
                 <Card.Body>
                   <Card.Title>Your Name</Card.Title>
                   <Card.Text>
@@ -254,8 +257,18 @@ class MyProfile extends React.Component {
               <div id="main-content">
                 <div id="background-container">
                   <Jumbotron id="background-jumbotron">
-                    <h3>background</h3>
-                    <h4>Update Your  Profile Or <a href="/login">Login</a> first</h4>
+                    <Card>
+                      <Card.Header>My Details:</Card.Header>
+                      {/* <Card.Title><h3>My Details:</h3></Card.Title> */}
+                      <Card.Body>
+                        <Row>
+                          <Col>
+                            <p>Please update your profile</p>
+                            {updateBtn}
+                          </Col>
+                        </Row>
+                      </Card.Body>
+                    </Card>
                   </Jumbotron>
                 </div>
               </div>
@@ -266,79 +279,15 @@ class MyProfile extends React.Component {
     )
   }
   if((role==='Mentor')){
+    
     return (
       <div className="App">
-        <h2 style={{ padding: "8px", background: "#fff" }}>Profile detailed View</h2>
+        <h2 style={{padding:"20px"}}>My Profile Page</h2>
         <Container fluid id="faculty-main-content">
           <Row>
-            <Col sm={3}>
-              <Card id="profile-card">
-                <Card.Img variant="top" src="/logo512.png" />
-                <Card.Body>
-                  <Card.Title>{this.state.fullName}</Card.Title>
-                  <Card.Text>
-                    Mentor
-                  </Card.Text>
-                  <Button variant="primary">Contact</Button>
-                </Card.Body>
-
-                {updateBtn}
-                {/* Add REST OF INFORMATION HERE */}
-
-              </Card>
-            </Col>
-            <Col sm={9}>
-              <div id="main-content">
-                <div id="posts-container">
-                  <Jumbotron id="posts-jumbotron">
-                    <div id="posts-top-menu">
-                      <h3>Posts</h3>
-                      <div className="right-buttons">
-                        <Button onClick={this.toggleAllPosts} size="sm" variant="outline-info">Show All</Button>
-                      </div>
-                    </div>
-                    <Row id="posts-body">
-                      {postsElementsList}
-                    </Row>
-                  </Jumbotron>
-
-                </div>
-                <div id="background-container">
-                  <Jumbotron id="background-jumbotron">
-                    <h3>background</h3>
-                    <ListGroup>
-      <ListGroupItem justifyStart>Year :{this.state.year}</ListGroupItem>
-      <ListGroupItem>Branch :{this.state.branch}</ListGroupItem>
-      <ListGroupItem>College_type :{this.state.college_type}</ListGroupItem>
-      <ListGroupItem>College :{this.state.college}</ListGroupItem>
-      <ListGroupItem>Rank :{this.state.rank}</ListGroupItem>
-      <ListGroupItem>Expertise :{this.state.expertise}</ListGroupItem>
-     {/* <ListGroupItem>language :{this.state.language}</ListGroupItem> */}
-      <ListGroupItem>Online start_time:{this.state.start_time}  end_time:{this.state.end_time}</ListGroupItem>
-      <ListGroupItem>Facebook profile :{this.state.fb_link}</ListGroupItem>
-      <ListGroupItem>Linkedin profile :{this.state.linkedin_link}</ListGroupItem>
-      <ListGroupItem>About Me :{this.state.about_me}</ListGroupItem>
-      {/* <ListGroupItem>coaching_type</ListGroupItem>      
-      <ListGroupItem>rank</ListGroupItem> */}
-    </ListGroup>
-                  </Jumbotron>
-                </div>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    );
-  }
-  else{
-    return (
-      <div className="App">
-        <h2 style={{ padding: "8px", background: "#fff" }}>Profile detailed View</h2>
-        <Container fluid id="faculty-main-content">
-          <Row>
-            <Col sm={3}>
-              <Card id="profile-card">
-                <Card.Img variant="top" src="/logo512.png" />
+            <Col md={3}>
+              <Card id="profile-card" style={{paddingTop:"20px"}}>
+                <Card.Img variant="top" style={{borderRadius:"50%", width:"150px", height:"150px"}} src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture} />
                 <Card.Body>
                   <Card.Title>{this.state.fullName}</Card.Title>
                   <Card.Text>
@@ -352,30 +301,85 @@ class MyProfile extends React.Component {
 
               </Card>
             </Col>
-            <Col sm={9}>
+            <Col md={9}>
               <div id="main-content">
-                {/* <div id="posts-container">
-                  <Jumbotron id="posts-jumbotron">
-                    <div id="posts-top-menu">
-                      <h3>Posts</h3>
-                      <div className="right-buttons">
-                        <Button onClick={this.toggleAllPosts} size="sm" variant="outline-info">Show All</Button>
-                      </div>
-                    </div>
-                    <Row id="posts-body">
-                      {postsElementsList}
-                    </Row>
-                  </Jumbotron>
-
-                </div> */}
                 <div id="background-container">
                   <Jumbotron id="background-jumbotron">
-                    <h3>background</h3>
-                    <ListGroupItem justifyStart>Class/year :{this.state.standard}</ListGroupItem>
-      {/* <ListGroupItem>Coaching_type :{this.state.coaching_type}</ListGroupItem> */}
-      <ListGroupItem>Coaching :{this.state.coaching}</ListGroupItem>
-      <ListGroupItem>Category :{this.state.category}</ListGroupItem>
-      <ListGroupItem>subject :{this.state.subject}</ListGroupItem>
+                    
+                    <Card>
+                      <Card.Header>My Details:</Card.Header>
+                      {/* <Card.Title><h3>My Details:</h3></Card.Title> */}
+                      <Card.Body>
+                        <Row>
+                          <Col md={6}>
+                            <p> Year :{this.state.year}</p>
+                            <p> Branch :{this.state.branch} </p>
+                            <p> College_type :{this.state.college_type}</p>
+                            <p> College :{this.state.college} </p>
+                            <p> Rank : <Badge color="success">{this.state.rank}</Badge></p>
+                          </Col>
+                          <Col>
+                            <p> Expertise :{this.state.expertise}</p>
+                            <p> Online start_time:{this.state.start_time}, end_time:{this.state.end_time} </p>
+                            <p> Facebook profile :{this.state.fb_link} </p>
+                            <p> Linkedin profile :{this.state.linkedin_link}</p>
+                            <p> About Me :{this.state.about_me} </p>
+                          </Col>
+                        </Row>
+                      </Card.Body>
+                    </Card>
+                  </Jumbotron>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    );
+  }
+  else{
+    return (
+      <div className="App">
+        <h2 style={{padding:"20px"}}>My Profile Page</h2>
+        <Container fluid id="faculty-main-content">
+          <Row>
+            <Col md={3}>
+              <Card id="profile-card" style={{paddingTop:"20px"}}>
+                <Card.Img variant="top" style={{borderRadius:"50%", width:"150px", height:"150px"}} src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture} />
+                <Card.Body>
+                  <Card.Title>{this.state.fullName}</Card.Title>
+                  <Card.Text>
+                    {this.state.role}
+                  </Card.Text>
+                  {/* <Button variant="primary">Contact</Button> */}
+                </Card.Body>
+
+                {updateBtn}
+                {/* Add REST OF INFORMATION HERE */}
+
+              </Card>
+            </Col>
+            <Col md={9}>
+              <div id="main-content">
+                <div id="background-container">
+                  <Jumbotron id="background-jumbotron">
+                    
+                    <Card>
+                      <Card.Header>My Details:</Card.Header>
+                      {/* <Card.Title><h3>My Details:</h3></Card.Title> */}
+                      <Card.Body>
+                        <Row>
+                          <Col md={6}>
+                            <p> Class/Year : {this.state.standard}</p>
+                            <p> Coaching : {this.state.coaching} </p>
+                          </Col>
+                          <Col>
+                            <p> Category : <Badge color="success">{this.state.category}</Badge></p>
+                            <p> Subject :{this.state.subject} </p>
+                          </Col>
+                        </Row>
+                      </Card.Body>
+                    </Card>
                   </Jumbotron>
                 </div>
               </div>
