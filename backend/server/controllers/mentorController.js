@@ -6,6 +6,8 @@ import multer from 'multer'
 import User from '../../database/models/users/index.js'
 
 import async from 'async'
+import fs from 'fs'
+import path from 'path'
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb){
@@ -107,6 +109,16 @@ export function user_detail(req, res, next){
             err.status = 404;
             return next(err);
         }
+
+        if(result.history.length>0 && result.history[0].profile_picture!==''){
+            const __dirname = path.resolve()
+            var imagePath = path.resolve(__dirname , `public/${result.history[0].profile_picture}`);
+            let buff = fs.readFileSync(imagePath);
+            let base64data = buff.toString('base64');
+            result.history[0].profile_picture = `data:image/jpeg;base64, ${base64data}`
+        }
+        
+        // console.log(result.history[0].profile_picture)
         res.send(result);
     })
 }
@@ -206,7 +218,7 @@ export function post_mentor_create(req, res)
         }else{
             if(req.file){
                 console.log("file saved")
-                history.profile_picture = `http://${req.hostname}:5005/`+req.file.filename;
+                history.profile_picture = req.file.filename;
                 User.findByIdAndUpdate(req.params.id,  {history:history}, function (err, result){
                     if (err) { res.send(err); }
                     if (result == null) { // No results.
