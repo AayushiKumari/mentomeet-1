@@ -18,6 +18,7 @@ import chatRouter from './routes/chat/index.js'
 import blogRouter from './routes/blog/index.js'
 import mentorRouter from './routes/mentor/index.js'
 import menteeRouter from './routes/mentee/index.js'
+import adminRouter from './routes/admin/index.js'
 
 import {addUser, removeUser, getUser, getUsersInRoom} from './controllers/chat/users.js'
 
@@ -63,6 +64,8 @@ app.use(chatRouter)
 app.use(blogRouter)
 app.use(mentorRouter)
 app.use(menteeRouter)
+app.use(adminRouter)
+
 io.on('connect', (socket) => {
     socket.on('join', ({ name, room }, callback) => {
       console.log("JOIN")
