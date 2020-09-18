@@ -126,7 +126,9 @@ class Mentor extends React.Component {
                  
                 </Col>
                 <Col>
-                  <Alert color="success"> <h3>Join us. </h3>Let's make stuff together,we are looking for talented and passionate creative people to join our Team.</Alert>
+                  <Alert color="success"> <h3>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd8tDDT3bT3-1k4fudBRmor1A2oJ3XkIbxyaC5Wr8q7bavWUQ/viewform" target="_blank">Join us. </a>
+                  </h3>Let's make stuff together,we are looking for talented and passionate creative people to join our Team.</Alert>
                 </Col>
               </Row>
               

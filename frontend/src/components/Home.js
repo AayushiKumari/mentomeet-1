@@ -9,6 +9,7 @@ import mic from '../assets/img/Rectangle 14@2x.png'
 import greaterThen from '../assets/img/Rectangle 13.png'
 import dialog from '../assets/img/Rectangle 5.png'
 import '../css/Home.css'
+import { Link } from 'react-router-dom'
 
 
 
@@ -19,21 +20,22 @@ export default function Home(){
                 <div id='row' className='col-12 col-sm-6 order-2 order-sm-1 row'>
                     <div className='col position-relative d-flex aling-items-center justify-content-center'>
                         <img className='d-block w-100' src={achive}></img>
-                        <a href="#" >  <img id='video' className='position-absolute' href="#" src={video}></img>
+                        <a href="https://www.youtube.com/channel/UCZhV5IEO2hqpeTwLzqKu8Sw/playlists?view_as=subscriber" target="_blank" >  <img id='video' className='position-absolute' href="#" src={video}></img>
                         </a> 
                     </div>
                     <div className='col d-flex aling-items-center justify-content-center position-relative'>
                         <img className='d-block w-100' src={talk}></img>
-                       <a href="#" > <img id='mic' className='position-absolute' href="#" src={mic}></img>
-                    </a></div>
+                       <Link to={`/chat?name=dadabn&room=General`} > <img id='mic' className='position-absolute' src={mic}></img>
+                    </Link></div>
                    <img id='greaterThen' className='d-none d-sm-block position-absolute' src={greaterThen}></img>
                     
                 </div>
                  
                 <div className='col-12 col-sm-6 order-1 order-sm-2 d-flex flex-sm-row aling-items-center justify-content-center justify-content-sm-end'>
                 
-                    <img id='teacher' className='' src={teacher}></img>
-                    <a id='btn-sm-register' className='d-block position-absolute d-sm-none mx-auto mt-4' href='#'>REGISTER</a>
+                    <img id='teacher' className='' src={teacher}></img><br />
+                    <p>Xyz</p>
+                    <a id='btn-sm-register' className='d-block position-absolute d-sm-none mx-auto mt-4' href='/login'>REGISTER</a>
                     <img id='dialog' className='position-absolute' src={dialog}></img>
                 </div>
                 

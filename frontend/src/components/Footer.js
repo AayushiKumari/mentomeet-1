@@ -77,6 +77,11 @@ class Footer extends React.Component {
                       <a href="https://twitter.com/MentoMeet" target="_blank" class="fab fa-twitter footer-social-media"></a>
                     </div>
 
+                    {/* Youtube */}
+                    <div className="col">
+                      <a href="https://www.youtube.com/channel/UCZhV5IEO2hqpeTwLzqKu8Sw/playlists?view_as=subscriber" target="_blank" class="fab fa-youtube footer-social-media"></a>
+                    </div>
+
                     {/* Insta */}
                     <div className="col">
                       <a href="https://www.instagram.com/official_mentomeet/" target="_blank" class="fab fa-instagram footer-social-media"></a>
@@ -86,6 +91,8 @@ class Footer extends React.Component {
                     <div className="col">
                       <a href="https://www.linkedin.com/company/mentomeet/" target="_blank" class="fab fa-linkedin footer-social-media"></a>
                     </div>
+
+                    
                     
                   </div>
                   <div className="copyright" style={{ marginTop: "auto", marginLeft: "12px", padding: "12px 12px" }} >
@@ -95,10 +102,10 @@ class Footer extends React.Component {
               </div>
               <div className="col-sm-3">
                 <ul className="links">
-                  <li><Link to="/mentee">Careers</Link></li>
+                  <li><Link to={!localStorage.getItem('token') ? "/login" : "/profile"}>Careers</Link></li>
                   <li><Link to="/blogs">Blogs</Link></li>
-                  <li><Link to="/mentor">Be a mentor</Link></li>
-                  <li><Link to="/mentee">Be a Mentee</Link></li>
+                  <li><Link to={!localStorage.getItem('token') ? "/login" : "/profile"}>Be a mentor</Link></li>
+                  <li><Link to={!localStorage.getItem('token') ? "/login" : "/profile"}>Be a Mentee</Link></li>
                   <li onClick={this.handleopenFAQ}>FAQs</li>
                   <li onClick={this.openPrivacyDialog}>Privacy Policy</li>
                   <li onClick={this.openTCDialog}>Terms & Conditions</li>
@@ -110,7 +117,7 @@ class Footer extends React.Component {
                     <div className="contact-details">
                       <p>Feel free to contact us</p>
                       <div className="row">
-                        <div className="col-12 text-success">9811567932</div>
+                        <div className="col-12 text-success">7688997701</div>
                         <div className="col-12 text-success">contact@mentomeet.com</div>
                       </div>
                     </div>

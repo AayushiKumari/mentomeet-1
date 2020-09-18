@@ -61,14 +61,14 @@ export default function CareerSolutionEveryone(){
                                 <div className='bullet' ></div><p>Personal Guidance</p>
                             </div>
                             <div className='li-item'>
-                                <div></div><p>Mentors From IIT/NIT/AIIMS</p>
+                            <div className='bullet' ></div><p>Mentors From IIT/NIT/AIIMS</p>
                             </div>
                     
                             <div className='li-item'>
-                                <div></div><p>Skill Development</p>
+                            <div className='bullet' ></div><p>Skill Development</p>
                             </div>
                             <div className='li-item'>
-                                <div></div><p>Doubt Clearing</p>
+                            <div className='bullet' ></div><p>Doubt Clearing</p>
                             </div>
                         </div>
                         <a href='/mentors' className='explore d-block' src='#'>Explore</a>
