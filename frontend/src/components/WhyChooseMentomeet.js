@@ -13,7 +13,7 @@ import students from '../assets/final assets/soln.png'
 
 export default function WhyChooseMentomeet(){
     return(
-        <div id='why-choose-mentomeet' className='row my-4 my-md-5 justify-content-center align-items-center'>
+        <div id='why-choose-mentomeet' className='container-fluid row my-4 my-md-5 justify-content-center align-items-center'>
             <div id='left-col' className='col-12 my-5 my-lg-0 col-lg-6 d-flex align-items-center '>
                 <div className='box ml-5 d-flex flex-row justify-content-start align-items-center'>
                     <img id='v-line' className='d-block' src={vLine} alt=""></img>
