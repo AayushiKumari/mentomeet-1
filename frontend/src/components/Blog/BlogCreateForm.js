@@ -88,7 +88,7 @@ class BlogCreateForm extends React.Component {
     
     console.log("token is " + `Bearer ${token}`)
     
-    Axios.post(`http://localhost:5005/blog`, formData, {
+    Axios.post(`http://${window.location.hostname}:5005/blog`, formData, {
         headers: {
             'Authorization': `Bearer ${token}` 
         } 

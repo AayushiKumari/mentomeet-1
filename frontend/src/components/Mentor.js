@@ -12,42 +12,93 @@ import avatar from '../assets/default-avatar.png';
 // import default from '../assets/default-avatar.png';
 
 var arr = [
-    {
-        src: avatar,
-        name: "Dinkey Mahawar",
-        fbLink:"https://www.facebook.com/profile.php?id=100013816158199",
-        linkedinLink:"https://www.linkedin.com/in/dinkey-mahawar-13ab67125"
-      },
-      {
-          src: avatar,
-          name: "Mahitha Sravani Sathupati",
-          fbLink:"https://www.facebook.com/mahithasravani.sathupati",
-          linkedinLink:"https://linkedin.com/in/"
-        },
-        {
-          src: avatar,
-          name: "Tikesh Kumar Sahuh",
-          fbLink:"https://www.facebook.com/tikeshkumar.sahu.336",
-          linkedinLink:"https://linkedin.com/in/"
-        },
-        {
-          src: avatar,
-          name: "Ayushi Joshi",
-          fbLink:"https://www.facebook.com/",
-          linkedinLink:"https://linkedin.com/in/"
-        },
-        {
-          src: avatar,
-          name: "Lalit Kumar",
-          fbLink:"https://www.facebook.com/profile.php?id=100013299780244",
-          linkedinLink:"https://linkedin.com/in/"
-        },
-        {
-          src: avatar,
-          name: "Anoop",
-          fbLink:"https://www.facebook.com/profile.php?id=100009371717274",
-          linkedinLink:"https://linkedin.com/in/"
-        }
+  {
+    src: require('../assets/members/abdul.jpg'),
+    name: "Abdulahad Khan",
+    position: "Management,Developer",
+    college:"IIT Roorkee",
+  },
+
+{
+    src: require('../assets/members/virendra.jpg'),
+    name: "Virendra Lohia",
+    position: "Management",
+    college:"NIT Hamirpur",
+  },
+{
+    src: require('../assets/members/ajay.jpg'),
+    name: "Ajay Dayma",
+    position: "Management,Developer",
+    college:"IIT Roorkee",
+  },
+{
+    src: require('../assets/default-avatar.png'),
+    name: "Abhishek Gupta",
+    position: "Developer",
+    college:"IIT Roorkee",
+  },
+
+{
+    src: require('../assets/members/abhinav.jpg'),
+    name: "Abhinav Saini",
+    position: "Marketing Research",
+    college:"PEC Chandigarh",
+  },
+
+{
+    src: require('../assets/members/prasoon.jpg'),
+    name: "Prasoon Kumar Gupta",
+    position: "Designer",
+    college:"NIT Hamirpur",
+  },
+
+{
+    src: require('../assets/default-avatar.png'),
+    name: "Priyam Seth",
+    position: "Developer",
+    college:"IIT Mandi",
+  },
+
+
+{
+    src: require('../assets/members/rohit.JPG'),
+    name: "Rohit Bhamu",
+    position: "Business Development",
+    college:"IIT Mandi",
+  },
+
+{
+    src: require('../assets/members/siddharth.jpg'),
+    name: "Siddharth Choudhary",
+    position: "Digital Marketing",
+    college:"NIT Hamirpur",
+  },
+
+{
+    src: require('../assets/members/yash.jpg'),
+    name: "Agrawal Yash",
+    position: "Content Writing",
+    college:"NIT Hamirpur",
+  },
+
+{
+    src: require('../assets/members/ankit.jpg'),
+    name: "Ankit Meena",
+    position: "Medical Operation",
+    college:"AIIMS Delhi",
+  },
+{
+    src: require('../assets/members/ravi.jpg'),
+    name: "Ravi Kishan",
+    position: "JEE Operation",
+    college:"IIIT Nagpuri",
+  },
+{
+    src: require('../assets/members/bharat.jpg'),
+    name: "Bharat Garg",
+    position: "JEE Operation",
+    college:"PEC Chandigarh",
+  },
 ]
 
 class Mentor extends React.Component {
@@ -79,7 +130,7 @@ class Mentor extends React.Component {
                                 alt={teamMember.name}
                                 className="rounded-circle img-fluid img-raised"
                                 src={teamMember.src}
-                                style={{maxWidth:"180px", border:"5px solid white", boxShadow:"15px 15px 30px 30px #ccc", borderRadius:"100%"}}
+                                style={{maxWidth:"180px", maxHeight:"180px", border:"5px solid white", boxShadow:"15px 15px 30px 30px #ccc", borderRadius:"100%"}}
                               ></img>
                             </div>
                             <div className="flip-box-back" style={{backgroundColor:"rgba(0,0,0,0)",opacity:"1"}}>
@@ -87,7 +138,7 @@ class Mentor extends React.Component {
                                 alt={teamMember.name}
                                 className="rounded-circle img-fluid img-raised"
                                 src={teamMember.src}
-                                style={{maxWidth:"180px", border:"5px solid white", boxShadow:"15px 15px 30px 30px #ccc", borderRadius:"100%"}}
+                                style={{maxWidth:"180px", maxHeight:"180px", border:"5px solid white", boxShadow:"15px 15px 30px 30px #ccc", borderRadius:"100%"}}
                               ></img>  
                             </div>
                           </div>
@@ -95,7 +146,8 @@ class Mentor extends React.Component {
                           
                         
                         <h4 className="title text-warning mt-5">{teamMember.name}</h4>
-                        {/* <p className="category text-info">{teamMember.category}</p> */}
+                        <p className="category text-info">{teamMember.position}</p>
+                        <h5 className="title text-success mt-1"> {teamMember.college} </h5>
                         <Button
                           className="btn-icon btn-round"
                           color="info"

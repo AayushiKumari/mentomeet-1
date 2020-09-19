@@ -86,53 +86,53 @@ class About extends Component {
                                     className="vertical-timeline-element--work"
                                     contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
                                     contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-                                    date="2011 - present"
+                                    // date="2011 - present"
                                     iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
                                     // icon={<WorkIcon />}
                                 >
                                     <h3 className="vertical-timeline-element-title">Creative Director</h3>
-                                    <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
+                                    <h4 className="vertical-timeline-element-subtitle">Ajay Dayma</h4>
                                     <p>
                                     Creative Direction, User Experience, Visual Design, Project Management, Team Leading
                                     </p>
                                 </VerticalTimelineElement>
                                 <VerticalTimelineElement
                                     className="vertical-timeline-element--work"
-                                    date="2010 - 2011"
-                                    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                                    // date="2010 - 2011"
+                                    iconStyle={{ background: 'rgb(243, 33, 122)', color: '#fff' }}
                                     // icon={<WorkIcon />}
                                 >
-                                    <h3 className="vertical-timeline-element-title">Art Director</h3>
-                                    <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
+                                    <h3 className="vertical-timeline-element-title">Why did we need it ? </h3>
+                                    {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
                                     <p>
-                                    Creative Direction, User Experience, Visual Design, SEO, Online Marketing
+                                    In this increasingly competitive world, children are now more ambitious and want to work hard for their dreams but are held back due to lack of resources and scattered study material while some still crave for quality education
                                     </p>
                                 </VerticalTimelineElement>
                                 <VerticalTimelineElement
                                     className="vertical-timeline-element--work"
-                                    date="2008 - 2010"
-                                    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                                    // date="2008 - 2010"
+                                    iconStyle={{ background: 'rgb(243, 112, 33)', color: '#fff' }}
                                     // icon={<WorkIcon />}
                                 >
-                                    <h3 className="vertical-timeline-element-title">Web Designer</h3>
-                                    <h4 className="vertical-timeline-element-subtitle">Los Angeles, CA</h4>
+                                    <h3 className="vertical-timeline-element-title">Solution</h3>
+                                    {/* <h4 className="vertical-timeline-element-subtitle">Los Angeles, CA</h4> */}
                                     <p>
-                                    User Experience, Visual Design
+                                    To bolster one's school education and to catapult him towards his dream, a system is required to prepare him for various national level examination where learning can be fun and insightful.
                                     </p>
                                 </VerticalTimelineElement>
                                 <VerticalTimelineElement
                                     className="vertical-timeline-element--work"
-                                    date="2006 - 2008"
+                                    date="2020"
                                     iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
                                     // icon={<WorkIcon />}
                                 >
-                                    <h3 className="vertical-timeline-element-title">Web Designer</h3>
-                                    <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
+                                    <h3 className="vertical-timeline-element-title">Meet Mentomeet </h3>
+                                    {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
                                     <p>
-                                    User Experience, Visual Design
+                                    Keeping in mind the above aspects, a group of like-minded individuals came together to create an interactive platform, Mentomeet which aims to mentor kids and guide them throughout their competitive exam preparations while also providing career guidance, doubt sessions and web-seminars.
                                     </p>
                                 </VerticalTimelineElement>
-                                <VerticalTimelineElement
+                                {/* <VerticalTimelineElement
                                     className="vertical-timeline-element--education"
                                     date="April 2013"
                                     iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
@@ -171,7 +171,7 @@ class About extends Component {
                                 <VerticalTimelineElement
                                     iconStyle={{ background: 'rgb(16, 204, 82)', color: '#fff' }}
                                     // icon={<StarIcon />}
-                                />
+                                /> */}
                                 </VerticalTimeline>
                         </DialogContentText>
                     </DialogContent>

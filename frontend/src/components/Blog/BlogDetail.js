@@ -176,7 +176,7 @@ class BlogDetail extends Component{
         return(
             this.state.isDataReturned?
             <>
-            <NavBarLog />
+            {/* <NavBarLog /> */}
             <div className="conatiner-fluid container-lg">
                 <div className="my-5">
                     <div className="row">

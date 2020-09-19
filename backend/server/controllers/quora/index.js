@@ -103,7 +103,7 @@ export function editQuestion(req, res){
         }else{
             if(req.file){
                 console.log("file saved")
-                qSchema.images = `http://${window.location.hostname}:5005/`+req.file.filename;
+                qSchema.images = `http://${req.hostname}:5005/`+req.file.filename;
                 // Object.assign(qSchema, {images: "http://localhost:5005/questionImg/"+req.file.filename});
 
                 Question.findOneAndUpdate(

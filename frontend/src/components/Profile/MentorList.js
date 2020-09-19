@@ -166,7 +166,7 @@ class OurMentor extends React.Component {
 
 
   componentDidMount() {
-    fetch('http://localhost:5005/mentors')
+    fetch(`http://${window.location.hostname}:5005/mentors`)
       .then(res => res.json())
       .then(
         (result) => {
