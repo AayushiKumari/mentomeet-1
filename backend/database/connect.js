@@ -9,7 +9,7 @@ dotenv.config({path:path.resolve(__dirname , `.env`)})
 //db connection
 //process.env.DATABASE_URI
 mongoose.connect(
-  process.env.DATABASE_URI,//
+  'mongodb+srv://MentoMeet:MentoMeet@mentomeet.kgh8o.mongodb.net/mentomeet?retryWrites=true&w=majority',//
     {useNewUrlParser: true}
   )
   .then(() => console.log('DB Connected'))
