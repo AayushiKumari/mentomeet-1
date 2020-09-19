@@ -34,7 +34,7 @@ export default function Home(){
                 <div className='col-12 col-sm-6 order-1 order-sm-2 d-flex flex-sm-row aling-items-center justify-content-center justify-content-sm-end'>
                 
                     <img id='teacher' className='' src={teacher}></img><br />
-                    <p>Xyz</p>
+                    {/* <p>Xyz</p> */}
                     <a id='btn-sm-register' className='d-block position-absolute d-sm-none mx-auto mt-4' href='/login'>REGISTER</a>
                     <img id='dialog' className='position-absolute' src={dialog}></img>
                 </div>

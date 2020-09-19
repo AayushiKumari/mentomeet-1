@@ -108,7 +108,10 @@ class BlogLists extends Component{
                         <div className="col-md-8">
                             <div>
                                 <div className="d-flex justify-content-between mb-3 d-md-none">
-                                    <button type="button" className="btn btn-info " data-toggle="modal" data-target="#blogform">Write a Blog</button>
+                                    {/* <button type="button" className="btn btn-info " data-toggle="modal" data-target="#blogform">Write a Blog</button> */}
+                                    {this.state.currUserRole == "Mentee"? ""
+                                        :<button type="button" className="btn btn-info d-none d-md-block w-100" data-toggle="modal" data-target="#blogform">Write a Blog</button>
+                                    }
                                     <div class="">
                                     <select class="custom-select border-0 rounded-0 bg-warning text-white" onChange={this.TagComponentHandler} >
                                                 
@@ -175,7 +178,10 @@ class BlogLists extends Component{
                         <div className="col-md-4">
                             <div>
                                 <div>
-                                    <button type="button" className="btn btn-info d-none d-md-block w-100" data-toggle="modal" data-target="#blogform">Write a Blog</button>
+                                    {/* <button type="button" className="btn btn-info d-none d-md-block w-100" data-toggle="modal" data-target="#blogform">Write a Blog</button> */}
+                                    {this.state.currUserRole == "Mentee"? ""
+                                        :<button type="button" className="btn btn-info d-none d-md-block w-100" data-toggle="modal" data-target="#blogform">Write a Blog</button>
+                                    }
                                 </div>
 
                                 <div className="card my-2">

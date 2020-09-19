@@ -245,7 +245,7 @@ export function post_blog_create
         
             if(req.file){
                 console.log("file saved")
-                blogSchema.body_image = "http://localhost:5005/"+req.file.filename;
+                blogSchema.body_image = `http://${req.hostname}:5005/`+req.file.filename;
                 // Object.assign(qSchema, {images: "http://localhost:5005/questionImg/"+req.file.filename});
                 Blog.create(blogSchema).then(result => {
                     return res.send(result)
