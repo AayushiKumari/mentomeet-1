@@ -59,7 +59,7 @@ class EachMentor extends Component{
                                 </div>
                                 
                                 <div className="text-center">
-                                    <h4 className="title text-warning mt-5">{this.state.mentor.firstName+" "+this.state.mentor.lastName}</h4>
+                                   <a href={this.state.mentor.history.length>0?'/profile/' + this.state.mentor._id:"#"} target="_blank"> <h4 className="title text-warning mt-5">{this.state.mentor.firstName+" "+this.state.mentor.lastName}</h4> </a>
                                     <h6 className="title text-info">{this.state.mentor.category}</h6>
                                     <Button
                                     className="btn-icon btn-round mr-2"
