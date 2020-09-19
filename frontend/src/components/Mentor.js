@@ -32,10 +32,10 @@ var arr = [
     college:"IIT Roorkee",
   },
 {
-    src: require('../assets/default-avatar.png'),
+    src: require('../assets/members/abhishek.jpg'),
     name: "Abhishek Gupta",
     position: "Developer",
-    college:"IIT Roorkee",
+    college:"Birla College,Maharastra",
   },
 
 {
@@ -61,7 +61,7 @@ var arr = [
 
 
 {
-    src: require('../assets/members/rohit.JPG'),
+    src: require('../assets/members/rohit.jpg'),
     name: "Rohit Bhamu",
     position: "Business Development",
     college:"IIT Mandi",
@@ -91,7 +91,7 @@ var arr = [
     src: require('../assets/members/ravi.jpg'),
     name: "Ravi Kishan",
     position: "JEE Operation",
-    college:"IIIT Nagpuri",
+    college:"IIIT Nagpur",
   },
 {
     src: require('../assets/members/bharat.jpg'),
@@ -148,24 +148,7 @@ class Mentor extends React.Component {
                         <h4 className="title text-warning mt-5">{teamMember.name}</h4>
                         <p className="category text-info">{teamMember.position}</p>
                         <h5 className="title text-success mt-1"> {teamMember.college} </h5>
-                        <Button
-                          className="btn-icon btn-round"
-                          color="info"
-                          href={teamMember.fbLink}
-                          target="_blank"
-                          // onClick={e => e.preventDefault()}
-                        >
-                          <i className="fab fa-facebook"></i>
-                        </Button>
-                        <Button
-                          className="btn-icon btn-round"
-                          color="info"
-                          href={teamMember.linkedinLink}
-                          target="_blank"
-                          // onClick={e => e.preventDefault()}
-                        >
-                          <i className="fab fa-linkedin"></i>
-                        </Button>
+                        
                       </div>
                     </Col>
                   );

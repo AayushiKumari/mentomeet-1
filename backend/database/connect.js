@@ -9,7 +9,7 @@ dotenv.config({path:path.resolve(__dirname , `.env`)})
 //db connection
 //process.env.DATABASE_URI
 mongoose.connect(
-  process.env.DATABASE_URI,//
+  'process.env.DATABASE_URI',//
     {useNewUrlParser: true}
   )
   .then(() => console.log('DB Connected'))
