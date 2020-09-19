@@ -358,7 +358,10 @@ class Answer extends Component{
                                         </div>
                                     </div> 
                                 </div>
-                                <button type="button" className="btn btn-info mt-3 w-100 d-md-none" data-toggle="modal" data-target="#answerModal">Write a Answer</button>
+                                {/* <button type="button" className="btn btn-info mt-3 w-100 d-md-none" data-toggle="modal" data-target="#answerModal">Write a Answer</button> */}
+                                {this.state.currUserRole == "Mentee"? ""
+                                        :<button type="button" className="btn btn-info mt-3 w-100 d-md-none" data-toggle="modal" data-target="#answerModal">Write a Answer</button>
+                                    }
 
                                 <div className="card mt-3">
                                     <div className="card-header py-2">
@@ -378,7 +381,10 @@ class Answer extends Component{
                             </div>
                             <div className="col-md-4">
                                 <div> 
-                                <button type="button" className="btn btn-info d-none d-md-block w-100" data-toggle="modal" data-target="#answerModal">Write a Answer</button>                               
+                                {/* <button type="button" className="btn btn-info d-none d-md-block w-100" data-toggle="modal" data-target="#answerModal">Write a Answer</button>                                */}
+                                {this.state.currUserRole == "Mentee"? ""
+                                        :<button type="button" className="btn btn-info mt-3 w-100 d-md-none" data-toggle="modal" data-target="#answerModal">Write a Answer</button>
+                                    }
                                     <div className="card my-2">
                                         <div className="card-body pb-0">
                                             <h5 className="card-title text-warning pb-2 border-bottom">Stats</h5>

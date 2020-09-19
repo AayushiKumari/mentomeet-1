@@ -103,7 +103,7 @@ export function mentor_list (req, res, next) {
     export function getMentorByCategory(req, res){
         const category = (req.params.category).toUpperCase();
         console.log(category)
-        User.find({category: category})
+        User.find({category: category, role:'Mentor'})
         .select("firstName lastName category history").then(result=>{
             const __dirname = path.resolve()
 
