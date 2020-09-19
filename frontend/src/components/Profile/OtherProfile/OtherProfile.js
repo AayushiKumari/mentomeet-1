@@ -217,7 +217,7 @@ class OtherProfile extends React.Component {
           <Row>
             <Col sm={3}>
               <Card id="profile-card">
-                <Card.Img variant="top" src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture}  />
+                <Card.Img variant="top" style={{borderRadius:"50%", width:"150px", height:"150px"}} src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture}  />
                 <Card.Body>
                   <Card.Title>Your Name</Card.Title>
                   <Card.Text>
@@ -254,7 +254,7 @@ class OtherProfile extends React.Component {
           <Row>
             <Col sm={3}>
               <Card id="profile-card">
-                <Card.Img variant="top" src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture}  />
+                <Card.Img variant="top" style={{borderRadius:"50%", width:"150px", height:"150px"}} src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture}  />
                 <Card.Body>
                   <Card.Title>{this.state.fullName}</Card.Title>
                   <Card.Text>
@@ -325,7 +325,7 @@ class OtherProfile extends React.Component {
           <Row>
             <Col sm={3}>
               <Card id="profile-card">
-                <Card.Img variant="top" src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture}  />
+                <Card.Img variant="top" style={{borderRadius:"50%", width:"150px", height:"150px"}} src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture}  />
                 <Card.Body>
                   <Card.Title>{this.state.fullName}</Card.Title>
                   <Card.Text>
