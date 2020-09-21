@@ -6,6 +6,8 @@ import multer from 'multer'
 import User from '../../database/models/users/index.js'
 
 import async from 'async'
+import fs from 'fs'
+import path from 'path'
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb){
@@ -79,6 +81,18 @@ export function mentor_list (req, res, next) {
     export function allMentors(req, res){
         User.find({role:'Mentor'}).select("firstName lastName category history").then(result=>{
             if(result){
+                const __dirname = path.resolve()
+
+                var i;
+                for (i = 0; i < result.length; i++) {
+                    if(result[i].history.length>0 && result[i].history[0].profile_picture!==''){
+                        var imagePath = path.resolve(__dirname , `public/${result[i].history[0].profile_picture}`);
+                        let buff = fs.readFileSync(imagePath);
+                        let base64data = buff.toString('base64');
+                        result[i].history[0].profile_picture = `data:image/jpeg;base64, ${base64data}`
+                    }
+                    
+                } 
                 return res.send(result)
             }
         }).catch(error=>{
@@ -89,9 +103,21 @@ export function mentor_list (req, res, next) {
     export function getMentorByCategory(req, res){
         const category = (req.params.category).toUpperCase();
         console.log(category)
-        User.find({category: category})
+        User.find({category: category, role:'Mentor'})
         .select("firstName lastName category history").then(result=>{
-            return res.send(result);
+            const __dirname = path.resolve()
+
+                var i;
+                for (i = 0; i < result.length; i++) {
+                    if(result[i].history.length>0 && result[i].history[0].profile_picture!==''){
+                        var imagePath = path.resolve(__dirname , `public/${result[i].history[0].profile_picture}`);
+                        let buff = fs.readFileSync(imagePath);
+                        let base64data = buff.toString('base64');
+                        result[i].history[0].profile_picture = `data:image/jpeg;base64, ${base64data}`
+                    }
+                    
+                } 
+                return res.send(result)
         }).catch(error => {
             return res.send(error);
         })
@@ -107,6 +133,16 @@ export function user_detail(req, res, next){
             err.status = 404;
             return next(err);
         }
+
+        if(result.history.length>0 && result.history[0].profile_picture!==''){
+            const __dirname = path.resolve()
+            var imagePath = path.resolve(__dirname , `public/${result.history[0].profile_picture}`);
+            let buff = fs.readFileSync(imagePath);
+            let base64data = buff.toString('base64');
+            result.history[0].profile_picture = `data:image/jpeg;base64, ${base64data}`
+        }
+        
+        // console.log(result.history[0].profile_picture)
         res.send(result);
     })
 }
@@ -206,13 +242,13 @@ export function post_mentor_create(req, res)
         }else{
             if(req.file){
                 console.log("file saved")
-                history.profile_picture = `http://${req.hostname}:5005/`+req.file.filename;
-                User.findByIdAndUpdate(req.params.id,  {history:history}, function (err, result){
+                history.profile_picture = req.file.filename;
+                User.findByIdAndUpdate(req.params.id,  {history:history},{useFindAndModify:false, new:true}, function (err, result){
                     if (err) { res.send(err); }
                     if (result == null) { // No results.
                         var err = new Error('Mentor not found');
                         err.status = 404;
-                        return next(err);
+                        return err;
                     }
                     
                         //console.log(req.user);

@@ -344,8 +344,12 @@ class Login extends Component{
                                                 </InputGroup>
 
                                                 <div className="text-center">
-                                                    <h6 className="text-muted mb-0">Already have an account??</h6>
-                                                    <a className="text-info font-weight-bold cursor-pointer" onClick={this.onChangeHandler}>Login.</a>
+                                                    <h6 className="text-muted mb-0">Already have an account? <a className="text-info font-weight-bold cursor-pointer" onClick={this.onChangeHandler}>Login.</a></h6>
+                                                    
+                                                </div>
+                                                        <hr />
+                                                <div className="text-center text-muted" >
+                                                    <p className="mb-0">By registering you agree to our Terms & conditions and Privacy Policies</p>
                                                 </div>
                                                 
                                             </LocalForm>
@@ -373,7 +377,7 @@ class Login extends Component{
                         </ul>
                     </div>
                 </nav> */}
-                <div className="d-flex align-items-center " style={{height:"80vh"}}>
+                <div className="d-flex align-items-center " style={{height:"100vh"}}>
                     {this.state.register ? RegisterDiv: LoginDiv}
                 </div>
                 

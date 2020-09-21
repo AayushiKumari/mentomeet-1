@@ -101,7 +101,7 @@ class BlogList extends React.Component {
 
   componentDidMount() {
     // Have to change the URL detail here afterwards
-    fetch('http://localhost:5005/blogs')
+    fetch(`http://${window.location.hostname}:5005/blogs`)
       .then(res => res.json())
       .then(
         (result) => {

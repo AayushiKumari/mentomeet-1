@@ -38,7 +38,7 @@ class EachMentor extends Component{
                             <div className="team-player">
                                 <div className="flip-box flip-box-team">
                                 <div className="flip-box-inner flip-box-inner-team" style={{opacity:"1"}}>
-                                    <div className="flip-box-front" style={{backgroundColor:"rgb(245 245 245)",opacity:"1"}}>
+                                    <div className="flip-box-front" style={{backgroundColor:"rgba(0,0,0,0)",opacity:"1"}}>
                                     <img
                                         alt={this.state.mentor.firstName}
                                         className="rounded-circle img-fluid img-raised"
@@ -59,8 +59,10 @@ class EachMentor extends Component{
                                 </div>
                                 
                                 <div className="text-center">
-                                    <h4 className="title text-warning mt-5">{this.state.mentor.firstName+" "+this.state.mentor.lastName}</h4>
+                                   <a className="text-decoration-none" href={this.state.mentor.history.length>0?'/profile/' + this.state.mentor._id:"#"} target="_blank"> <h4 className="title text-warning mt-5">{this.state.mentor.firstName+" "+this.state.mentor.lastName}</h4> </a>
                                     <h6 className="title text-info">{this.state.mentor.category}</h6>
+                                     <h6 className="title text-info">{this.state.mentor.history.length>0?this.state.mentor.history[0].expertise:""}</h6>
+                                    <h6 className="title text-info">{this.state.mentor.history.length>0?this.state.mentor.history[0].start_time+" "+this.state.mentor.history[0].end_time:""}</h6>
                                     <Button
                                     className="btn-icon btn-round mr-2"
                                     color="info"

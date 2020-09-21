@@ -23,7 +23,7 @@ const router  = express.Router()
 router.get('/mentees',mentee_list)
 //to get all mentees
 //,authorizer()
-router.put('/mentee/:id',menteeValidator,post_mentee_create)
+router.put('/mentee/:id',post_mentee_create)
 //req(first_name,last_name,coaching,class,category,subject)optional(phone,email,need_notes)
 
 router.get('/mentees/:id',mentee_detail)

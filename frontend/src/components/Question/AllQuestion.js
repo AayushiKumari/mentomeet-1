@@ -3,7 +3,7 @@ import Axios from 'axios'
 
 import EachQuestion from "./EachQuestion"
 
-
+import NoQuest from "./NoQuest"
 
 class AllQuestion extends Component{
     constructor(props){
@@ -44,7 +44,7 @@ class AllQuestion extends Component{
                     })}
                     
                 </div>
-            : <></>
+            : <NoQuest />
         )
     }
 }

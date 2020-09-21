@@ -224,7 +224,7 @@ class AnswerComponent extends Component{
                     </div>                                        
                     <div>
                         <p className="text-muted mb-0" style={{"letterSpacing":"1px","whiteSpace":"pre-wrap"}}>{this.state.answer.answer}</p>
-                        { this.state.answer.images !="no image"? <img class="card-img-top w-100 mt-3" src={this.state.answer.images} alt="alternate image"/>: "" }
+                        { this.state.answer.images !="no image"? <img class="card-img-top w-100 mt-3" src={this.state.answer.images} alt="alternate image" style={{"width":"100%", "maxHeight":"24rem"}} />: "" }
                     </div>
                 </div>
                 <CommentComponent commentData={{"aid": this.state.answer._id, "qid": this.state.qid, "allComments": this.state.answer.comments}}/>
@@ -348,7 +348,7 @@ class Answer extends Component{
                                         <h5 class="card-title mb-0"><a className="text-decoration-none">{this.state.questionData.question}</a></h5>
                                         <p className="card-text text-muted small mr-2 mb-0">{setQDate(this.state.questionData.date)}</p>
                                         
-                                        { this.state.questionData.images? <img class="card-img-top w-100 my-3" src={this.state.questionData.images} alt="alternate image"/>: "" }
+                                        { this.state.questionData.images? <img class="card-img-top w-100 my-3" src={this.state.questionData.images} alt="alternate image" style={{"width":"100%", "maxHeight":"27rem"}} />: "" }
                                         
                                         <div className="mt-1">
                                         {this.state.questionData.tags.map((tag, index)=>{
@@ -359,11 +359,10 @@ class Answer extends Component{
                                         </div>
                                     </div> 
                                 </div>
-
-                                {this.state.currUserRole == "Mentee"? ""
+                                {/* <button type="button" className="btn btn-info mt-3 w-100 d-md-none" data-toggle="modal" data-target="#answerModal">Write a Answer</button> */}
+                                {this.state.currUser.role == "Mentee"? ""
                                         :<button type="button" className="btn btn-info mt-3 w-100 d-md-none" data-toggle="modal" data-target="#answerModal">Write a Answer</button>
                                     }
-                                
 
                                 <div className="card mt-3">
                                     <div className="card-header py-2">
@@ -383,10 +382,10 @@ class Answer extends Component{
                             </div>
                             <div className="col-md-4">
                                 <div> 
+                                {/* <button type="button" className="btn btn-info d-none d-md-block w-100" data-toggle="modal" data-target="#answerModal">Write a Answer</button>                                */}
                                 {this.state.currUserRole == "Mentee"? ""
-                                    :<button type="button" className="btn btn-info d-none d-md-block w-100" data-toggle="modal" data-target="#answerModal">Write a Answer</button>                               
-                                }
-                                
+                                        :<button type="button" className="btn btn-info w-100 d-none d-md-block" data-toggle="modal" data-target="#answerModal">Write a Answer</button>
+                                    }
                                     <div className="card my-2">
                                         <div className="card-body pb-0">
                                             <h5 className="card-title text-warning pb-2 border-bottom">Stats</h5>
@@ -456,6 +455,7 @@ class Answer extends Component{
                                             <Control.file model=".file"
                                                 id="file"
                                                 name="file"
+                                                accept="image/*"
                                                 className="form-controls"
                                                 onChange={this.onFileChangeHandler}
                                             />

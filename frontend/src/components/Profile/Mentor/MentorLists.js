@@ -2,11 +2,12 @@ import React, { Component, Suspense } from "react"
 import Axios from 'axios'
 import $ from "jquery"
 import { Control, LocalForm, Errors } from 'react-redux-form';
-import { Row, Label, Col, Container, Breadcrumb, BreadcrumbItem, Button, InputGroupText,  InputGroupAddon, InputGroup} from 'reactstrap';
+import { Row, Label, Col, Container, Breadcrumb, BreadcrumbItem, Button, InputGroupText,  InputGroupAddon, InputGroup, Card, CardBody, CardTitle, Alert} from 'reactstrap';
 import { Link, BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 
 // import NavBarLog from './../NavBarLog.js'
 import Routes from "./MentorRoutes.js"
+import { CardHeader } from "@material-ui/core";
 // import BlogCreateForm from "./BlogCreateForm"
 
 
@@ -65,6 +66,25 @@ class MentorLists extends Component{
                     <div className="row">
                         <div className="col-12">
                             <div>
+                                <Card style={{marginBottom:"20px"}}>
+                                    <CardTitle style={{padding:"20px"}}><h3> Meet the Mentors</h3></CardTitle>
+                                    
+                                    <CardBody>
+
+                                    <p>
+                                        Our Mentors are from premier institutes of india like IITs, NITs, AIIMSs and other top universities.
+                                        who have faced the same problems which you are facing right now. they will provide you their own experience,strategies. It's going to definitely help you crack the JEE,NEET & AIIMS exam.
+                                    </p>
+                                    <p>
+
+                                    <Alert color="success"> <h3>
+                                        <Link to="/login">Be a Mentor </Link>to change people’s lives.
+                                        </h3>Share your experience & knowledge with the world online. If you are passionate about Mentoring / coaching to people who needs guidance, this is the place to be in.</Alert>
+                                        {/* <b></b> to change people’s lives.<br /> */}
+                                        
+                                    </p>
+                                    </CardBody>
+                                </Card>
                                 <nav>
                                     <div className="nav-tabs-question d-flex justify-content-between">
                                         <div className="nav nav-tabs " id="nav-tab" role="tablist">

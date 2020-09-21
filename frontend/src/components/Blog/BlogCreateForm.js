@@ -88,7 +88,7 @@ class BlogCreateForm extends React.Component {
     
     console.log("token is " + `Bearer ${token}`)
     
-    Axios.post(`http://localhost:5005/blog`, formData, {
+    Axios.post(`http://${window.location.hostname}:5005/blog`, formData, {
         headers: {
             'Authorization': `Bearer ${token}` 
         } 
@@ -157,6 +157,7 @@ class BlogCreateForm extends React.Component {
                         <Control.file model=".file"
                             id="file"
                             name="file"
+                            accept="image/*"
                             className="form-controls"
                             onChange={this.onFileChangeHandler}
                         />
@@ -227,6 +228,7 @@ class BlogCreateForm extends React.Component {
                     <Col md={12}>
                         <Control.text model=".minute_read"
                             id="minute_read"
+                            type="number"
                             name="minute_read"
                             placeholder="Minute read between 0 to 60 mins"
                             className="form-control"

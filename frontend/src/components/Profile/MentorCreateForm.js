@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import ImageUploader from 'react-images-upload';
 import $ from 'jquery' 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import Axios from 'axios';
 
 class MentorCreateForm extends React.Component {
@@ -490,30 +492,32 @@ class MentorCreateForm extends React.Component {
 
     return (
       <Fragment>
-        <div className="container" style={{ marginTop: "24px", marginBottom: "48px" }}>
-
-          <h3 style={{ textAlign: "center" }}>Update Mentor Profile</h3>
-
-          <form
-            id="create-mentor-form"
-            onSubmit={this.handleSubmit}
-          >
+        <Container style={{paddingTop:"100px"}}>
+          {/* <h3 style={{ textAlign: "center", margin: "12px 0" }}>Register as Mentee</h3> */}
+          <Card>
+            <Card.Header style={{textAlign:"center"}}>You are registered as Mentor..</Card.Header>
+            <Card.Body>
+            <form
+              id="create-mentor-form"
+              onSubmit={this.handleSubmit}
+            >
 
             {/* Input body image */}
             <div className="form-group">
-              <label htmlFor="profile_picture">Upload Profile picture</label><br />
+              <label htmlFor="profile_picture">Upload Profile picture*</label><br />
               <input
               id="profile_picture"
                 name="profile_picture"
                 type="file"
                 placeholder="Select image"
+                required
                 onChange={this.onFileChangeHandler}
               />
             </div>
 
 
             <div className="row">
-              <div className="col-sm-6">
+              <div className="col-md-6">
 
                 {/* Select Year */}
                 <div className="form-group">
@@ -537,7 +541,7 @@ class MentorCreateForm extends React.Component {
                 </div>
 
               </div>
-              <div className="col-sm-6">
+              <div className="col-md-6">
 
                 {/* Input Branch */}
                 <div className="form-group">
@@ -576,7 +580,7 @@ class MentorCreateForm extends React.Component {
 
 
             <div className="row">
-              <div className="col-sm-4">
+              <div className="col-md-4">
                 {/* Input CollegeType */}
                 <div className="form-group">
                   <label htmlFor="college-type">College Type*</label>
@@ -599,7 +603,7 @@ class MentorCreateForm extends React.Component {
                   {isValidCollegeType ? null : <div className='invalid-feedback'>Must be less than 100 characters</div>}
                 </div>
               </div>
-              <div className="col-sm-4">
+              <div className="col-md-4">
                 {/* Select college */}
                 <div className="form-group">
                   <label htmlFor="category">Category*</label>
@@ -621,7 +625,7 @@ class MentorCreateForm extends React.Component {
 
 
               </div>
-              <div className="col-sm-4">
+              <div className="col-md-4">
                 {/* Input Rank */}
                 <div className="form-group">
                   <label htmlFor="rank">Rank</label>
@@ -648,35 +652,39 @@ class MentorCreateForm extends React.Component {
             <div className="form-group">
 
               <label htmlFor="availability_time*">Online Time range* </label>
-              <div className="col-sm-6 d-flex align-items-center justify-content-center">
-                <label htmlFor="start_time">start time* </label>
-                <input
-                id="start_time"
-                  name="start_time"
-                  type="time"
-                  className={`form-control`}
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-              <div className="col-sm-6 d-flex align-items-center justify-content-center">
-                <label htmlFor="end_time">end time* </label>
-                <input
-                id="end_time"
-                  name="end_time"
-                  type="time"
-                  className={`form-control`}
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
+              <Row>
+                <div className="col-md-5">
+                  <label htmlFor="start_time">Start time* </label>
+                  <input
+                    id="start_time"
+                    name="start_time"
+                    type="time"
+                    defaultValue="00:00"
+                    className={`form-control`}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </div>
+                <div className="col-md-5">
+                  <label htmlFor="end_time">End time* </label>
+                  <input
+                    id="end_time"
+                    name="end_time"
+                    type="time"
+                    defaultValue="00:00"
+                    className={`form-control`}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </div>
+              </Row>
 
             </div>
 
 
             {/* expertise  */}
             <div className="form-group">
-              <label htmlFor="expertise">choose expertise</label>
+              <label htmlFor="expertise">Choose Expertise</label>
               <select
               id="expertise"
                 name="expertise"
@@ -686,7 +694,7 @@ class MentorCreateForm extends React.Component {
                 required
               >
                 <option selected value="PHYSICS">PHYSICS</option>
-                <option value="CHEMESTRY">CHEMESTRY</option>
+                <option value="CHEMISTRY">CHEMISTRY</option>
                 <option value="MATHS">MATHS</option>
                 <option value="BIOLOGY">BIOLOGY</option>
                 <option value="PCM">PCM</option>
@@ -697,20 +705,35 @@ class MentorCreateForm extends React.Component {
             </div>
 
             {/* AboutMe  */}
+            {/* <div className="col-md-6">
+              <div className="form-group">
+              <label htmlFor="about_me">Your Descriptions/achievements: </label>
+                <input
+                  id="branch"
+                  name="branch"
+                  type="text"
+                  placeholder="Enter branch"
+                  className={`form-control`}
+                  onChange={this.handleChange}
+                />
+              </div>
+            </div> */}
+
             <div className="form-group">
-              <label htmlFor="about_me">Your Descriptions/achievements</label>
-              <input
+              <label htmlFor="about_me">Your Descriptions/achievements: </label>
+              <textarea
               id="about_me"
                 name="about_me"
-                type="textarea"
+                // type="textarea"
                 placeholder="Your Descriptions"
+                className={`form-control`}
                 onChange={this.handleChange}
-                rows={5} cols={15}
+                rows={4}
               />
             </div>
 
             <div className="row">
-              <div className="col-sm-6">
+              <div className="col-md-6">
                 {/* fb  Name */}
                 <div className="form-group">
                   <label htmlFor="fb_link">FB Profile</label>
@@ -725,7 +748,7 @@ class MentorCreateForm extends React.Component {
                   {isValidFbLink ? null : <div className='invalid-feedback'>invalid url</div>}
                 </div>
               </div>
-              <div className="col-sm-6">
+              <div className="col-md-6">
                 {/* linkedin_link Name */}
                 <div className="form-group">
                   <label htmlFor="linkedin_link">Linkedin Profile</label>
@@ -753,9 +776,11 @@ class MentorCreateForm extends React.Component {
               </button>
             </div>
 
-          </form>
+            </form>
+            </Card.Body>
+          </Card>
 
-        </div>
+        </Container>
       </Fragment>
     )
   }

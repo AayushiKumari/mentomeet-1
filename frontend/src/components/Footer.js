@@ -7,6 +7,7 @@ import '../css/footer.css';
 
 import Dialog from '@material-ui/core/Dialog';
 import { Slide, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from "@material-ui/core";
+import { Alert } from "react-bootstrap";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -18,6 +19,7 @@ class Footer extends React.Component {
     this.state = {
       openPrivacy: false,
       openTC: false,
+      openFAQ: false,
       newsLetterEmail: ''
     }
   }
@@ -31,7 +33,8 @@ class Footer extends React.Component {
   handleClose = () => {
     this.setState({
       openPrivacy: false,
-      openTC: false
+      openTC: false,
+      openFAQ:false
     });
   }
 
@@ -46,86 +49,89 @@ class Footer extends React.Component {
       openPrivacy: true
     })
   }
+  
 
-  handleSubmit = () => {
-    
+  handleopenFAQ = () => {
+    this.setState({openFAQ:true})
   }
 
   render() {
     return (
       <Fragment>
-        <footer id="footer">
+        <footer id="footer" className="pt-3" style={{background: "rgb(197 197 197) none repeat scroll 0% 0%", color:"white"}}>
           <div className="container-fluid" style={{ maxWidth: "1400px", margin: "auto" }}>
             <div className="row">
               <div className="col-sm-4">
                 <div className="left-menu">
                   <h3><img className="logo" src={brand} /></h3>
-                  <div className="row social-links">
+                  <div className="row social-links text-center">
                     {/* To be created */}
-
-                    {/* Twiiter */}
-                    <div className="col">
-                    <a href="https://twitter.com" target="_none">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABTElEQVRIS92V4TGEMRCGn6uAEnSAClABKkAF6IAK6IAO0IEOUAEqQAfmMclNvlySS8zcn9uZ+3PZ3Xf33d33m7Fim604P+sHsAl8d9B2BJwD+8AHcA9chzjfHmOOnCKddXhtgFwAN4V3Y3aAswD455IC+PgSOjgGngtJtoD3Brggb8BtLDIFkJ6vJDi2bVfR7O6hAfATaJszkFNk1XtZAvn0J9BuhZ4Y8hQonqfIO3BoVr7RMeiSi4O+Sh9aFP0H4zLwX+zAP0sUjQBJ4WQD8xm4JfK9PZI1+H4Cxk+sJBXOwSNyY0ZsgZ78DmKyU+BuJDNg9d7RggrUxM5DsYteO6gcZlNN5dOVO1mCMpGGnhnoY7t2IF0182rVJe+mailFDteAww5evFh9UxkphpVmYNWC2UVcVwXMAaay0VHHVE27Akad1u+TOcrAUv9fv6M4GaSJj2wAAAAASUVORK5CYII="/>
-                    </a>
-                    </div>
 
                     {/* Facebook */}
                     <div className="col">
-                    <a href="https://twitter.com" target="_none">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABTElEQVRIS92V4TGEMRCGn6uAEnSAClABKkAF6IAK6IAO0IEOUAEqQAfmMclNvlySS8zcn9uZ+3PZ3Xf33d33m7Fim604P+sHsAl8d9B2BJwD+8AHcA9chzjfHmOOnCKddXhtgFwAN4V3Y3aAswD455IC+PgSOjgGngtJtoD3Brggb8BtLDIFkJ6vJDi2bVfR7O6hAfATaJszkFNk1XtZAvn0J9BuhZ4Y8hQonqfIO3BoVr7RMeiSi4O+Sh9aFP0H4zLwX+zAP0sUjQBJ4WQD8xm4JfK9PZI1+H4Cxk+sJBXOwSNyY0ZsgZ78DmKyU+BuJDNg9d7RggrUxM5DsYteO6gcZlNN5dOVO1mCMpGGnhnoY7t2IF0182rVJe+mailFDteAww5evFh9UxkphpVmYNWC2UVcVwXMAaay0VHHVE27Akad1u+TOcrAUv9fv6M4GaSJj2wAAAAASUVORK5CYII="/>
-                    </a>
+                      <a href="https://www.facebook.com/mentomeet/" target="_blank" class="fab fa-facebook footer-social-media"></a>
                     </div>
 
-                    {/* Twiiter */}
+                    {/* Twitter */}
                     <div className="col">
-                    <a href="https://twitter.com" target="_none">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABTElEQVRIS92V4TGEMRCGn6uAEnSAClABKkAF6IAK6IAO0IEOUAEqQAfmMclNvlySS8zcn9uZ+3PZ3Xf33d33m7Fim604P+sHsAl8d9B2BJwD+8AHcA9chzjfHmOOnCKddXhtgFwAN4V3Y3aAswD455IC+PgSOjgGngtJtoD3Brggb8BtLDIFkJ6vJDi2bVfR7O6hAfATaJszkFNk1XtZAvn0J9BuhZ4Y8hQonqfIO3BoVr7RMeiSi4O+Sh9aFP0H4zLwX+zAP0sUjQBJ4WQD8xm4JfK9PZI1+H4Cxk+sJBXOwSNyY0ZsgZ78DmKyU+BuJDNg9d7RggrUxM5DsYteO6gcZlNN5dOVO1mCMpGGnhnoY7t2IF0182rVJe+mailFDteAww5evFh9UxkphpVmYNWC2UVcVwXMAaay0VHHVE27Akad1u+TOcrAUv9fv6M4GaSJj2wAAAAASUVORK5CYII="/>
-                    </a>
+                      <a href="https://twitter.com/MentoMeet" target="_blank" class="fab fa-twitter footer-social-media"></a>
                     </div>
 
-                    {/* Twiiter */}
+                    {/* Youtube */}
                     <div className="col">
-                    <a href="https://twitter.com" target="_none">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABTElEQVRIS92V4TGEMRCGn6uAEnSAClABKkAF6IAK6IAO0IEOUAEqQAfmMclNvlySS8zcn9uZ+3PZ3Xf33d33m7Fim604P+sHsAl8d9B2BJwD+8AHcA9chzjfHmOOnCKddXhtgFwAN4V3Y3aAswD455IC+PgSOjgGngtJtoD3Brggb8BtLDIFkJ6vJDi2bVfR7O6hAfATaJszkFNk1XtZAvn0J9BuhZ4Y8hQonqfIO3BoVr7RMeiSi4O+Sh9aFP0H4zLwX+zAP0sUjQBJ4WQD8xm4JfK9PZI1+H4Cxk+sJBXOwSNyY0ZsgZ78DmKyU+BuJDNg9d7RggrUxM5DsYteO6gcZlNN5dOVO1mCMpGGnhnoY7t2IF0182rVJe+mailFDteAww5evFh9UxkphpVmYNWC2UVcVwXMAaay0VHHVE27Akad1u+TOcrAUv9fv6M4GaSJj2wAAAAASUVORK5CYII="/>
-                    </a>
+                      <a href="https://www.youtube.com/channel/UCZhV5IEO2hqpeTwLzqKu8Sw/playlists?view_as=subscriber" target="_blank" class="fab fa-youtube footer-social-media"></a>
                     </div>
+
+                    {/* Insta */}
+                    <div className="col">
+                      <a href="https://www.instagram.com/official_mentomeet/" target="_blank" class="fab fa-instagram footer-social-media"></a>
+                    </div>
+
+                    {/* LinkedIn */}
+                    <div className="col">
+                      <a href="https://www.linkedin.com/company/mentomeet/" target="_blank" class="fab fa-linkedin footer-social-media"></a>
+                    </div>
+
                     
-                  </div>
-                  <div className="copyright" style={{ marginTop: "auto", marginLeft: "12px", padding: "12px 12px" }} >
-                    <a className="text-warning w-100" href="index">Copyright &copy; MentoMeet 2020</a>
+                    
                   </div>
                 </div>
               </div>
               <div className="col-sm-3">
                 <ul className="links">
-                  <li><Link to="/mentee">Careers</Link></li>
-                  <li><Link to="/blogs">Blogs</Link></li>
-                  <li><Link to="/mentor">Be a mentor</Link></li>
-                  <li><Link to="/mentee">Be a Mentee</Link></li>
-                  <li>FAQs</li>
-                  <li onClick={this.openPrivacyDialog}>Privacy Policy</li>
-                  <li onClick={this.openTCDialog}>Terms & Conditions</li>
+                  <li><Link style={{color:"#505050"}} to={!localStorage.getItem('token') ? "/login" : "/profile"}>Careers</Link></li>
+                  <li><Link style={{color:"#505050"}} to="/blogs">Blogs</Link></li>
+                  <li><Link style={{color:"#505050"}} to={!localStorage.getItem('token') ? "/login" : "/profile"}>Be a mentor</Link></li>
+                  <li><Link style={{color:"#505050"}} to={!localStorage.getItem('token') ? "/login" : "/profile"}>Be a Mentee</Link></li>
+                  <li style={{color:"#505050"}} onClick={this.handleopenFAQ}>FAQs</li>
+                  <li style={{color:"#505050"}} onClick={this.openPrivacyDialog}>Privacy Policy</li>
+                  <li style={{color:"#505050"}} onClick={this.openTCDialog}>Terms & Conditions</li>
                 </ul>
               </div>
               <div className="col-sm-5">
                 <div className="join-us">
                   <div>
-                    <h3 style={{ margin: "0 12px 12px 12px" }}>Join our Newsletter</h3>
+                    <div className="contact-details text-md-right text-left">
+                      <h5 className="text-dark font-weight-bold">Contact us</h5>
+                      <div className="row">
+                        <div className="col-12" style={{color:"#505050"}}>7688997701</div>
+                        <a href="contact@mentomeet.com" style={{color:"#505050"}} target="_blank" className="col-12">contact@mentomeet.com</a>
+                        {/* <div className="col-12" style={{color:"#505050"}}>Mentors available in working hours</div> */}
+                      </div>
+                    </div>
+                    {/* <h3 style={{ margin: "0 12px 12px 12px" }}>Join our Newsletter</h3>
                     <form className="join-us-form">
                       <input className="form-control" placeholder="Enter your Email" />
                       <button className="btn btn-warning" type="submit">Submit</button>
-                    </form>
-                    <div className="contact-details">
-                      <p>Feel free to contact us</p>
-                      <div className="row">
-                        <div className="col text-success">9811567932</div>
-                        <div className="col text-success">contact@mentomeet.com</div>
-                      </div>
-                    </div>
+                    </form> */}<br/>
+                    <h5 className="text-dark text-md-right text-left"><i class="fas fa-arrow-left"></i>Chat with us </h5>
+                    
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="copyright text-center" style={{ marginTop: "auto", marginLeft: "12px", padding: "12px 12px" }} >
+              <a className="text-dark w-100 font-weight-bold" href="index">Copyright &copy; MentoMeet 2020</a>
             </div>
           </div >
         </footer >
@@ -238,7 +244,133 @@ class Footer extends React.Component {
           <DialogTitle >Terms and Conditions</DialogTitle>
           <DialogContent>
             <DialogContentText >
-              Here Terms and conditions will come
+ 
+              <p>The terms “We” / “Us” / “Our”/”Company” individually and collectively refer to MentoMeet and the terms “Visitor” ”User” refer to the users.
+              This page states the Terms and Conditions under which you (Visitor) may visit and use this Application. Please read this page carefully. MentoMeet reserves the right to revise these Terms and Conditions at any time by updating this posting. You should visit this page periodically to re-appraise yourself of the Terms and Conditions, because they are binding on all users of this Application.
+              </p>
+
+              <h3>USE OF CONTENT</h3>
+                <p>
+              All logos, brands, marks headings, labels, names, signatures, numerals, shapes or any combinations thereof, appearing in this Application, except as otherwise noted, are properties either owned, or used under licence, by MentoMeet. The use of these properties or any other content on this Application, except as provided in these terms and conditions or in the Application content, is strictly prohibited.
+              You may not sell or modify the content of this Application or reproduce, display, publicly perform, distribute, or otherwise use the materials in any way for any public or commercial purpose without the MentorKart’s written permission.
+              </p>
+
+              <h3>ACCEPTABLE APPLICATION USE</h3>
+                
+              <h3>(A) Security Rules</h3>
+                
+                <p>
+              Visitors are prohibited from violating or attempting to violate the security of the Application, including, without limitation, <br />
+              (1) accessing data not intended for such user or logging into a server or account which the user is not authorised to access,<br />
+              (2) attempting to probe, scan or test the vulnerability of a system or network or to breach security or authentication measures without proper authorisation, <br />
+              (3) attempting to interfere with service to any user, host or network, overloading, “flooding”, “mail bombing” or “crashing”, or <br />
+              (4) sending unsolicited electronic mail, including promotions and/or advertising of products or services. Violations of system or network security may result in civil or criminal liability. MentorKart will have the right to investigate occurrences that it suspects as involving such violations and will have the right to involve, and cooperate with, law enforcement authorities in prosecuting users who are involved in such violations.<br />
+              </p>
+                
+                
+              <h3>(B) General Rules</h3>
+                
+                <p>
+              Visitors may not use the Application in order to transmit, distribute, store or destroy material <br />
+              (a) that could constitute or encourage conduct that would be considered a criminal offence or violate any applicable law or regulation, <br />
+              (b) in a manner that will infringe the copyright, trademark, trade secret or other intellectual property rights of others or violate the privacy or publicity of other personal rights of others, or <br />
+              (c) that is libellous, defamatory, pornographic, profane, obscene, threatening, abusive or hateful.<br />
+              </p>
+
+              <h3>
+              INDEMNITY</h3>
+                
+                <p>
+              The User unilaterally agree to indemnify and hold harmless, without objection, the Company, its officers, directors, employees and agents from and against any claims, actions and/or demands and/or liabilities and/or losses and/or damages whatsoever arising from or resulting from their use of MentorKart Application or their breach of the terms .
+              </p>
+
+              <h3>
+              LIABILITY</h3>
+                
+                <p>
+              User agrees that neither Company nor its group companies, directors, officers or employees shall be liable for any direct or/and indirect or/and incidental or/and special or/and consequential or/and exemplary damages, resulting from the use or/and the inability to use the service or resulting from any data or/and information or/and services purchased or/and obtained or/and messages received or/and transactions entered into through or/and from the service or/and resulting from unauthorized access to or/and alteration of user’s transmissions or/and data or/and arising from any other matter relating to the service, including but not limited to, damages for loss of profits or/and use or/and data or other intangible, even if Company has been advised of the possibility of such damages.<br />
+              User further agrees that Company shall not be liable for any damages arising from interruption, suspension or termination of service, including but not limited to direct or/and indirect or/and incidental or/and special consequential or/and exemplary damages, whether such interruption or/and suspension or/and termination was justified or not, negligent or intentional, inadvertent or advertent.<br />
+              User agrees that the Company shall not be responsible or liable to the user, or anyone, for the statements or conduct of any third party of the service. In sum, in no event shall Company’s total liability to the User for all damages or/and losses or/and causes of action exceed the amount paid by the User to Company, if any, that is related to the cause of action.<br />
+              </p>
+          </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              close
+          </Button>
+          </DialogActions>
+        </Dialog>
+
+
+        {/* FAQs dialog or modal */}
+        <Dialog
+          open={this.state.openFAQ}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={this.handleClose}
+          aria-labelledby="FAQs"
+          aria-describedby="MentoMeet"
+          fullWidth={true}
+          maxWidth = {'lg'}
+        >
+          <DialogTitle >Frequently Asked Questions:</DialogTitle>
+          <DialogContent>
+            <DialogContentText >
+                <hr />
+                <h5>1. How is MentoMeet different from career guidance programs ?</h5>
+                <p>MentoMeet is the next gen 1:1 mentoring platform in India  bringing together renowned mentors and mentees who need mentoring. It is for NEET & JEE Aspirants.</p>
+
+                <hr />
+                <h5>
+                2. What is MentoMeet?</h5>
+                <p>
+                MentoMeet is an EdTech startup which aims to connect school/Coaching students to India's top institutes (IIT, NIT, AIIMS) Students Which provides constructive guidance and solves their queries.MentoMeet is the next gen 1:1 mentoring platform in India
+                ,bringing together renowned mentors and mentees who need mentoring.</p>
+                <hr />
+                <h5>
+                3. How does MentoMeet work ?</h5>
+                <p>Sign up on MentoMeet as a mentee and choose your section(JEE/NEET).  Choose a relevant mentor which is available in the mentor section and. Take up the mentorship program with the mentor and whoosh… crack the JEE/NEET..</p>
+                <hr />
+                <h5>
+                4. I already have a Teacher assigned at coaching, why should I sign up at MentoMeet ?</h5>
+                <p>Our Mentors are from premier institutes of India like IITs, NITs, AIIMSs and other top universities.who have faced the same problems which you are facing right now. they will provide you their own experience,strategies. It's going to definitely help you crack the JEE,NEET & AIIMS exam.</p>
+                <hr />
+                <h5>
+                5. How do I stay in touch with my mentors ?</h5>
+                <p>MentoMeet enables you to stay in touch with your mentor all the time. You can SMS, schedule a call and have a voice chat with your mentor, all through the platform.</p>
+                <hr />
+                <h5>
+                6. How does MentoMeet ensure the quality of the program ?</h5>
+                <p>All the mentoring programs are being closely monitored by our panel of observers who ensure the quality of programs and also assist in recalibration if the mentee needs assistance.</p>
+                <hr />
+                <h5>
+                7. Is it Free?</h5>
+                <p>Yes, It is absolutely Free.</p>
+                <hr />
+                <h5 className="text-dark mb-3">How it works:</h5>
+                <h5>
+                ✨Sign Up For Free</h5>
+                <p>Signup on the MentoMeet and create your profile.</p>
+                <hr />
+                <h5>
+                🌟Set your Section</h5>
+                <p>Choose your section(NEET/JEE) </p>
+                <hr />
+                <h5>
+                ⭐Find a Mentor</h5>
+                <p>Complete your profile, Choose your section & we will find the best suitable mentor for you.you can explore BLOGS, Q&A etc.</p>
+                <hr />
+                <h5>
+                ⭐Live Interaction</h5>
+                <p>Begin your Mentorship program with the mentor</p>
+                <hr />
+                <h5>
+                🌟Track Progress</h5>
+                <p>Keep tracking your progress by our mentors</p>
+                <hr />
+                <h5>
+                🌟Review by Experts</h5>
+                <p>Experts review the progress, keep interacting with the mentor and mentee</p>
           </DialogContentText>
           </DialogContent>
           <DialogActions>

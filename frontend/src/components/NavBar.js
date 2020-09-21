@@ -14,7 +14,7 @@ class NavBar extends React.Component {
     return (
       <nav className="navbar shadow  navbar-expand-lg sticky-top navbar-light bg-light">
         {/* <Link className="navbar-brand text-warning" to="/index"><img src={brand} alt="Brand" width="120"/></Link> */}
-        <Link className="navbar-brand text-warning" to="/index"><img src={brand} alt="Brand" width="120" /></Link>
+        <Link className="navbar-brand text-warning" to="/index"><img src={brand} alt="Brand" width="135" /></Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -24,11 +24,14 @@ class NavBar extends React.Component {
             <li className="nav-item different mx-3 font-weight-bold">
               <a className="nav-link text-warning" href="/index#about">ABOUT US</a>
             </li>
-            <li className="nav-item different mx-3 font-weight-bold dropdown">
+            <li className="nav-item different mx-3 font-weight-bold">
+              <a className="nav-link text-warning" href="/team">OUR TEAM</a>
+            </li>
+            {/* <li className="nav-item different mx-3 font-weight-bold dropdown">
               <a className="nav-link text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 STUDENTS
                             </a>
-            </li>
+            </li> */}
             <li className="nav-item different mx-3 font-weight-bold dropdown">
               <a className="nav-link text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 MENTORS
@@ -61,11 +64,22 @@ class NavBar extends React.Component {
 
             {localStorage.getItem('token') ?
               <>
-                <li className="nav-item different mx-3 font-weight-bold">
+                {/* <li className="nav-item different mx-3 font-weight-bold">
                   <Link className="nav-link text-info login mb-0" to="/profile" >{JSON.parse(localStorage.getItem('user')).email}</Link>
                 </li>
                 <li className="nav-item different mx-3 font-weight-bold">
                   <Link className="nav-link text-info login" to="/" style={{ textDecoration: "none" }} onClick={this.handleLogout}>Logout</Link>
+                </li> */}
+                <li className="nav-item different mx-3 font-weight-bold dropdown">
+                  <a className="nav-link text-info" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {JSON.parse(localStorage.getItem('user')).firstName + " " + JSON.parse(localStorage.getItem('user')).lastName}
+                                </a>
+
+                  <div className="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdown">
+                    
+                    <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/profile">My Profile</Link>
+                    <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/" onClick={this.handleLogout}>Logout</Link>
+                  </div>
                 </li>
               </>
               :

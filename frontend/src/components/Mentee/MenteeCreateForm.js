@@ -2,7 +2,8 @@ import React, { Fragment } from 'react';
 //import ImageUploader from 'react-images-upload';
 import $ from 'jquery' 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import Axios from 'axios'
 
 
 class MenteeCreateForm extends React.Component {
@@ -10,7 +11,8 @@ class MenteeCreateForm extends React.Component {
     super(props);
     // this.onDrop = this.onDrop.bind(this);
     this.state = {
-      // body_image: [],
+      profile_picture: null,
+      profile_picture_url:null,
       standard: {
         value: '',
         valid: true
@@ -107,28 +109,37 @@ class MenteeCreateForm extends React.Component {
   makePostRequest = (data,userId) => {
     const endpoint = `http://${window.location.hostname}:5005/mentee/${userId}`;
     // CSRF Token if needed
+    console.log(data)
+    const formData = new FormData();
+    formData.append("file", this.state.profile_picture);
+    formData.append("category", data.category);
+    formData.append("coaching", data.coaching);
+    formData.append("standard", data.standard);
+    formData.append("subject", data.subject);
 
-    let lookupOptions = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    }
+    // let lookupOptions = {
+    //   method: "PUT",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   data: formData
+    // }
 
-    fetch(endpoint, lookupOptions)
+    Axios.put(endpoint, formData)
       .then(response => {
         if (response.status !== 401 && response.status !== 400) {
 
           if (response) {
             alert("Good job!  Successfully added as a mentee")
-            console.log("Response came", response.text());
+            console.log("Response came", response.data);
             window.location.href="/profile"
           }
           //  
           //catch bad request
         }
-        else { console.log(response.text()); alert(":(' please check your inputs") }
+        else { 
+          alert(":(' please check your inputs") 
+        }
         // window.location.href= '/mentors/'+response.text()._id
       })
       .catch(error => {
@@ -193,6 +204,7 @@ class MenteeCreateForm extends React.Component {
               //mentee specific
               standard:{value:standard,valid:true},coaching:{value:coaching,valid:true},
               category:{value:category,valid:true},subject:{value:subject,valid:true},
+              profile_picture_url: result.history[0].profile_picture
             
           });
           $(document).ready(function() { 
@@ -233,6 +245,13 @@ class MenteeCreateForm extends React.Component {
       this.updateProfileData(uId);
     }
    }
+
+   onFileChangeHandler = (e) => {
+    this.setState({
+        profile_picture_url: URL.createObjectURL(e.target.files[0]),
+        profile_picture: e.target.files[0]
+    })
+  }
   render() {
 
     const isValidSubject = this.state.subject.valid;
@@ -242,102 +261,123 @@ class MenteeCreateForm extends React.Component {
 
     return (
       <Fragment>
-        <Container>
-          <h3 style={{ textAlign: "center", margin: "12px 0" }}>Register as Mentee</h3>
-          <form
-            id="create-mentor-form"
-            onSubmit={this.handleSubmit}
-          >
+        <Container style={{paddingTop:"100px"}}>
+          {/* <h3 style={{ textAlign: "center", margin: "12px 0" }}>Register as Mentee</h3> */}
+          <Card>
+            <Card.Header style={{textAlign:"center"}}>You are registered as Mentee..</Card.Header>
+            <Card.Body>
+            <form
+              id="create-mentor-form"
+              onSubmit={this.handleSubmit}
+            >
+              <Row>
+                <Col md={6} className="d-flex justify-content-center align-self-center">
+                  <Card.Img variant="top" style={{borderRadius:"50%", height:"100px", width:"100px"}} src={this.state.profile_picture_url===null ? require('./../../assets/default-avatar.png') : (this.state.profile_picture_url)} />
+                </Col>
+                <Col md={6} className="d-flex justify-content-center align-self-center">
+                    <div className="form-group">
+                      <label htmlFor="profile_picture">Upload Profile picture</label><br />
+                      <input
+                        id="profile_picture"
+                        name="profile_picture"
+                        type="file"
+                        placeholder="Select image"
+                        onChange={this.onFileChangeHandler}
+                      />
+                    </div>
+                </Col>
+              </Row>
+              
+              <Row>
+                <Col sm={6}>
+                  {/* Select class */}
+                  <div className="form-group">
+                    <label htmlFor="standard">Class/Year</label>
+                    <input
+                    id="standard"
+                      name="standard"
+                      type="number"
+                      placeholder="Enter Class/year "
+                      className={`form-control ${isValidStandard ? '' : 'is-invalid'}`}
+                      onChange={this.handleChange}
+                      value={this.state.standard.value}
+                      required
+                    />
 
+                    {/*feedback here*/}
+                    {isValidStandard ? null : <div className='invalid-feedback'>Requried, class Must be in correct range </div>}
+                  </div>
+                </Col>
+                <Col sm={6}>
+                  {/* subject  */}
+                  <div className="form-group">
+                    <label htmlFor="subject"> Subject</label>
+                    <select
+                    id="subject"
+                      name="subject"
+                      placeholder="Enter subject"
+                      className={`form-control ${isValidSubject ? '' : 'is-invalid'}`}
+                      onChange={this.handleChange}
+                      required
+                    >  <option value="">choose subject for help </option>
+                      <option value="PHYSICS">PHYSICS</option>
+                      <option value="CHEMISTRY">CHEMISTRY</option>
+                      <option value="MATHS">MATHS</option>
+                      <option value="BIOLOGY">BIOLOGY</option>
+                      <option value="PCM">PCM</option>
+                      <option value="PCB">PCB</option>
+                    </select>
+                    {/*feedback here*/}
+                    {isValidSubject ? null : <div className='invalid-feedback'>Requried, choose from given</div>}
+                  </div>
+                </Col>
+              </Row>
+              {/* Input coaching */}
+              <div className="form-group">
+                <label htmlFor="coaching">Your Coaching</label>
+                <input
+                id="coaching"
+                  name="coaching"
+                  type="text"
+                  placeholder="Enter coaching"
+                  className={`form-control ${isValidCoaching ? '' : 'is-invalid'}`}
+                  onChange={this.handleChange}
+                  required
+                />
+                {/*feedback here*/}
+                {isValidCoaching ? null : <div className='invalid-feedback'>Requried, Must be less than 100 characters</div>}
+              </div>
 
-            <Row>
-              <Col sm={6}>
-                {/* Select class */}
-                <div className="form-group">
-                  <label htmlFor="standard">Class/Year*</label>
-                  <input
-                  id="standard"
-                    name="standard"
-                    type="number"
-                    placeholder="Enter Class/year "
-                    className={`form-control ${isValidStandard ? '' : 'is-invalid'}`}
-                    onChange={this.handleChange}
-                    value={this.state.standard.value}
-                    required
-                  />
+              {/* Select category */}
+              <div className="form-group">
+                <label htmlFor="category">Category</label>
+                <select
+                id="category"
+                  name="category"
+                  placeholder="Enter category"
+                  className={`form-control ${isValidCategory ? '' : 'is-invalid'}`}
+                  onChange={this.handleChange}
+                  required
+                > <option value="">Choose Field</option>
+                  <option value="JEE">JEE</option>
+                  <option value="NEET">NEET</option>
+                  <option value="CAREER">CAREER</option>
+                  <option value="DEVELOPMENT">DEVELOPMENT</option>
+                </select>
+                {/*feedback here*/}
+                {isValidCategory ? null : <div className='invalid-feedback'>Requried, Must be less than 100 characters</div>}
+              </div>
 
-                  {/*feedback here*/}
-                  {isValidStandard ? null : <div className='invalid-feedback'>class Must be in correct range </div>}
-                </div>
-              </Col>
-              <Col sm={6}>
-                {/* subject  */}
-                <div className="form-group">
-                  <label htmlFor="subject"> Subject*</label>
-                  <select
-                  id="subject"
-                    name="subject"
-                    placeholder="Enter subject"
-                    className={`form-control ${isValidSubject ? '' : 'is-invalid'}`}
-                    onChange={this.handleChange}
-                    required
-                  >  <option value="">choose subject for help </option>
-                    <option value="PHYSICS">PHYSICS</option>
-                    <option value="CHEMESTRY">CHEMESTRY</option>
-                    <option value="MATHS">MATHS</option>
-                    <option value="BIOLOGY">BIOLOGY</option>
-                    <option value="PCM">PCM</option>
-                    <option value="PCB">PCB</option>
-                  </select>
-                  {/*feedback here*/}
-                  {isValidSubject ? null : <div className='invalid-feedback'>choose from given</div>}
-                </div>
-              </Col>
-            </Row>
-            {/* Input coaching */}
-            <div className="form-group">
-              <label htmlFor="coaching">Your Coaching*</label>
-              <input
-              id="coaching"
-                name="coaching"
-                type="text"
-                placeholder="Enter coaching"
-                className={`form-control ${isValidCoaching ? '' : 'is-invalid'}`}
-                onChange={this.handleChange}
-                required
-              />
-              {/*feedback here*/}
-              {isValidCoaching ? null : <div className='invalid-feedback'>Must be less than 100 characters</div>}
-            </div>
+              {/* Submit button */}
+              <div className="form-group">
+                <button type="submit" className="btn btn-info btn-block">
+                  Submit
+                </button>
+              </div>
 
-            {/* Select category */}
-            <div className="form-group">
-              <label htmlFor="category">Category*</label>
-              <select
-              id="category"
-                name="category"
-                placeholder="Enter category"
-                className={`form-control ${isValidCategory ? '' : 'is-invalid'}`}
-                onChange={this.handleChange}
-                required
-              > <option value="">Choose Field</option>
-                <option value="JEE">JEE</option>
-                <option value="NEET">NEET</option>
-                <option value="CAREER">CAREER</option>
-                <option value="DEVELOPMENT">DEVELOPMENT</option>
-              </select>
-              {/*feedback here*/}
-              {isValidCategory ? null : <div className='invalid-feedback'>Must be less than 100 characters</div>}
-            </div>
-
-            {/* Submit button */}
-            <div className="form-group">
-              <button type="submit" className="btn btn-info btn-block">
-                Submit
-              </button>
-            </div>
-
-          </form>
+            </form>
+            </Card.Body>
+          </Card>
 
         </Container>
       </Fragment>

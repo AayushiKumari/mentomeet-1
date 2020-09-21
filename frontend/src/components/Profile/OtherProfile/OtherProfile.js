@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Card, Jumbotron } from 'react-bootstrap';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { ListGroup, ListGroupItem, Badge } from 'reactstrap';
 
 
 
@@ -109,7 +109,7 @@ class OtherProfile extends React.Component {
           this.setState({
             isLoaded: true,
             fullName: fullName,
-            role: 'Mentor',email:email,otherProfileRole:otherProfileRole,
+            role: 'Mentor',email:email,otherProfileRole:otherProfileRole,profile_picture :profile_picture,
             //mentor specific
             year:year,college_type:college_type,college:college,language:language,linkedin_link:linkedin_link,
             start_time:start_time,end_time:end_time,about_me:about_me,rank:rank,fb_link:fb_link,expertise:expertise,branch:branch,
@@ -216,8 +216,8 @@ class OtherProfile extends React.Component {
         <Container fluid id="faculty-main-content">
           <Row>
             <Col sm={3}>
-              <Card id="profile-card">
-                <Card.Img variant="top" src="/logo512.png" />
+              <Card id="profile-card" style={{marginBottom: "1rem"}}>
+                <Card.Img variant="top" style={{borderRadius:"50%", width:"150px", height:"150px"}} src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture}  />
                 <Card.Body>
                   <Card.Title>Your Name</Card.Title>
                   <Card.Text>
@@ -253,8 +253,8 @@ class OtherProfile extends React.Component {
         <Container fluid id="faculty-main-content">
           <Row>
             <Col sm={3}>
-              <Card id="profile-card">
-                <Card.Img variant="top" src="/logo512.png" />
+              <Card id="profile-card" style={{paddingTop:"20px", marginBottom: "1rem"}}>
+                <Card.Img variant="top" style={{borderRadius:"50%", width:"150px", height:"150px"}} src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture}  />
                 <Card.Body>
                   <Card.Title>{this.state.fullName}</Card.Title>
                   <Card.Text>
@@ -270,7 +270,7 @@ class OtherProfile extends React.Component {
             </Col>
             <Col sm={9}>
               <div id="main-content">
-                <div id="posts-container">
+                {/* <div id="posts-container">
                   <Jumbotron id="posts-jumbotron">
                     <div id="posts-top-menu">
                       <h3>Posts</h3>
@@ -283,25 +283,42 @@ class OtherProfile extends React.Component {
                     </Row>
                   </Jumbotron>
 
-                </div>
+                </div> */}
                 <div id="background-container">
                   <Jumbotron id="background-jumbotron">
-                    <h3>background</h3>
-                    <ListGroup>
-      <ListGroupItem justifyStart>Year :{this.state.year}</ListGroupItem>
-      <ListGroupItem>branch :{this.state.branch}</ListGroupItem>
-      <ListGroupItem>college_type :{this.state.college_type}</ListGroupItem>
-      <ListGroupItem>College :{this.state.college}</ListGroupItem>
-      <ListGroupItem>rank :{this.state.rank}</ListGroupItem>
-      <ListGroupItem>Experience :{this.state.experience}</ListGroupItem>
-     {/* <ListGroupItem>language :{this.state.language}</ListGroupItem> */}
-      <ListGroupItem>start_time:{this.state.start_time}  end_time:{this.state.end_time}</ListGroupItem>
-      <ListGroupItem>Facebook profile :{this.state.fb_link}</ListGroupItem>
-      <ListGroupItem>Linkedin profile :{this.state.linkedin_link}</ListGroupItem>
-      <ListGroupItem>About Me :{this.state.about_me}</ListGroupItem>
-      {/* <ListGroupItem>coaching_type</ListGroupItem>      
-      <ListGroupItem>rank</ListGroupItem> */}
-    </ListGroup>
+                  <Card>
+                      <Card.Header>
+                        <h6 className="mb-0 font-weight-bold">My Details:</h6>
+                      </Card.Header>
+                      {/* <Card.Title><h3>My Details:</h3></Card.Title> */}
+                      <Card.Body>
+                        <Row>
+                          <Col className="text-left" md={6}>
+                            <p className="font-weight-bold"> College: <span className="small">{this.state.college} </span></p>
+                            <p className="font-weight-bold"> College_type: <span className="small">{this.state.college_type}</span></p>
+                            <p className="font-weight-bold"> Branch: <span className="small">{this.state.branch} </span></p>
+                            <p className="font-weight-bold"> Year: <span className="small">{this.state.year}</span></p>
+                            <p className="font-weight-bold"> JEE Rank: <span className="small"> <Badge color="success">{this.state.rank}</Badge></span></p>
+                          </Col>
+                          <Col className="text-left">
+                            <p className="font-weight-bold"> Expertise: <span className="small">{this.state.expertise}</span></p>
+                            <p className="font-weight-bold"> Online Start time: <span className="small">{this.state.start_time} </span></p>
+                            <p className="font-weight-bold"> Online End_time: <span className="small">{this.state.end_time} </span></p>
+                            <div>
+                              <h6 className="font-weight-bold">Social Links:</h6>
+                              <div className="d-flex justify-conten-between">
+                                <p className="font-weight-bold"> <a href={this.state.fb_link} target="_blank">Facebook</a></p>
+                                <p className="ml-3 font-weight-bold"> <a href={this.state.linkedin_link} target="_blank">Linkedin </a></p>
+                              </div>
+                            </div>  
+                          </Col>
+                        </Row>
+                        <div className="text-left">
+                          <p className="font-weight-bold mb-1"> About Me : </p>
+                          <p>{this.state.about_me}</p>
+                        </div>
+                      </Card.Body>
+                    </Card>
                   </Jumbotron>
                 </div>
               </div>
@@ -318,8 +335,8 @@ class OtherProfile extends React.Component {
         <Container fluid id="faculty-main-content">
           <Row>
             <Col sm={3}>
-              <Card id="profile-card">
-                <Card.Img variant="top" src="/logo512.png" />
+              <Card id="profile-card" style={{marginBottom: "1rem"}}>
+                <Card.Img variant="top" style={{borderRadius:"50%", width:"150px", height:"150px"}} src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture}  />
                 <Card.Body>
                   <Card.Title>{this.state.fullName}</Card.Title>
                   <Card.Text>
@@ -351,12 +368,24 @@ class OtherProfile extends React.Component {
                 </div> */}
                 <div id="background-container">
                   <Jumbotron id="background-jumbotron">
-                    <h3>background</h3>
-                    <ListGroupItem justifyStart>Class/year :{this.state.standard}</ListGroupItem>
-      {/* <ListGroupItem>Coaching_type :{this.state.coaching_type}</ListGroupItem> */}
-      <ListGroupItem>Coaching :{this.state.coaching}</ListGroupItem>
-      <ListGroupItem>Category :{this.state.category}</ListGroupItem>
-      <ListGroupItem>subject :{this.state.subject}</ListGroupItem>
+                  <Card>
+                      <Card.Header>
+                      <h6 className="mb-0 font-weight-bold">My Details:</h6>
+                      </Card.Header>
+                      {/* <Card.Title><h3>My Details:</h3></Card.Title> */}
+                      <Card.Body>
+                      <Row>
+                          <Col className="text-left" md={6}>
+                            <p className="font-weight-bold"> Class/Year : <span className="small">{this.state.standard}</span></p>
+                            <p className="font-weight-bold"> Coaching : <span className="small">{this.state.coaching} </span></p>
+                          </Col>
+                          <Col>
+                            <p className="font-weight-bold"> Category : <span className="small"><Badge color="success">{this.state.category}</Badge></span></p>
+                            <p className="font-weight-bold"> Subject : <span className="small">{this.state.subject} </span></p>
+                          </Col>
+                        </Row>
+                      </Card.Body>
+                    </Card>
                   </Jumbotron>
                 </div>
               </div>
