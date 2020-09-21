@@ -119,6 +119,7 @@ class Footer extends React.Component {
                       <div className="row">
                         <div className="col-12 text-success">7688997701</div>
                         <div className="col-12 text-success">contact@mentomeet.com</div>
+                        <div className="col-12 text-success">Mentors available in working hours</div>
                       </div>
                     </div>
                     {/* <h3 style={{ margin: "0 12px 12px 12px" }}>Join our Newsletter</h3>
@@ -126,7 +127,7 @@ class Footer extends React.Component {
                       <input className="form-control" placeholder="Enter your Email" />
                       <button className="btn btn-warning" type="submit">Submit</button>
                     </form> */}<br/>
-                    <h5 style={{textAlign:"center"}}>Chat with us <i class="fas fa-arrow-right"></i></h5>
+                    <h5 style={{textAlign:"center"}}><i class="fas fa-arrow-left"></i>Chat with us </h5>
                     
                   </div>
                 </div>
