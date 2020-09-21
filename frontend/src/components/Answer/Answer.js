@@ -359,7 +359,7 @@ class Answer extends Component{
                                     </div> 
                                 </div>
                                 {/* <button type="button" className="btn btn-info mt-3 w-100 d-md-none" data-toggle="modal" data-target="#answerModal">Write a Answer</button> */}
-                                {this.state.currUserRole == "Mentee"? ""
+                                {this.state.currUser.role == "Mentee"? ""
                                         :<button type="button" className="btn btn-info mt-3 w-100 d-md-none" data-toggle="modal" data-target="#answerModal">Write a Answer</button>
                                     }
 
