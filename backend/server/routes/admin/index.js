@@ -6,6 +6,7 @@ const router = express.Router();
 
 function admin_check(req, res, next) {
     // API_KEY in body parameters in needed
+    console.log("Admin check");
 
     if (req.body.API_KEY) {
         console.log("API Key Provided", req.body.API_KEY);
@@ -14,6 +15,7 @@ function admin_check(req, res, next) {
         if (req.body.API_KEY === 'Hello_World') {
             return next();
         } else {
+            console.log("Incorrect API key")
             var err = new Error('Wrong API Key Provided');
             err.status = 404;
             return next(err);
@@ -37,9 +39,9 @@ router.post('/admin/users', admin_check, function (req, res) {
      * Default to 1 to 20 if not provided params
      * 
      * Return
-     *  The data in json form of each user
+     *  The data in json form of each user (See Users schema)
      * 
-     * Returns an empty array if no user found
+     * Returns an empty array if no user found 
      */
     console.log("Admin route!");
 
@@ -57,6 +59,7 @@ router.post('/admin/users', admin_check, function (req, res) {
     // console.log(bodySkip, bodyLimit);
     // MongoDB call
     User.find({}).skip(bodySkip).limit(bodyLimit).then(result => {
+        // console.log(result);
         return res.json(result);
     }).catch(err => {
         return next(err);
@@ -64,6 +67,14 @@ router.post('/admin/users', admin_check, function (req, res) {
 });
 
 router.post('/admin/nusers', admin_check, (req, res) => {
+    /**
+     * Provides the current nummber of users
+     * Stored in the Users doc
+     * 
+     * Params: API_KEY needed to make a request
+     * 
+     * return: error or { count: number_of_users (int) }
+     */
     User.count({}, function(error, result) {
         if (error) {
             var err = new Error('Error');

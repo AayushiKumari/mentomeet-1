@@ -7,8 +7,8 @@ class AdminPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userCount: 31,
-      secretId: 'Hello_World'
+      userCount: 0,
+      secretId: '' // Initially Empty means not loggined, and this should be equal to the API_KEY set on backend
     }
   }
 
@@ -47,7 +47,7 @@ class AdminPage extends React.Component {
     .catch(error => {
       // This error comes when the API_KEY is false
       console.log("Error", error);
-      alert("Failed!");
+      alert("Login Failed!");
     });
 
   }
