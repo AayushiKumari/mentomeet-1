@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Link } from 'react-router-dom'
 
-import brand from '../assets/brand-removebg.png'
+import brand from '../assets/brand.png'
 
 import '../css/footer.css';
 
@@ -58,13 +58,13 @@ class Footer extends React.Component {
   render() {
     return (
       <Fragment>
-        <footer id="footer" style={{background: "rgb(2, 2, 2) none repeat scroll 0% 0%", color:"white"}}>
+        <footer id="footer" className="pt-3" style={{background: "rgb(197 197 197) none repeat scroll 0% 0%", color:"white"}}>
           <div className="container-fluid" style={{ maxWidth: "1400px", margin: "auto" }}>
             <div className="row">
               <div className="col-sm-4">
                 <div className="left-menu">
                   <h3><img className="logo" src={brand} /></h3>
-                  <div className="row social-links">
+                  <div className="row social-links text-center">
                     {/* To be created */}
 
                     {/* Facebook */}
@@ -95,30 +95,28 @@ class Footer extends React.Component {
                     
                     
                   </div>
-                  <div className="copyright" style={{ marginTop: "auto", marginLeft: "12px", padding: "12px 12px" }} >
-                    <a className="text-warning w-100" href="index">Copyright &copy; MentoMeet 2020</a>
-                  </div>
                 </div>
               </div>
               <div className="col-sm-3">
                 <ul className="links">
-                  <li><Link to={!localStorage.getItem('token') ? "/login" : "/profile"}>Careers</Link></li>
-                  <li><Link to="/blogs">Blogs</Link></li>
-                  <li><Link to={!localStorage.getItem('token') ? "/login" : "/profile"}>Be a mentor</Link></li>
-                  <li><Link to={!localStorage.getItem('token') ? "/login" : "/profile"}>Be a Mentee</Link></li>
-                  <li onClick={this.handleopenFAQ}>FAQs</li>
-                  <li onClick={this.openPrivacyDialog}>Privacy Policy</li>
-                  <li onClick={this.openTCDialog}>Terms & Conditions</li>
+                  <li><Link style={{color:"#505050"}} to={!localStorage.getItem('token') ? "/login" : "/profile"}>Careers</Link></li>
+                  <li><Link style={{color:"#505050"}} to="/blogs">Blogs</Link></li>
+                  <li><Link style={{color:"#505050"}} to={!localStorage.getItem('token') ? "/login" : "/profile"}>Be a mentor</Link></li>
+                  <li><Link style={{color:"#505050"}} to={!localStorage.getItem('token') ? "/login" : "/profile"}>Be a Mentee</Link></li>
+                  <li style={{color:"#505050"}} onClick={this.handleopenFAQ}>FAQs</li>
+                  <li style={{color:"#505050"}} onClick={this.openPrivacyDialog}>Privacy Policy</li>
+                  <li style={{color:"#505050"}} onClick={this.openTCDialog}>Terms & Conditions</li>
                 </ul>
               </div>
               <div className="col-sm-5">
                 <div className="join-us">
                   <div>
-                    <div className="contact-details">
-                      <p>Feel free to contact us</p>
+                    <div className="contact-details text-md-right text-left">
+                      <h5 className="text-dark font-weight-bold">Contact us</h5>
                       <div className="row">
-                        <div className="col-12 text-success">7688997701</div>
-                        <div className="col-12 text-success">contact@mentomeet.com</div>
+                        <div className="col-12" style={{color:"#505050"}}>7688997701</div>
+                        <a href="contact@mentomeet.com" style={{color:"#505050"}} target="_blank" className="col-12">contact@mentomeet.com</a>
+                        {/* <div className="col-12" style={{color:"#505050"}}>Mentors available in working hours</div> */}
                       </div>
                     </div>
                     {/* <h3 style={{ margin: "0 12px 12px 12px" }}>Join our Newsletter</h3>
@@ -126,11 +124,14 @@ class Footer extends React.Component {
                       <input className="form-control" placeholder="Enter your Email" />
                       <button className="btn btn-warning" type="submit">Submit</button>
                     </form> */}<br/>
-                    <h5 style={{textAlign:"center"}}>Chat with us <i class="fas fa-arrow-right"></i></h5>
+                    <h5 className="text-dark text-md-right text-left"><i class="fas fa-arrow-left"></i>Chat with us </h5>
                     
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="copyright text-center" style={{ marginTop: "auto", marginLeft: "12px", padding: "12px 12px" }} >
+              <a className="text-dark w-100 font-weight-bold" href="index">Copyright &copy; MentoMeet 2020</a>
             </div>
           </div >
         </footer >
@@ -346,6 +347,7 @@ class Footer extends React.Component {
                 7. Is it Free?</h5>
                 <p>Yes, It is absolutely Free.</p>
                 <hr />
+                <h5 className="text-dark mb-3">How it works:</h5>
                 <h5>
                 ✨Sign Up For Free</h5>
                 <p>Signup on the MentoMeet and create your profile.</p>

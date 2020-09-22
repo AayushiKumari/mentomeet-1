@@ -13,14 +13,30 @@ class EachBlog extends Component{
         this.state = {
             blog : this.props.blogdata.eachBlog,
             author: JSON.parse(this.props.blogdata.eachBlog.author),
+            blogAuthor: "",
+            isDataReturned: false,
             currUser: JSON.parse(localStorage.getItem('user')),
             vote: "text-info"
         }
         
-    }    
+    }
+    
+    componentDidMount(){
+        Axios.get(`http://${window.location.hostname}:5005/profile/${this.state.author._id}`).then(author => {
+            console.log(author);
+            this.setState({
+                blogAuthor: author.data,
+                isDataReturned: true
+            })
+        }).catch(error => {
+            console.log("Axios error")
+            console.log(error)
+        })
+    }
 
     render(){
         return(
+            this.state.isDataReturned?
             <div class="card my-3">
                 { this.state.blog.body_image? <img class="card-img-top w-100" src={this.state.blog.body_image} alt="alternate image" style={{"width":"100%", "maxHeight":"20rem"}} />: "" }
                 <Link to={`/blogs/view/${this.state.blog._id}`} className="text-decoration-none">
@@ -43,7 +59,7 @@ class EachBlog extends Component{
                 <div className="card-footer bg-white">
                     <div className="d-flex justify-content-between align-items-center">
                         <div className='d-flex align-items-center'>
-                            <img className='rounded-circle border border-warning' src={avatar} width="30" height="30"/>
+                            <img className='rounded-circle border border-warning' src={this.state.blogAuthor.history.length>0 && this.state.blogAuthor.history[0].profile_picture !="" ? this.state.blogAuthor.history[0].profile_picture:avatar} width="30" height="30"/>
                             <h6 className='ml-2 mb-0 small font-weight-bold'><span className='text-muted' >by</span> {this.state.author.firstName},</h6>
                             <h6 className='ml-1 mb-0 small text-muted'>{setQDate(this.state.blog.date)}</h6>
                         </div>
@@ -53,6 +69,7 @@ class EachBlog extends Component{
                     </div>
                 </div>
             </div>
+            :""
         )
     }
 }

@@ -298,6 +298,7 @@ class Question extends Component {
                                             <Control.file model=".file"
                                                 id="file"
                                                 name="file"
+                                                accept="image/*"
                                                 className="form-controls"
                                                 onChange={this.onFileChangeHandler}
                                             />

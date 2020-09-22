@@ -24,6 +24,9 @@ import Chat from './components/Chat/Chat/Chat.js'
 import Join from './components/Chat/Join/Join.js'
 import NavBar from './components/NavBar'
 import AdminPage from './components/admin/AdminPage';
+import Footer from './components/Footer'
+import Mentor from './components/Team'
+
 
 function App() {
   return (
@@ -60,12 +63,15 @@ function App() {
             <Route path="/student" render={props => <Student {...props} /> } /> */}
 
             <Route path="/admin" render={props => <AdminPage {...props} /> } />
+    
+            <Route path="/team" render={props => <Mentor {...props} /> } /> 
 
             <Redirect to="/index" />
             <Redirect from="/" to="/index" />
             
           </Switch>
         </div>
+        <Footer />
       </BrowserRouter>
     </Fragment>
   )

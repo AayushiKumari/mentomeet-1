@@ -2,7 +2,7 @@ import React, { Component, Suspense } from "react"
 import Axios from 'axios'
 import $ from "jquery"
 import { Control, LocalForm, Errors } from 'react-redux-form';
-import { Row, Label, Col, Container, Breadcrumb, BreadcrumbItem, Button, InputGroupText,  InputGroupAddon, InputGroup, Card, CardBody, CardTitle} from 'reactstrap';
+import { Row, Label, Col, Container, Breadcrumb, BreadcrumbItem, Button, InputGroupText,  InputGroupAddon, InputGroup, Card, CardBody, CardTitle, Alert} from 'reactstrap';
 import { Link, BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 
 // import NavBarLog from './../NavBarLog.js'
@@ -77,10 +77,11 @@ class MentorLists extends Component{
                                     </p>
                                     <p>
 
-                                        <b>Be a Mentor</b> to change people’s lives.<br />
-                                        Share your experience & knowledge with the world online.
-                                        If you are passionate about Mentoring / coaching to people who needs guidance,
-                                        this is the place to be in.
+                                    <Alert color="success"> <h3>
+                                        <Link to="/login">Be a Mentor </Link>to change people’s lives.
+                                        </h3>Share your experience & knowledge with the world online. If you are passionate about Mentoring / coaching to people who needs guidance, this is the place to be in.</Alert>
+                                        {/* <b></b> to change people’s lives.<br /> */}
+                                        
                                     </p>
                                     </CardBody>
                                 </Card>

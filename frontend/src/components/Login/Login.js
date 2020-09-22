@@ -349,7 +349,7 @@ class Login extends Component{
                                                 </div>
                                                         <hr />
                                                 <div className="text-center text-muted" >
-                                                    <p>By registering you agree to our Terms & conditions and Privacy Policies</p>
+                                                    <p className="mb-0">By registering you agree to our Terms & conditions and Privacy Policies</p>
                                                 </div>
                                                 
                                             </LocalForm>
@@ -377,7 +377,7 @@ class Login extends Component{
                         </ul>
                     </div>
                 </nav> */}
-                <div className="d-flex align-items-center " style={{height:"80vh"}}>
+                <div className="d-flex align-items-center " style={{height:"100vh"}}>
                     {this.state.register ? RegisterDiv: LoginDiv}
                 </div>
                 

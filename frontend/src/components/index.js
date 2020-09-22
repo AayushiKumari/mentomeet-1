@@ -11,7 +11,7 @@ import About from './About'
 import BeyondMentorship from './BeyondMentorship'
 import WhyChooseMentomeet from './WhyChooseMentomeet'
 import Footer from './Footer'
-import Mentor from './Mentor'
+import Mentor from './Team'
 // import WordFromStudents from './WordFromStudents.js'
 
 
@@ -24,10 +24,10 @@ function Index() {
       {/* <BlogDetailedPage/> */}
       
       <About/>
-      <Mentor/>
+      {/* <Mentor/> */}
       <BeyondMentorship/>     
       <WhyChooseMentomeet/>
-       <Footer />
+       {/* <Footer /> */}
     </div>
   )
 }
