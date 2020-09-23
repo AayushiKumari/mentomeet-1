@@ -103,7 +103,7 @@ const Chat = ({ location }) => {
                 </a>
               </Col>
               <hr /><br />
-              <p style={{textAlign:"center"}}><Badge color="danger" style={{fontSize:"95%", padding:"10px"}} >Any kind of misbehaviour will lead to termination of your mentomeet account... </Badge></p>
+              <p style={{textAlign:"center"}}><Badge color="danger" style={{fontSize:"95%", padding:"10px"}} >Any kind of nuisance or foul language will lead to termination of your Mentomeet account... </Badge></p>
             </CardBody>
           </Card>
         </Col>
