@@ -13,11 +13,13 @@ import WhyChooseMentomeet from './WhyChooseMentomeet'
 import Footer from './Footer'
 import Mentor from './Team'
 // import WordFromStudents from './WordFromStudents.js'
+import FadeIn from 'react-fade-in';
 
 
 function Index() {
   return (
     <div>
+      <FadeIn>
       <Home/>
       <CareerSolutionEveryone/>
       <WhyChooseUs/> 
@@ -28,6 +30,7 @@ function Index() {
       <BeyondMentorship/>     
       <WhyChooseMentomeet/>
        {/* <Footer /> */}
+       </FadeIn>
     </div>
   )
 }

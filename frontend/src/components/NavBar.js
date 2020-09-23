@@ -25,7 +25,7 @@ class NavBar extends React.Component {
               <a className="nav-link text-warning" href="/index#about">ABOUT US</a>
             </li>
             <li className="nav-item different mx-3 font-weight-bold">
-              <a className="nav-link text-warning" href="/team">OUR TEAM</a>
+              <Link className="nav-link text-warning" to="/team">OUR TEAM</Link>
             </li>
             {/* <li className="nav-item different mx-3 font-weight-bold dropdown">
               <a className="nav-link text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

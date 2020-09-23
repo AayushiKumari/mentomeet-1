@@ -159,7 +159,7 @@ class Login extends Component{
                                         <div className="card-body m-3">                                         
                                             <LocalForm onSubmit={(values) => this.handleRegister(values)}>
                                                 <h3 className="text-warning">MentoMeet</h3>
-                                                <p className="text-muted font-weight-bold">Welocome to new world</p>
+                                                <p className="text-muted font-weight-bold">Welcome to new world</p>
                                                 <div className="d-flex mb-3 w-100">
                                                     <InputGroup className="mr-1 d-block">                                            
                                                         <Control.text  model=".firstName"

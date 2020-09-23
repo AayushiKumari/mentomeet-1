@@ -3,10 +3,6 @@ import {Link} from 'react-router-dom'
 import Axios from 'axios'
 import {
     Button,
-    // Input,
-    // InputGroupAddon,
-    // InputGroupText,
-    // InputGroup,
     Container,
     Row,
     Col
@@ -14,7 +10,6 @@ import {
 
 import avatar from '../../../assets/default-avatar.png'
 
-// import {setQDate} from "../../CommonFunc/common.js"
 import {setQDate} from "../../CommonFunc/common.js"
 
 class EachMentor extends Component{
@@ -22,9 +17,6 @@ class EachMentor extends Component{
         super(props)
         this.state = {
             mentor : this.props.mentordata.eachMentor,
-            // author: JSON.parse(this.props.blogdata.eachBlog.author),
-            // currUser: JSON.parse(localStorage.getItem('user')),
-            // vote: "text-info"
         }
         
     }    
