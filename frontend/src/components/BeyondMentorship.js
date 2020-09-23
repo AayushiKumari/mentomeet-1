@@ -14,7 +14,7 @@ export default function BeyondMentorship(){
                 <div className='col-12 col-md  d-flex justify-content-center'>
                     <div className='square px-1 pb-5 d-flex flex-column justify-content-end align-items-center'>
                     <a href="/login" className="text-decoration-none">
-                        <img className='d-block' src={community} alt='team icon'></img>
+                        <img className='mx-auto d-block' src={community} alt='team icon'></img>
                         <p className='d-block'>Community <br></br> Buildup</p>
                     </a>
                     </div>
@@ -22,7 +22,7 @@ export default function BeyondMentorship(){
                 <div className='col-12 col-md mt-4 mt-md-0 d-flex justify-content-center'>
                     <div className='square px-1 pb-5 d-flex flex-column justify-content-end align-items-center'>
                         <a href="/qna" className="text-decoration-none">
-                        <img src={qa} alt='journey icon'></img>
+                        <img src={qa}  className='mx-auto d-block' alt='journey icon'></img>
                         <p>Live Q & A</p>
                         </a>
                     </div>
@@ -31,12 +31,12 @@ export default function BeyondMentorship(){
                     <div className='square px-1 pb-5 d-flex flex-column justify-content-end align-items-center'>
                     {localStorage.getItem('token') ? 
                         <a className="nav-link text-warning" href={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName+JSON.parse(localStorage.getItem('user')).lastName}&room=General`}>
-                            <img src={seminar} alt='goal icon'></img>
+                            <img src={seminar} className='mx-auto d-block' alt='goal icon'></img>
                             <p>Expert's Talk</p>
                         </a>
                     :
                     <a className="nav-link text-warning" href="/login">
-                        <img src={seminar} alt='goal icon'></img>
+                        <img src={seminar} className='mx-auto d-block' alt='goal icon'></img>
                         <p>Expert's Talk</p>
                     </a>
                     }

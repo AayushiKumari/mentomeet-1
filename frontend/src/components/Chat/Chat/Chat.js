@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import queryString from 'query-string';
 import io from "socket.io-client";
-import {Col, Row, Container, Card, CardHeader, CardBody, Button} from 'reactstrap'
+import {Col, Row, Container, Card, CardHeader, CardBody, Button, Badge} from 'reactstrap'
 import NavBarLog from './../../NavBarLog'
 import {Link} from 'react-router-dom'
 
@@ -11,6 +11,7 @@ import InfoBar from '../InfoBar/InfoBar';
 import Input from '../Input/Input';
 
 import './Chat.css';
+
 
 let socket;
 
@@ -73,7 +74,7 @@ const Chat = ({ location }) => {
         </Col>
         <Col md={6}>
           <Card style={{marginTop:"100px"}}>
-            <CardHeader>Other Public Rooms:</CardHeader>
+            <CardHeader>Other Public Rooms: <Badge color="success" style={{fontSize:"90%"}} >(Discussion rooms are completely active from 9PM-12AM)</Badge></CardHeader>
             <hr />
             <CardBody>
               <Col md={12}>
@@ -101,6 +102,8 @@ const Chat = ({ location }) => {
                   <Button style={{margin:"10px"}} block color="danger" outline>Maths</Button>
                 </a>
               </Col>
+              <hr /><br />
+              <p style={{textAlign:"center"}}><Badge color="danger" style={{fontSize:"95%", padding:"10px"}} >Any kind of misbehaviour will lead to termination of your mentomeet account... </Badge></p>
             </CardBody>
           </Card>
         </Col>

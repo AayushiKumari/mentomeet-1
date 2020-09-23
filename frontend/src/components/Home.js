@@ -39,8 +39,8 @@ export default function Home(){
                     <img id='dialog' className='position-absolute' src={dialog}></img>
                 </div>
                 
-            </div>
-            <a id='btn-register' className='d-none d-sm-block mx-auto mt-4' href='/login'>REGISTER</a>
+            </div>{!localStorage.getItem('token')? <a id='btn-register' className='d-none d-sm-block mx-auto mt-4' href='/login'>REGISTER</a> :""}
+            
         </div>
         
     )
