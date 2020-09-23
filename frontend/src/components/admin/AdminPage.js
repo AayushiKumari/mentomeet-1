@@ -25,7 +25,7 @@ class AdminPage extends React.Component {
       body: JSON.stringify({ API_KEY: val })
     };
 
-    const endpoint = 'http://localhost:5005/admin/nusers';
+    const endpoint = `http://${window.location.hostname}:5005/admin/nusers`;
     fetch(endpoint, requestOptions)
     .then(res => res.json())
     .then(data => {

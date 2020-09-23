@@ -26,7 +26,7 @@ export default function WhyChooseUs(){
                 <div className='bg-brother col-lg-3 mt-5 mt-lg-0 col-12 col-sm-6 d-flex align-items-center justify-content-center'>
                     <div className='s-brother py-2  px-4 d-flex flex-column align-items-center justify-content-center'>
                         <img className='d-block ' src={videoCall} alt='destination'></img>
-                        <p className='d-block'>Video Call With Exports</p>
+                        <p className='d-block'>Video Call With Experts</p>
                      </div>
                 </div>
                 <div className='bg-brother col-lg-3 mt-5 mt-lg-0 col-12 col-sm-6 d-flex align-items-center justify-content-center'>

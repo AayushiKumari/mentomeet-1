@@ -1,5 +1,5 @@
 import express from 'express';
-
+import dotenv from 'dotenv'
 import User from '../../../database/models/users/index.js'
 
 const router = express.Router();
@@ -10,9 +10,10 @@ function admin_check(req, res, next) {
 
     if (req.body.API_KEY) {
         console.log("API Key Provided", req.body.API_KEY);
+        console.log("API Key is", '9950874706-7744822894');
 
         // Change this API key and most probable store it in an environment variable
-        if (req.body.API_KEY === 'Hello_World') {
+        if (req.body.API_KEY === '9950874706-7744822894') { //process.env.API_KEY
             return next();
         } else {
             console.log("Incorrect API key")
@@ -58,7 +59,7 @@ router.post('/admin/users', admin_check, function (req, res) {
 
     // console.log(bodySkip, bodyLimit);
     // MongoDB call
-    User.find({}).skip(bodySkip).limit(bodyLimit).then(result => {
+    User.find({}).sort({ role : -1}).skip(bodySkip).limit(bodyLimit).then(result => {
         // console.log(result);
         return res.json(result);
     }).catch(err => {

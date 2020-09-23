@@ -223,7 +223,7 @@ class OtherProfile extends React.Component {
                   <Card.Text>
                     Role
                   </Card.Text>
-                  <Button variant="primary">Contact</Button>
+                  <Button variant="primary" onClick={alert("Use Chat Support.Available in bottom left")}>Contact</Button>
                 </Card.Body>
 
                 {updateBtn}

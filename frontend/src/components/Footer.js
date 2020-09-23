@@ -116,7 +116,7 @@ class Footer extends React.Component {
                       <div className="row">
                         <div className="col-12" style={{color:"#505050"}}>7688997701</div>
                         <a href="contact@mentomeet.com" style={{color:"#505050"}} target="_blank" className="col-12">contact@mentomeet.com</a>
-                        {/* <div className="col-12" style={{color:"#505050"}}>Mentors available in working hours</div> */}
+                        <div className="col-12" style={{color:"#505050"}}>Mentors available in working hours</div>
                       </div>
                     </div>
                     {/* <h3 style={{ margin: "0 12px 12px 12px" }}>Join our Newsletter</h3>

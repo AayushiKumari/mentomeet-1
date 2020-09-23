@@ -31,7 +31,7 @@ class AdminPlace extends React.Component {
       body: JSON.stringify({ API_KEY: API_KEY, skip: (tabValue - 1) * 20, limit: 20 })
     };
 
-    fetch('http://localhost:5005/admin/users', requestOptions)
+    fetch(`http://${window.location.hostname}:5005/admin/users`, requestOptions)
       .then(res => res.json())
       .then(res => {
         console.log("Data got", res)
@@ -112,16 +112,19 @@ class AdminPlace extends React.Component {
               className="jumbotron"
             >
               {/* Change according to the user data to be shown */}
-              <div className="row">
-                <div className="col"> {val._id} </div>
-                <div className="col"> {val.firstName} </div>
-                <div className="col"> {val.lastName} </div>
-                <div className="col"> {val.category} </div>
-                <div className="col"> {val.email} </div>
-                <div className="col"> {val.phone} </div>
-                <div className="col"> {val.gender} </div>
-                <div className="col"> {val.role} </div>
-              </div>
+             <a href={val.history.length>0?'/profile/' + val._id:"#"} target="_blank">
+                <div className="row">
+                  <div className="col"> <b> {val.role}</b> </div>
+                  <div className="col"> <b>{val.firstName}</b> </div>
+                  <div className="col"> <b> {val.lastName}</b> </div>
+                  <div className="col"> {val.mobile} </div>
+                  <div className="col"> {val.category} </div>
+                  <div className="col"> {val.email} </div>
+                  <div className="col"> {val.gender} </div>  
+                  <div className="col"> {val.history.length>0?'PROFILE YES':"PROFILE NO"} </div>                 
+               
+                </div>
+              </a>
             </div>
           )
         });

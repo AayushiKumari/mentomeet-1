@@ -79,7 +79,7 @@ export function mentor_list (req, res, next) {
 
 
     export function allMentors(req, res){
-        User.find({role:'Mentor'}).select("firstName lastName category history").then(result=>{
+        User.find({role:'Mentor',"history.flag":true}).limit(20).select("firstName lastName category history").then(result=>{
             if(result){
                 const __dirname = path.resolve()
 
@@ -93,6 +93,7 @@ export function mentor_list (req, res, next) {
                     }
                     
                 } 
+                console.log(result)
                 return res.send(result)
             }
         }).catch(error=>{
@@ -103,7 +104,7 @@ export function mentor_list (req, res, next) {
     export function getMentorByCategory(req, res){
         const category = (req.params.category).toUpperCase();
         console.log(category)
-        User.find({category: category, role:'Mentor'})
+        User.find({category: category, role:'Mentor',"history.flag":true})
         .select("firstName lastName category history").then(result=>{
             const __dirname = path.resolve()
 
@@ -212,7 +213,7 @@ export function post_mentor_create(req, res)
         // Extract the validation errors from a request.
         // Create Mentor object with escaped and trimmed data (and the old id!)
         var history = 
-            {
+            {   flag:false,
                 profile_picture:"",
                 branch:req.body.branch,
                 language: req.body.language,               

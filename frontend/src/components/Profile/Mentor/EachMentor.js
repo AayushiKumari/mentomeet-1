@@ -52,10 +52,10 @@ class EachMentor extends Component{
                                 
                                 <div className="text-center">
                                    <a className="text-decoration-none" href={this.state.mentor.history.length>0?'/profile/' + this.state.mentor._id:"#"} target="_blank"> <h4 className="title text-warning mt-5">{this.state.mentor.firstName+" "+this.state.mentor.lastName}</h4> </a>
-                                    <h6 className="title text-info">{this.state.mentor.category}</h6>
-                                     <h6 className="title text-info">{this.state.mentor.history.length>0?this.state.mentor.history[0].expertise:""}</h6>
+                                    <h6 className="title text-info">{this.state.mentor.history.length>0?this.state.mentor.history[0].college:""}</h6>
+                                    <h6 className="title text-info">{this.state.mentor.category}-{this.state.mentor.history.length>0?this.state.mentor.history[0].expertise:""}</h6>
                                     <h6 className="title text-info">{this.state.mentor.history.length>0?this.state.mentor.history[0].start_time+" "+this.state.mentor.history[0].end_time:""}</h6>
-                                    <Button
+                                    {/* <Button
                                     className="btn-icon btn-round mr-2"
                                     color="info"
                                     href={this.state.mentor.history.length>0?this.state.mentor.history[0].fb_link:"https://www.facebook.com"}
@@ -70,7 +70,7 @@ class EachMentor extends Component{
                                     target="_blank"
                                     >
                                     <i className="fab fa-linkedin"></i>
-                                    </Button>
+                                    </Button> */}
                                 </div>
                                 
                             </div>
