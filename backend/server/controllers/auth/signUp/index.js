@@ -11,7 +11,7 @@ function signUp(req, res){
         console.log(err)
         if(err){
             let errorMessage = DbErrorHandler(err)
-            console.log(errorMessage)
+            console.log(err)
             return res.status(400).json({
                 errorMessage : errorMessage
             })

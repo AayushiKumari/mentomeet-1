@@ -345,7 +345,7 @@ class MentorCreateForm extends React.Component {
       if (response.status !== 401 && response.status !== 400) {
 
         if (response) {
-          alert("Good job!  Successfully added as a mentor")
+          alert("Good job!  once verified you will be added as mentor")
           // console.log("Response came", response.text());
           window.location.href="/profile"
         }

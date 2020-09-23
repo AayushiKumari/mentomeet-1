@@ -243,12 +243,12 @@ export function post_mentor_create(req, res)
             if(req.file){
                 console.log("file saved")
                 history.profile_picture = req.file.filename;
-                User.findByIdAndUpdate(req.params.id,  {history:history}, function (err, result){
+                User.findByIdAndUpdate(req.params.id,  {history:history},{useFindAndModify:false, new:true}, function (err, result){
                     if (err) { res.send(err); }
                     if (result == null) { // No results.
                         var err = new Error('Mentor not found');
                         err.status = 404;
-                        return next(err);
+                        return err;
                     }
                     
                         //console.log(req.user);

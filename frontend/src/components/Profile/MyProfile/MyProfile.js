@@ -238,7 +238,7 @@ class MyProfile extends React.Component {
         <Container fluid id="faculty-main-content">
           <Row>
             <Col sm={3}>
-              <Card id="profile-card" style={{paddingTop:"20px"}}>
+              <Card id="profile-card" style={{paddingTop:"20px", marginBottom: "1rem"}}>
                 <Card.Img variant="top" style={{borderRadius:"50%", width:"150px", height:"150px"}} src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture} />
                 <Card.Body>
                   <Card.Title>Your Name</Card.Title>
@@ -286,7 +286,7 @@ class MyProfile extends React.Component {
         <Container fluid id="faculty-main-content">
           <Row>
             <Col md={3}>
-              <Card id="profile-card" style={{paddingTop:"20px"}}>
+              <Card id="profile-card" style={{paddingTop:"20px", marginBottom: "1rem"}}>
                 <Card.Img variant="top" style={{borderRadius:"50%", width:"150px", height:"150px"}} src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture} />
                 <Card.Body>
                   <Card.Title>{this.state.fullName}</Card.Title>
@@ -307,25 +307,36 @@ class MyProfile extends React.Component {
                   <Jumbotron id="background-jumbotron">
                     
                     <Card>
-                      <Card.Header>My Details:</Card.Header>
+                      <Card.Header>
+                        <h6 className="mb-0 font-weight-bold">My Details:</h6>
+                      </Card.Header>
                       {/* <Card.Title><h3>My Details:</h3></Card.Title> */}
                       <Card.Body>
                         <Row>
-                          <Col md={6}>
-                            <p> Year :{this.state.year}</p>
-                            <p> Branch :{this.state.branch} </p>
-                            <p> College_type :{this.state.college_type}</p>
-                            <p> College :{this.state.college} </p>
-                            <p> Rank : <Badge color="success">{this.state.rank}</Badge></p>
+                          <Col className="text-left" md={6}>
+                            <p className="font-weight-bold"> College: <span className="small">{this.state.college} </span></p>
+                            <p className="font-weight-bold"> College_type: <span className="small">{this.state.college_type}</span></p>
+                            <p className="font-weight-bold"> Branch: <span className="small">{this.state.branch} </span></p>
+                            <p className="font-weight-bold"> Year: <span className="small">{this.state.year}</span></p>
+                            <p className="font-weight-bold"> JEE Rank: <span className="small"> <Badge color="success">{this.state.rank}</Badge></span></p>
                           </Col>
-                          <Col>
-                            <p> Expertise :{this.state.expertise}</p>
-                            <p> Online start_time:{this.state.start_time}, end_time:{this.state.end_time} </p>
-                            <p> Facebook profile :{this.state.fb_link} </p>
-                            <p> Linkedin profile :{this.state.linkedin_link}</p>
-                            <p> About Me :{this.state.about_me} </p>
+                          <Col className="text-left">
+                            <p className="font-weight-bold"> Expertise: <span className="small">{this.state.expertise}</span></p>
+                            <p className="font-weight-bold"> Online Start time: <span className="small">{this.state.start_time} </span></p>
+                            <p className="font-weight-bold"> Online End_time: <span className="small">{this.state.end_time} </span></p>
+                            <div>
+                              <h6 className="font-weight-bold">Social Links:</h6>
+                              <div className="d-flex justify-conten-between">
+                                <p className="font-weight-bold"> <a href={this.state.fb_link} target="_blank">Facebook</a></p>
+                                <p className="ml-3 font-weight-bold"> <a href={this.state.linkedin_link} target="_blank">Linkedin </a></p>
+                              </div>
+                            </div>  
                           </Col>
                         </Row>
+                        <div className="text-left">
+                          <p className="font-weight-bold mb-1"> About Me : </p>
+                          <p>{this.state.about_me}</p>
+                        </div>
                       </Card.Body>
                     </Card>
                   </Jumbotron>
@@ -344,7 +355,7 @@ class MyProfile extends React.Component {
         <Container fluid id="faculty-main-content">
           <Row>
             <Col md={3}>
-              <Card id="profile-card" style={{paddingTop:"20px"}}>
+              <Card id="profile-card" style={{paddingTop:"20px", marginBottom: "1rem"}}>
                 <Card.Img variant="top" style={{borderRadius:"50%", width:"150px", height:"150px"}} src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture} />
                 <Card.Body>
                   <Card.Title>{this.state.fullName}</Card.Title>
@@ -365,17 +376,19 @@ class MyProfile extends React.Component {
                   <Jumbotron id="background-jumbotron">
                     
                     <Card>
-                      <Card.Header>My Details:</Card.Header>
+                      <Card.Header>
+                      <h6 className="mb-0 font-weight-bold">My Details:</h6>
+                      </Card.Header>
                       {/* <Card.Title><h3>My Details:</h3></Card.Title> */}
                       <Card.Body>
                         <Row>
-                          <Col md={6}>
-                            <p> Class/Year : {this.state.standard}</p>
-                            <p> Coaching : {this.state.coaching} </p>
+                          <Col className="text-left" md={6}>
+                            <p className="font-weight-bold"> Class/Year : <span className="small">{this.state.standard}</span></p>
+                            <p className="font-weight-bold"> Coaching : <span className="small">{this.state.coaching} </span></p>
                           </Col>
                           <Col>
-                            <p> Category : <Badge color="success">{this.state.category}</Badge></p>
-                            <p> Subject :{this.state.subject} </p>
+                            <p className="font-weight-bold"> Category : <span className="small"><Badge color="success">{this.state.category}</Badge></span></p>
+                            <p className="font-weight-bold"> Subject : <span className="small">{this.state.subject} </span></p>
                           </Col>
                         </Row>
                       </Card.Body>

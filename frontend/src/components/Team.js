@@ -41,14 +41,14 @@ var arr = [
 {
     src: require('../assets/members/abhinav.jpg'),
     name: "Abhinav Saini",
-    position: "Marketing Research",
+    position: "Business Analyst",
     college:"PEC Chandigarh",
   },
 
 {
-    src: require('../assets/members/prasoon.jpg'),
+    src: require('../assets/members/viru.png'),
     name: "Prasoon Kumar Gupta",
-    position: "Designer",
+    position: "UI/UX Designer",
     college:"NIT Hamirpur",
   },
 
@@ -77,7 +77,7 @@ var arr = [
 {
     src: require('../assets/members/yash.jpg'),
     name: "Agrawal Yash",
-    position: "Content Writing",
+    position: "Content Writer",
     college:"NIT Hamirpur",
   },
 
@@ -146,7 +146,7 @@ class Mentor extends React.Component {
                           
                         
                         <h4 className="title text-warning mt-5">{teamMember.name}</h4>
-                        <p className="category text-info">{teamMember.position}</p>
+                        <p className="category mb-2 text-info">{teamMember.position}</p>
                         <h5 className="title text-success mt-1"> {teamMember.college} </h5>
                         
                       </div>
