@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Card, Jumbotron } from 'react-bootstrap';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { ListGroup, ListGroupItem, Badge } from 'reactstrap';
 
 
 
@@ -109,7 +109,7 @@ class OtherProfile extends React.Component {
           this.setState({
             isLoaded: true,
             fullName: fullName,
-            role: 'Mentor',email:email,otherProfileRole:otherProfileRole,
+            role: 'Mentor',email:email,otherProfileRole:otherProfileRole,profile_picture:profile_picture,
             //mentor specific
             year:year,college_type:college_type,college:college,language:language,linkedin_link:linkedin_link,
             start_time:start_time,end_time:end_time,about_me:about_me,rank:rank,fb_link:fb_link,expertise:expertise,branch:branch,
@@ -217,7 +217,7 @@ class OtherProfile extends React.Component {
           <Row>
             <Col sm={3}>
               <Card id="profile-card">
-                <Card.Img variant="top" src="/logo512.png" />
+                <Card.Img variant="top" src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture}  />
                 <Card.Body>
                   <Card.Title>Your Name</Card.Title>
                   <Card.Text>
@@ -254,7 +254,7 @@ class OtherProfile extends React.Component {
           <Row>
             <Col sm={3}>
               <Card id="profile-card">
-                <Card.Img variant="top" src="/logo512.png" />
+                <Card.Img variant="top" style={{borderRadius:"50%", width:"150px", height:"150px"}} src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture}  />
                 <Card.Body>
                   <Card.Title>{this.state.fullName}</Card.Title>
                   <Card.Text>
@@ -270,7 +270,7 @@ class OtherProfile extends React.Component {
             </Col>
             <Col sm={9}>
               <div id="main-content">
-                <div id="posts-container">
+                {/* <div id="posts-container">
                   <Jumbotron id="posts-jumbotron">
                     <div id="posts-top-menu">
                       <h3>Posts</h3>
@@ -283,25 +283,31 @@ class OtherProfile extends React.Component {
                     </Row>
                   </Jumbotron>
 
-                </div>
+                </div> */}
                 <div id="background-container">
                   <Jumbotron id="background-jumbotron">
-                    <h3>background</h3>
-                    <ListGroup>
-      <ListGroupItem justifyStart>Year :{this.state.year}</ListGroupItem>
-      <ListGroupItem>branch :{this.state.branch}</ListGroupItem>
-      <ListGroupItem>college_type :{this.state.college_type}</ListGroupItem>
-      <ListGroupItem>College :{this.state.college}</ListGroupItem>
-      <ListGroupItem>rank :{this.state.rank}</ListGroupItem>
-      <ListGroupItem>Experience :{this.state.experience}</ListGroupItem>
-     {/* <ListGroupItem>language :{this.state.language}</ListGroupItem> */}
-      <ListGroupItem>start_time:{this.state.start_time}  end_time:{this.state.end_time}</ListGroupItem>
-      <ListGroupItem>Facebook profile :{this.state.fb_link}</ListGroupItem>
-      <ListGroupItem>Linkedin profile :{this.state.linkedin_link}</ListGroupItem>
-      <ListGroupItem>About Me :{this.state.about_me}</ListGroupItem>
-      {/* <ListGroupItem>coaching_type</ListGroupItem>      
-      <ListGroupItem>rank</ListGroupItem> */}
-    </ListGroup>
+                  <Card>
+                      <Card.Header>Mentor Details:</Card.Header>
+                      {/* <Card.Title><h3>My Details:</h3></Card.Title> */}
+                      <Card.Body>
+                        <Row>
+                          <Col md={6}>
+                            <p> Year :{this.state.year}</p>
+                            <p> Branch :{this.state.branch} </p>
+                            <p> College_type :{this.state.college_type}</p>
+                            <p> College :{this.state.college} </p>
+                            <p> Rank : <Badge color="success">{this.state.rank}</Badge></p>
+                          </Col>
+                          <Col>
+                            <p> Expertise :{this.state.expertise}</p>
+                            <p> Online start_time:{this.state.start_time}, end_time:{this.state.end_time} </p>
+                            <p> Facebook profile :{this.state.fb_link} </p>
+                            <p> Linkedin profile :{this.state.linkedin_link}</p>
+                            <p> About Me :{this.state.about_me} </p>
+                          </Col>
+                        </Row>
+                      </Card.Body>
+                    </Card>
                   </Jumbotron>
                 </div>
               </div>
@@ -319,7 +325,7 @@ class OtherProfile extends React.Component {
           <Row>
             <Col sm={3}>
               <Card id="profile-card">
-                <Card.Img variant="top" src="/logo512.png" />
+                <Card.Img variant="top" style={{borderRadius:"50%", width:"150px", height:"150px"}} src={this.state.profile_picture===null ? require('./../../../assets/default-avatar.png') : this.state.profile_picture}  />
                 <Card.Body>
                   <Card.Title>{this.state.fullName}</Card.Title>
                   <Card.Text>
@@ -351,12 +357,22 @@ class OtherProfile extends React.Component {
                 </div> */}
                 <div id="background-container">
                   <Jumbotron id="background-jumbotron">
-                    <h3>background</h3>
-                    <ListGroupItem justifyStart>Class/year :{this.state.standard}</ListGroupItem>
-      {/* <ListGroupItem>Coaching_type :{this.state.coaching_type}</ListGroupItem> */}
-      <ListGroupItem>Coaching :{this.state.coaching}</ListGroupItem>
-      <ListGroupItem>Category :{this.state.category}</ListGroupItem>
-      <ListGroupItem>subject :{this.state.subject}</ListGroupItem>
+                  <Card>
+                      <Card.Header>Mentee Details:</Card.Header>
+                      {/* <Card.Title><h3>My Details:</h3></Card.Title> */}
+                      <Card.Body>
+                        <Row>
+                          <Col md={6}>
+                            <p> Class/Year : {this.state.standard}</p>
+                            <p> Coaching : {this.state.coaching} </p>
+                          </Col>
+                          <Col>
+                            <p> Category : <Badge color="success">{this.state.category}</Badge></p>
+                            <p> Subject :{this.state.subject} </p>
+                          </Col>
+                        </Row>
+                      </Card.Body>
+                    </Card>
                   </Jumbotron>
                 </div>
               </div>
