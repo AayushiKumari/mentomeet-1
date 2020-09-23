@@ -149,8 +149,10 @@ class MentorCreateForm extends React.Component {
 
       case 'college':
 
-        // check for the correct email
         var isValid = true;
+        if (value.trim().length > 13) {
+          isValid = false;
+        }
         this.setState({
           college: {
             value: value,
@@ -504,12 +506,12 @@ class MentorCreateForm extends React.Component {
 
             {/* Input body image */}
             <div className="form-group">
-              <label htmlFor="profile_picture">Upload Profile picture*</label><br />
+              <label htmlFor="profile_picture">Upload Profile picture* (size must be less than 300kb) </label><br />
               <input
               id="profile_picture"
                 name="profile_picture"
                 type="file"
-                placeholder="Select image"
+                placeholder="Image size must be <300kb and square for best look"
                 required
                 onChange={this.onFileChangeHandler}
               />
@@ -569,7 +571,7 @@ class MentorCreateForm extends React.Component {
               id="college"
                 name="college"
                 type="text"
-                placeholder="Enter college*"
+                placeholder="College name should less than 13 characters*"
                 className={`form-control ${isValidCollege ? '' : 'is-invalid'}`}
                 onChange={this.handleChange}
                 required
