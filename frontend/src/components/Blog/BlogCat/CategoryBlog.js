@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Axios from 'axios'
+import ReactLoading from 'react-loading';
 
 import EachBlog from "./EachBlog"
 import NoBlog from "./NoBlog"
@@ -32,8 +33,10 @@ class CategoryBlog extends Component{
     
 
     render(){
-        return(                
-            this.state.isDataReturned && this.state.allBlogs.length > 0 ?             
+        return(
+            this.state.isDataReturned ? 
+            <>
+            {this.state.allBlogs.length>0 ? 
                 <div>
                     {this.state.allBlogs.map((data, index) => {
                         return(
@@ -43,7 +46,10 @@ class CategoryBlog extends Component{
                     
                 </div>
             : <NoBlog />
-            // <div>CategoryBlog</div>
+            
+            }
+            </>:<ReactLoading style={{ color: "black", margin: "auto", height: "20%", width: "20%" }} type={"spinningBubbles"} />
+            
         )
     }
 }

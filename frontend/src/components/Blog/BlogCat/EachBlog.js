@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import Axios from 'axios'
 
+import ReactLoading from 'react-loading';
 import avatar from '../../../assets/default-avatar.png'
 
 // import {setQDate} from "../../CommonFunc/common.js"
@@ -69,7 +70,7 @@ class EachBlog extends Component{
                     </div>
                 </div>
             </div>
-            :""
+            :<ReactLoading style={{ color: "black", margin: "auto", height: "20%", width: "20%" }} type={"spinningBubbles"} />
         )
     }
 }

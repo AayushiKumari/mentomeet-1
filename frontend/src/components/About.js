@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Link} from 'react-router-dom'
 import '../sass/About.scss'
 import Dialog from '@material-ui/core/Dialog';
 import { Slide, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from "@material-ui/core";
@@ -185,12 +185,12 @@ class About extends Component {
                 <h1 className='text-center'>About Us</h1>
                 <div className='row my-5 mt-5'>
                     <div className='col-12 col-md  d-flex justify-content-center'>
-                        <a href="#team">
+                        <Link to="/team">
                             <div className='square d-flex flex-column justify-content-center align-items-center'>
                                 <img className='d-block' src={team} alt='team icon'></img>
                                 <p className='d-block'>Our Team</p>
                             </div>
-                        </a>
+                        </Link>
     
                     </div>
                     <div className='col-12 col-md mt-4 mt-md-0 d-flex justify-content-center'>

@@ -5,6 +5,8 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Row, Label, Col, Container, Breadcrumb, BreadcrumbItem, Button, InputGroupText,  InputGroupAddon, InputGroup, Card, CardBody, CardTitle, Alert} from 'reactstrap';
 import { Link, BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 
+import ReactLoading from 'react-loading';
+
 // import NavBarLog from './../NavBarLog.js'
 import Routes from "./MentorRoutes.js"
 import { CardHeader } from "@material-ui/core";
@@ -59,7 +61,7 @@ class MentorLists extends Component{
 
     render(){
         return(
-            this.state.isDataReturned?
+            this.state.isDataReturned ?
             <>
             <div className="my-4">
                 <div className="container-lg">
@@ -95,21 +97,7 @@ class MentorLists extends Component{
                                             {/* <a href="/blogs/development" className={"nav-item text-dark py-1 px-2 px-sm-3 border-0 nav-link " + (window.location.pathname === '/blogs/development' ? 'active' : '')} id="nav-contact-tab">DEVELOPMENT</a> */}
 
                                         </div>
-                                        {/* <div class="d-none d-md-block">
-                                            <select class="custom-select border-0 rounded-0 bg-warning text-white" onChange={this.TagComponentHandler} >
-                                                
-                                                <option value={0} selected>Choose Tag...</option>
-                                                <option value="physics">PHYSICS</option>
-                                                <option value="chemistry">CHEMESTRY</option>
-                                                <option value="maths">MATHS</option>
-                                                <option value="biology">BIOLOGY</option>
-                                                <option value="pcm">PCM</option>
-                                                <option value="pcb">PCB</option>
-                                                <option value="jee-exam">JEE-EXAM</option>
-                                                <option value="neet-exam">NEET-EXAM</option>
-                                                <option value="dev-blog">DEV-BLOG</option>
-                                            </select>
-                                        </div> */}
+                                        
                                     </div>
                                     <div class="tab-content" id="nav-tabContent">
                                         <Suspense>
@@ -152,7 +140,7 @@ class MentorLists extends Component{
                 </div>
             </div>
             </>
-            :""
+            :<ReactLoading style={{ color: "black", margin: "auto", height: "20%", width: "20%" }} type={"spinningBubbles"} />
         )
     }
 }

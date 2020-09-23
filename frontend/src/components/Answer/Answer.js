@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Row, Label, Col, Container, Breadcrumb, BreadcrumbItem, Button, InputGroupText,  InputGroupAddon, InputGroup} from 'reactstrap';
 import Axios from 'axios'
-import Loader from "react-loader"
+import ReactLoading from 'react-loading';
 // var Loader = require(');
 
 import NavBarLog from './../NavBarLog.js'
@@ -40,18 +40,25 @@ class RelatedQuestion extends Component{
 
     render(){
         return(
-            this.state.isDataReturned && this.state.relatedQuest.length>1?
-            <div>
-                {this.state.relatedQuest.map((eachQuest, index)=>{                    
-                    return(
-                        eachQuest._id === this.state.qid ? "" :
-                        <h6 className="small font-weight-bold mb-3">
-                            <a href={"/answer/"+eachQuest._id} className="text-decoration-none">{eachQuest.question}</a>
-                        </h6>
-                    )
-                })}
-            </div>
+            this.state.isDataReturned ? 
+            <>
+            {this.state.relatedQuest.length>1 ? 
+                <div>
+                    {this.state.relatedQuest.map((eachQuest, index)=>{                    
+                        return(
+                            eachQuest._id === this.state.qid ? "" :
+                            <h6 className="small font-weight-bold mb-3">
+                                <a href={"/answer/"+eachQuest._id} className="text-decoration-none">{eachQuest.question}</a>
+                            </h6>
+                        )
+                    })}
+                </div>
             : <h6>No Related Questions</h6>
+            
+            }
+            </>:<ReactLoading style={{ color: "black", margin: "auto", height: "20%", width: "20%" }} type={"spinningBubbles"} />
+
+            
         )
     }
 
@@ -477,7 +484,7 @@ class Answer extends Component{
             </div>
             
             
-            :""}
+            :<ReactLoading style={{ color: "black", margin: "auto", height: "20%", width: "20%" }} type={"spinningBubbles"} />}
             </div>
 
             

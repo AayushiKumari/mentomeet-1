@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from 'react-router-dom'
+import FadeIn from 'react-fade-in';
 import {
     Button,
     Alert,
@@ -117,6 +118,7 @@ class Mentor extends React.Component {
           <Container>
             <h1 className="title font-weight-bold text-warning">Our Team</h1>
             <div className="team"  style={{zIndex:"-100"}} >
+              <FadeIn>
               <Row  style={{zIndex:"-100"}} >
                 {arr.map(teamMember=> {
                   return(
@@ -166,7 +168,7 @@ class Mentor extends React.Component {
                   </h3>Let's make stuff together,we are looking for talented and passionate creative people to join our Team.</Alert>
                 </Col>
               </Row>
-              
+              </FadeIn>
             </div>
             
           </Container>
