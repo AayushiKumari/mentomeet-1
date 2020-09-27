@@ -114,7 +114,7 @@ class Footer extends React.Component {
                     <div className="contact-details text-md-right text-left">
                       <h5 className="text-dark font-weight-bold">Contact us</h5>
                       <div className="row">
-                        <div className="col-12" style={{color:"#505050"}}>7688997701</div>
+                        <div className="col-12" style={{color:"#505050"}}>6378963002</div>
                         <a href="mailto:contact@mentomeet.com" style={{color:"#505050"}} target="_blank" className="col-12">contact@mentomeet.com</a>
                         <div className="col-12" style={{color:"#505050"}}>Mentors available in working hours</div>
                       </div>
