@@ -57,7 +57,7 @@ class Login extends Component{
                         // console.log("Token is " + response.data.token)
                         localStorage.setItem('token', response.data.token)
                         localStorage.setItem('user',JSON.stringify(response.data.user))
-                        
+                        alert("Successfully logged in!")
                         window.location.href="/"
                         console.log(localStorage.getItem('user'));
                     }
