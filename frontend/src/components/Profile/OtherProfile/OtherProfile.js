@@ -260,7 +260,7 @@ class OtherProfile extends React.Component {
                   <Card.Text>
                     Mentor
                   </Card.Text>
-                  <Button variant="primary">Contact</Button>
+                   <Button variant="primary" onClick={alert("Use Chat Support in bottom left to connect")}>Contact</Button>
                 </Card.Body>
 
                 {updateBtn}
