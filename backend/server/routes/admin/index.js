@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv'
 import User from '../../../database/models/users/index.js'
+import Announcement from '../../../database/models/announcements/index.js'
 
 const router = express.Router();
 
@@ -86,5 +87,42 @@ router.post('/admin/nusers', admin_check, (req, res) => {
         }
     });
 });
+
+// by ABD
+
+router.post('/admin/announcements', admin_check, (req, res) => {
+
+    let newEvent = new Announcement(req.body)
+    console.log("newEvent is ")
+    console.log(newEvent)
+    
+    newEvent.save((err, event)=>{
+        if(err){
+            let errorMessage = err
+            console.log(errorMessage)
+            return res.status(400).json({
+                errorMessage : errorMessage
+            })
+        }
+
+        res.json(event)   
+    })
+    
+})
+
+router.get('/admin/announcements/fetch', (req, res) => {
+    Announcement.find((err,result)=>{
+        if(err){
+            let errorMessage = err
+            console.log(errorMessage)
+            return res.status(400).json({
+                errorMessage : errorMessage
+            })
+        }
+        console.log(result)
+
+        res.json(result)
+    })
+})
 
 export default router;

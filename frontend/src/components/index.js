@@ -14,6 +14,7 @@ import Footer from './Footer'
 import Mentor from './Team'
 // import WordFromStudents from './WordFromStudents.js'
 import FadeIn from 'react-fade-in';
+import Announcements from './Announcements';
 
 
 function Index() {
@@ -21,6 +22,7 @@ function Index() {
     <div>
       <FadeIn>
       <Home/>
+      <Announcements/>
       <CareerSolutionEveryone/>
       <WhyChooseUs/> 
       {/* <BlogDetailedPage/> */}

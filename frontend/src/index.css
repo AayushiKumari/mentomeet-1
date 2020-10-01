@@ -2,6 +2,10 @@ html{
     scroll-behavior: smooth;
 }
 
+body{
+  overflow-x: hidden;
+}
+
 .navbar a:hover, .navbar a:focus{
   color: #ffc107 !important;
 }
