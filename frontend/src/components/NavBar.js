@@ -125,48 +125,64 @@ class NavBar extends React.Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
           <li className="nav-item different mx-3 font-weight-bold">
-              <Link className="nav-link text-warning" to="/index#">HOME</Link>
+              <Link className="nav-link text-warning" to="/index#">Home</Link>
             </li>
-            <li className="nav-item different mx-3 font-weight-bold">
+            {/* <li className="nav-item different mx-3 font-weight-bold">
               <a className="nav-link text-warning" href="/index#about">ABOUT US</a>
-            </li>
-            <li className="nav-item different mx-3 font-weight-bold">
+            </li> */}
+            {/* <li className="nav-item different mx-3 font-weight-bold">
               <Link className="nav-link text-warning" to="/team">OUR TEAM</Link>
-            </li>
+            </li> */}
             {/* <li className="nav-item different mx-3 font-weight-bold dropdown">
               <a className="nav-link text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 STUDENTS
                             </a>
             </li> */}
+            <li className="nav-item different mx-3 font-weight-bold">
+              {/* <Link className="nav-link text-warning" to="/team">OUR TEAM</Link> */}
+                {localStorage.getItem('token') ?
+                  <Link className="nav-link text-warning" to="/qna">QnA</Link>
+                  :<Link className="nav-link text-warning" to="/login">QnA</Link>
+                }
+            </li>
+            <li className="nav-item different mx-3 font-weight-bold">
+              {/* <Link className="nav-link text-warning" to="/team">OUR TEAM</Link> */}
+                {localStorage.getItem('token') ?
+                  <Link className="nav-link text-warning" to="/blogs">Blogs</Link>
+                  :<Link className="nav-link text-warning" to="/login">Blogs</Link>
+                }
+            </li>
+            <li className="nav-item different mx-3 font-weight-bold">
+              {/* <Link className="nav-link text-warning" to="/team">OUR TEAM</Link> */}
+                {localStorage.getItem('token') ?
+                  <Link className="nav-link text-warning" to={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName + JSON.parse(localStorage.getItem('user')).lastName}&room=General`}>Chat Rooms</Link>
+                  :<Link className="nav-link text-warning" to="/login">Chats</Link>
+                }
+            </li>
+            
+                {/* <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/blog">Create Blog</Link> */}
+                
             <li className="nav-item different mx-3 font-weight-bold dropdown">
               <a className="nav-link text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                MENTORS
+                Mentors
                             </a>
               <div className="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdown">
-                <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/mentors">OUR MENTORS</Link>
 
+              <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/mentors">Our Mentors</Link>
               </div>
             </li>
             <li className="nav-item different mx-3 font-weight-bold dropdown">
               <a className="nav-link text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                RESOURCES
+                Others
                             </a>
 
               <div className="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdown">
-                {localStorage.getItem('token') ?
-                <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/qna">QnA</Link>
-                :<Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/login">QnA</Link>
-                }
-                {localStorage.getItem('token') ?
-                <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/blogs">Blogs</Link>
-                :<Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/login">Blogs</Link>
-                }
-                {localStorage.getItem('token') ?
-                  <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName + JSON.parse(localStorage.getItem('user')).lastName}&room=General`}>Chat Rooms</Link>
-                  : <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/login">Chats</Link>}
-                {/* <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/blog">Create Blog</Link> */}
-                
-                <a className="dropdown-item bg-white my-2 rounded shadow text-info" onClick={this.handleopenFAQ}>FAQs</a>
+                    
+                    <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/team">Our Team</Link>
+                    {/* {localStorage.getItem('token') ?
+                      <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName + JSON.parse(localStorage.getItem('user')).lastName}&room=General`}>Chat Rooms</Link>
+                      : <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/login">Chats</Link>} */}
+                    <a className="dropdown-item bg-white my-2 rounded shadow text-info" onClick={this.handleopenFAQ}>FAQs</a>
               </div>
             </li>
 
