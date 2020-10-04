@@ -46,26 +46,27 @@ class Announcements extends Component {
             // <Container>
                 <div id='career-solution-everyone' className='container-lg  py-4'>
                     <h1 className='text-center'>Announcements</h1>
-                    <div className='row align-items-start justify-content-center mt-5'>
+                    <div className='my-5'>
+                    {/* <div className='row align-items-start justify-content-center mt-5'> */}
                         {this.state.dataReturned ? 
                         <>
                             
                         {this.state.data.length!==0 ?
-                            <Row>
+                            <Row className="align-items-start justify-content-center">
                                     {this.state.data.map((item) => {
                                         return (
-                                            <Col md={6}>
+                                            <Col lg={4} md={6}>
                                                 <Card>
                                                     <CardHeader>
-                                                        <h4>{item.eventName} </h4>
+                                                        <h5 className="mb-0 font-weight-bold">{item.eventName} </h5>
                                                     </CardHeader>
                                                     <CardBody>
-                                                        <p>Mode: <Badge color="success">{item.mode}</Badge></p>
-                                                        <p>Date: {item.date} , Time:{item.time} </p>
-                                                        <p>Link: <a href={item.link} target="_blank"> {item.link} </a></p>
+                                                        <p className="font-weight-bold">Mode: <Badge color="success">{item.mode}</Badge></p>
+                                                        <p className="font-weight-bold">Date: <span className="text-muted">{item.date}</span> , Time: <span className="text-muted">{item.time}</span> </p>
+                                                        <p><a className="btn btn-info btn-sm" href={item.link} target="_blank"> Register Here</a></p>
                                                         {item.description ? <p className="text-muted">{item.description}</p> : ""}
                                                     </CardBody>
-                                                    <CardFooter>For Queries: {item.contact}</CardFooter>
+                                                    <CardFooter><span className="font-weight-bold">For Queries:</span> {item.contact}</CardFooter>
                                                 </Card><hr />
                                             </Col>
                                             
