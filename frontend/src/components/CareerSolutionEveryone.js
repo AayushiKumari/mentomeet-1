@@ -58,10 +58,10 @@ export default function CareerSolutionEveryone(){
                         <h2 className='d-block'>COLLEGE</h2>
                         <div>
                             <div className='li-item'>
-                                <div className='bullet' ></div><p>Talk with PPOs</p>
+                                <div className='bullet' ></div><p>Mock Placement</p>
                             </div>
                             <div className='li-item'>
-                            <div className='bullet' ></div><p>Mock Placement</p>
+                            <div className='bullet' ></div><p>Talk with PPOs</p>
                             </div>
                     
                             <div className='li-item'>
@@ -69,6 +69,9 @@ export default function CareerSolutionEveryone(){
                             </div>
                             <div className='li-item'>
                             <div className='bullet' ></div><p>Personal Guidance</p>
+                            </div>
+                            <div className='li-item'>
+                            <div className='bullet' ></div><p>Internship Occasion</p>
                             </div>
                         </div>
                         <a href='/mentors' className='explore d-block' src='#'>Explore</a>
