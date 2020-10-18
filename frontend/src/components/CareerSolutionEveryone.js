@@ -55,20 +55,20 @@ export default function CareerSolutionEveryone(){
                 </div>
                 <div className='big-brother col-md-4 mt-4 mt-md-0 col-12 d-flex align-items-center justify-content-center'>
                     <div className='sm-brother py-2  px-4 d-flex flex-column align-items-start justify-content-between'>
-                        <h2 className='d-block'>SCHOOL</h2>
+                        <h2 className='d-block'>COLLEGE</h2>
                         <div>
                             <div className='li-item'>
-                                <div className='bullet' ></div><p>Personal Guidance</p>
+                                <div className='bullet' ></div><p>Talk with PPOs</p>
                             </div>
                             <div className='li-item'>
-                            <div className='bullet' ></div><p>Mentors From IIT/NIT/AIIMS</p>
+                            <div className='bullet' ></div><p>Mock Placement</p>
                             </div>
                     
                             <div className='li-item'>
                             <div className='bullet' ></div><p>Skill Development</p>
                             </div>
                             <div className='li-item'>
-                            <div className='bullet' ></div><p>Doubt Clearing</p>
+                            <div className='bullet' ></div><p>Personal Guidance</p>
                             </div>
                         </div>
                         <a href='/mentors' className='explore d-block' src='#'>Explore</a>
