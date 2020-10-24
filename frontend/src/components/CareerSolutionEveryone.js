@@ -27,7 +27,7 @@ export default function CareerSolutionEveryone(){
                             </div>
                             
                         </div>
-                        <a href='/mentors' className='explore d-block' src='#'>Explore</a>
+                        <a href='/mentors/jee' className='explore d-block' src='#'>Explore</a>
                     </div>
                 </div>
                 <div className='big-brother col-md-4 mt-4 mt-sm-0 col-12 col-sm-6 d-flex align-items-center justify-content-center'>
@@ -50,7 +50,7 @@ export default function CareerSolutionEveryone(){
                                 <div></div><p>Study Material</p>
                             </div>
                         </div>
-                        <a href='/mentors' className='explore d-block' src='#'>Explore</a>
+                        <a href='/mentors/neet' className='explore d-block' src='#'>Explore</a>
                     </div>
                 </div>
                 <div className='big-brother col-md-4 mt-4 mt-md-0 col-12 d-flex align-items-center justify-content-center'>
@@ -74,7 +74,7 @@ export default function CareerSolutionEveryone(){
                             <div className='bullet' ></div><p>Internship Occasion</p>
                             </div>
                         </div>
-                        <a href='/mentors' className='explore d-block' src='#'>Explore</a>
+                        <a href='/mentors/career' className='explore d-block' src='#'>Explore</a>
                     </div>
                 </div>
             </div>
