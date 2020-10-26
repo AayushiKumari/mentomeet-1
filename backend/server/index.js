@@ -37,6 +37,10 @@ const io = socketio(server);
 
 app.use(express.static('public'));
 
+
+app.set('view engine', 'pug')
+app.set('views', path.join(__dirname, '/server/views'));
+
 //third party middlwares 
 app.use(bodypParser.json())
 app.use(bodypParser.urlencoded({ extended: true }));
@@ -102,6 +106,14 @@ io.on('connect', (socket) => {
       }
     })
   });
+
+  app.get('/mail', function (req, res) {
+    res.render('mail')
+  })
+
+  // app.get('/mail', function (req, res) {
+  //   res.render('index', { title: 'Hey', message: 'Hello there!' })
+  // })
   
 
 server.listen(port, ()=> console.log("listenig at " + port))
