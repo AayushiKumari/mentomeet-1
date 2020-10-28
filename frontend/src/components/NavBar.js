@@ -162,14 +162,8 @@ class NavBar extends React.Component {
             
                 {/* <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/blog">Create Blog</Link> */}
                 
-            <li className="nav-item different mx-3 font-weight-bold dropdown">
-              <a className="nav-link text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Mentors
-                            </a>
-              <div className="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdown">
-
-              <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/mentors">Our Mentors</Link>
-              </div>
+            <li className="nav-item different mx-3 font-weight-bold">
+              <Link className="nav-link text-warning" to="/mentors">Our Menors</Link>
             </li>
             <li className="nav-item different mx-3 font-weight-bold dropdown">
               <a className="nav-link text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
