@@ -66,7 +66,7 @@ class Announcements extends Component {
                                                         <p><a className="btn btn-info btn-sm" href={item.link} target="_blank"> Register Here</a></p>
                                                         {item.description ? <p className="text-muted">{item.description}</p> : ""}
                                                     </CardBody>
-                                                    <CardFooter><span className="font-weight-bold">For Queries:</span> <a className="btn btn-info btn-sm" href={item.contact} target="_blank">Join Us</a></CardFooter>
+                                                    <CardFooter><span className="font-weight-bold">Checkout Latest Seminar:</span> <a className="btn btn-info btn-sm" href={item.contact} target="_blank">Join Us</a></CardFooter>
                                                 </Card><hr />
                                             </Col>
                                             
