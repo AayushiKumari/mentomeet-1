@@ -13,8 +13,8 @@ var transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-      user: 'yourmail@gmail.com',
-      pass: 'yourpassword'
+      user: 'officialmentomeet@gmail.com',
+      pass: 'Mm212@#$'
     }
 });
 
@@ -25,7 +25,7 @@ var transporter = nodemailer.createTransport({
 function signUp(req, res){
     console.log(req.body)
     var mailOptions = {
-        from: 'yourmail@gmail.com',
+        from: 'officialmentomeet@gmail.com',
         to: req.body.email,
         subject: 'Welcome to MentoMeet',
         html: pug.renderFile(path.join(__dirname, '/server/views/mail.pug'), { userName: `Hello, ${req.body.firstName}` })
