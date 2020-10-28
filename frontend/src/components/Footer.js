@@ -100,7 +100,7 @@ class Footer extends React.Component {
               <div className="col-sm-3">
                 <ul className="links">
                   <li><Link style={{color:"#505050"}} to={!localStorage.getItem('token') ? "/login" : "/profile"}>Careers</Link></li>
-                  <li><Link style={{color:"#505050"}} to="/blogs">Blogs</Link></li>
+                  <li><Link style={{color:"#505050"}} to={!localStorage.getItem('token') ? "/login" : "/blogs"}>Blogs</Link></li>
                   <li><Link style={{color:"#505050"}} to={!localStorage.getItem('token') ? "/login" : "/profile"}>Be a mentor</Link></li>
                   <li><Link style={{color:"#505050"}} to={!localStorage.getItem('token') ? "/login" : "/profile"}>Be a Mentee</Link></li>
                   <li style={{color:"#505050"}} onClick={this.handleopenFAQ}>FAQs</li>
