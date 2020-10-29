@@ -163,21 +163,10 @@ class NavBar extends React.Component {
                 {/* <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/blog">Create Blog</Link> */}
                 
             <li className="nav-item different mx-3 font-weight-bold">
-              <Link className="nav-link text-warning" to="/mentors">Our Menors</Link>
+              <Link className="nav-link text-warning" to="/mentors">Our Mentors</Link>
             </li>
-            <li className="nav-item different mx-3 font-weight-bold dropdown">
-              <a className="nav-link text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Others
-                            </a>
-
-              <div className="dropdown-menu bg-transparent border-0" aria-labelledby="navbarDropdown">
-                    
-                    <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/team">Our Team</Link>
-                    {/* {localStorage.getItem('token') ?
-                      <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName + JSON.parse(localStorage.getItem('user')).lastName}&room=General`}>Chat Rooms</Link>
-                      : <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/login">Chats</Link>} */}
-                    <a className="dropdown-item bg-white my-2 rounded shadow text-info" onClick={this.handleopenFAQ}>FAQs</a>
-              </div>
+            <li className="nav-item different mx-3 font-weight-bold">
+              <a className="nav-link text-warning" onClick={this.handleopenFAQ}>FAQs</a>
             </li>
 
             {localStorage.getItem('token') ?
