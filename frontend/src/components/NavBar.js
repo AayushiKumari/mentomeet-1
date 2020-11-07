@@ -139,6 +139,9 @@ class NavBar extends React.Component {
                             </a>
             </li> */}
             <li className="nav-item different mx-3 font-weight-bold">
+              <Link className="nav-link text-warning" to="/mentors">Talk to Mentor</Link>
+            </li>
+            <li className="nav-item different mx-3 font-weight-bold">
               {/* <Link className="nav-link text-warning" to="/team">OUR TEAM</Link> */}
                 {localStorage.getItem('token') ?
                   <Link className="nav-link text-warning" to="/qna">QnA</Link>
@@ -162,9 +165,7 @@ class NavBar extends React.Component {
             
                 {/* <Link className="dropdown-item bg-white my-2 rounded shadow text-info" to="/blog">Create Blog</Link> */}
                 
-            <li className="nav-item different mx-3 font-weight-bold">
-              <Link className="nav-link text-warning" to="/mentors">Our Mentors</Link>
-            </li>
+            
             <li className="nav-item different mx-3 font-weight-bold">
               <a className="nav-link text-warning" onClick={this.handleopenFAQ}>FAQs</a>
             </li>
