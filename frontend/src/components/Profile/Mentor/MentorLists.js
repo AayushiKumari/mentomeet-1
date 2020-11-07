@@ -80,8 +80,13 @@ class MentorLists extends Component{
                                     <p>
 
                                     <Alert color="success"> <h3>
-                                        <Link to="/login">Be a Mentor </Link>to change people’s lives.
-                                        </h3>Share your experience & knowledge with the world online. If you are passionate about Mentoring / coaching to people who needs guidance, this is the place to be in.</Alert>
+                                        "Where there's a will, there's a way"
+                                        </h3>Now you can also connect your mentors through Google meet services from 5 pm to 6 pm and 9 pm to 11 pm.<br />
+                                           <div class="d-md-flex justify-content-between">
+                                                <a class="btn btn-info btn-sm mt-2" href="https://meet.google.com/cuz-ubfq-ydn" target="_blank">Talk to IIT-JEE Mentors</a>
+                                                <a class="btn btn-info btn-sm mt-2" href="https://meet.google.com/wwa-cvii-eit" target="_blank">Talk to NEET/AIIMS Mentors</a>
+                                            </div>
+                                        </Alert>
                                         {/* <b></b> to change people’s lives.<br /> */}
                                         
                                     </p>
