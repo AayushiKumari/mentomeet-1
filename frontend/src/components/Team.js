@@ -35,8 +35,8 @@ var arr = [
 {
     src: require('../assets/members/abhishek.jpg'),
     name: "Abhishek Gupta",
-    position: "Developer",
-    college:"Birla College,Maharastra",
+    position: "Lead Developer",
+    college:"Birla College, Maharastra",
   },
 
 {
@@ -83,23 +83,29 @@ var arr = [
   },
 
 {
-    src: require('../assets/members/ankit.jpg'),
-    name: "Ankit Meena",
-    position: "Medical Operation",
-    college:"AIIMS Delhi",
+    src: require('../assets/members/vidhi.png'),
+    name: "Vidhi Shekhawat",
+    position: "Operations",
+    college:"NIT Hamirpur",
   },
 {
-    src: require('../assets/members/ravi.jpg'),
-    name: "Ravi Kishan",
-    position: "JEE Operation",
-    college:"IIIT Nagpur",
+    src: require('../assets/members/subash.png'),
+    name: "Subhash Samota",
+    position: "Marketing",
+    college:"NIT Kurukshetra",
   },
 {
     src: require('../assets/members/bharat.jpg'),
     name: "Bharat Garg",
-    position: "JEE Operation",
+    position: "Social Media Handling",
     college:"PEC Chandigarh",
-  },
+  },   
+{
+    src: require('../assets/members/rajat.png'),
+    name: "Rajat Uba",
+    position: "Bussiness Development",
+    college:"IIT Roorkee",
+  }
 ]
 
 class Mentor extends React.Component {
