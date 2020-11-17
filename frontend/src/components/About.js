@@ -82,20 +82,7 @@ class About extends Component {
                     <DialogContent>
                         <DialogContentText >
                             <VerticalTimeline>
-                                <VerticalTimelineElement
-                                    className="vertical-timeline-element--work"
-                                    contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-                                    contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-                                    // date="2011 - present"
-                                    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-                                    // icon={<WorkIcon />}
-                                >
-                                    <h3 className="vertical-timeline-element-title">Creative Director</h3>
-                                    <h4 className="vertical-timeline-element-subtitle">Ajay Dayma</h4>
-                                    <p>
-                                    Creative Direction, User Experience, Visual Design, Project Management, Team Leading
-                                    </p>
-                                </VerticalTimelineElement>
+                                
                                 <VerticalTimelineElement
                                     className="vertical-timeline-element--work"
                                     // date="2010 - 2011"
@@ -130,6 +117,21 @@ class About extends Component {
                                     {/* <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4> */}
                                     <p>
                                     Keeping in mind the above aspects, a group of like-minded individuals came together to create an interactive platform, Mentomeet which aims to mentor kids and guide them throughout their competitive exam preparations while also providing career guidance, doubt sessions and web-seminars.
+                                    </p>
+                                </VerticalTimelineElement>
+            
+                                <VerticalTimelineElement
+                                    className="vertical-timeline-element--work"
+                                    contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                                    contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                                    // date="2011 - present"
+                                    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                                    // icon={<WorkIcon />}
+                                >
+                                    <h3 className="vertical-timeline-element-title">Creative Director</h3>
+                                    <h4 className="vertical-timeline-element-subtitle">Ajay Dayma</h4>
+                                    <p>
+                                    Creative Direction, User Experience, Visual Design, Project Management, Team Leading
                                     </p>
                                 </VerticalTimelineElement>
                                 {/* <VerticalTimelineElement
