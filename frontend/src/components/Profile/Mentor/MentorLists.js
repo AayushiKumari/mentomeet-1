@@ -83,8 +83,17 @@ class MentorLists extends Component{
                                         "Where there's a will, there's a way"
                                         </h3>Now you can also connect your mentors through Google meet services from 5 pm to 6 pm.<br />
                                            <div class="d-md-flex justify-content-between">
-                                                <a class="btn btn-info btn-sm mt-2" href="https://meet.google.com/cuz-ubfq-ydn" target="_blank">Talk to IIT-JEE Mentors</a>
-                                                <a class="btn btn-info btn-sm mt-2" href="https://meet.google.com/wwa-cvii-eit" target="_blank">Talk to NEET/AIIMS Mentors</a>
+                                                {localStorage.getItem('token') ?
+                                                  <a className="btn btn-info btn-sm mt-2" href="https://meet.google.com/cuz-ubfq-ydn" target="_blank">Talk to IIT-JEE Mentors</a>
+                                                  :<Link className="btn btn-info btn-sm mt-2" to="/login">Talk to IIT-JEE Mentors</Link>
+                                                }
+
+                                                {localStorage.getItem('token') ?
+                                                  <a className="btn btn-info btn-sm mt-2" href="https://meet.google.com/wwa-cvii-eit" target="_blank">Talk to NEET/AIIMS Mentors</a>
+                                                  :<Link className="btn btn-info btn-sm mt-2" to="/login">Talk to NEET/AIIMS Mentors</Link>
+                                                }
+                                                
+                                                
                                             </div>
                                         </Alert>
                                         {/* <b></b> to change people’s lives.<br /> */}
