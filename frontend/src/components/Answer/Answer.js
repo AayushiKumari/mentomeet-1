@@ -236,7 +236,7 @@ class AnswerComponent extends Component{
                                 }
                                 </>
                                 :
-                                    <Link to="/login"><i class="far fa-arrow-alt-circle-up text-info"></i></Link>
+                                    <Link to="/login" className="text-decoration-none"><i class="far fa-arrow-alt-circle-up text-info"></i></Link>
                                 }
                             </h4>
                         </div>
