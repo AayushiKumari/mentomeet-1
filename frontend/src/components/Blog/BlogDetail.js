@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import BlogPosts from './BlogPosts'
 import BlogSideBar from './BlogSideBar'
 import Axios from 'axios'
+import { Link } from 'react-router-dom'
 
 import avatar from '../../assets/default-avatar.png'
 import NavBarLog from './../NavBarLog.js'
