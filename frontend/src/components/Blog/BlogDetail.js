@@ -82,7 +82,11 @@ class CommentComponent extends Component{
                             <input type="text" class="form-control form-control-sm" name="comment" placeholder="Add a Comment"
                             value={this.state.comment} onChange={this.onChange} />
                             <div class="input-group-append">
+                                {localStorage.getItem('token') ?
                                 <button class="btn btn-info btn-sm" type="submit">Comment</button>
+                                 :
+                                    <Link class="btn btn-info btn-sm" to="/login">Comment</Link>
+                                }
                             </div>
                         </div>
                     </form>
@@ -194,9 +198,15 @@ class BlogDetail extends Component{
                                         </div>
                                         <div>
                                             <h4 className="vote-btn dfdsf text-info cursor-pointer" >
+                                                {localStorage.getItem('token') ?
+                                                <>
                                                 {this.state.blogData.likes.includes(this.state.currUser._id) ? 
                                                     <i class="far fa-arrow-alt-circle-up text-warning"></i>
                                                     : <i class={"far fa-arrow-alt-circle-up " + this.state.vote } onClick={(e)=>this.Vote(e, this.state.blogData._id)}></i>
+                                                }
+                                                </>
+                                                :
+                                                    <Link to="/login" className="text-decoration-none"><i class="far fa-arrow-alt-circle-up text-info"></i></Link>
                                                 }
                                             </h4>
                                         </div>
