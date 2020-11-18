@@ -66,10 +66,15 @@ class EachQuestion extends Component{
                         <div className="d-flex">
                             <div className="d-flex align-items-center pr-3">
                                 <h5 className="vote-btn cursor-pointer" >
-
+                                    {localStorage.getItem('token') ?
+                                    <>
                                     {this.state.sQuestion.likes.includes(this.state.currUser._id) ? 
                                         <i class="far fa-arrow-alt-circle-up text-warning"></i>
                                         : <i class={"far fa-arrow-alt-circle-up " + this.state.vote } onClick={(e)=>this.Vote(e, this.state.sQuestion._id)}></i>
+                                    }
+                                    </>
+                                    :
+                                        <Link to="/login" className="text-decoration-none"><i class="far fa-arrow-alt-circle-up text-info"></i></Link>
                                     }
                                     
                                 </h5>
