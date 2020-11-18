@@ -159,7 +159,7 @@ class NavBar extends React.Component {
               {/* <Link className="nav-link text-warning" to="/team">OUR TEAM</Link> */}
                 {localStorage.getItem('token') ?
                   <Link className="nav-link text-warning" to={`/chat?name=${JSON.parse(localStorage.getItem('user')).firstName + JSON.parse(localStorage.getItem('user')).lastName}&room=General`}>Chat Rooms</Link>
-                  :<Link className="nav-link text-warning" to="/login">Chats Rooms</Link>
+                  :<Link className="nav-link text-warning" to="/login">Chat Rooms</Link>
                 }
             </li>
             
