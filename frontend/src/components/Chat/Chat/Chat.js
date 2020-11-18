@@ -74,7 +74,7 @@ const Chat = ({ location }) => {
         </Col>
         <Col md={6}>
           <Card style={{marginTop:"100px"}}>
-            <CardHeader>Other Public Rooms: <Badge color="success" style={{fontSize:"90%"}} >(Discussion rooms are completely active from 9PM-12AM)</Badge></CardHeader>
+            <CardHeader>Other Public Rooms: <p className="bg-success text-white small font-weight-bold px-2 py-1 rounded d-inline-block" >(Discussion rooms are completely active from 9PM-11AM)</p></CardHeader>
             <hr />
             <CardBody>
               <Col md={12}>
@@ -103,7 +103,7 @@ const Chat = ({ location }) => {
                 </a>
               </Col>
               <hr /><br />
-              <p style={{textAlign:"center"}}><Badge color="danger" style={{fontSize:"95%", padding:"10px"}} >Any kind of nuisance or foul language will lead to termination of your Mentomeet account... </Badge></p>
+              <p className="bg-danger text-white small font-weight-bold px-2 py-1 rounded d-inline-block" >Any kind of nuisance or foul language will lead to termination of your Mentomeet account... </p>
             </CardBody>
           </Card>
         </Col>
