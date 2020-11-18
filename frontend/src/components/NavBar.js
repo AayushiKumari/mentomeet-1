@@ -143,17 +143,13 @@ class NavBar extends React.Component {
             </li>
             <li className="nav-item different mx-3 font-weight-bold">
               {/* <Link className="nav-link text-warning" to="/team">OUR TEAM</Link> */}
-                {localStorage.getItem('token') ?
-                  <Link className="nav-link text-warning" to="/qna">QnA</Link>
-                  :<Link className="nav-link text-warning" to="/login">QnA</Link>
-                }
+                
+               <Link className="nav-link text-warning" to="/qna">QnA</Link>
             </li>
             <li className="nav-item different mx-3 font-weight-bold">
               {/* <Link className="nav-link text-warning" to="/team">OUR TEAM</Link> */}
-                {localStorage.getItem('token') ?
+                
                   <Link className="nav-link text-warning" to="/blogs">Blogs</Link>
-                  :<Link className="nav-link text-warning" to="/login">Blogs</Link>
-                }
             </li>
             <li className="nav-item different mx-3 font-weight-bold">
               {/* <Link className="nav-link text-warning" to="/team">OUR TEAM</Link> */}
