@@ -148,7 +148,11 @@ class CommentComponent extends Component{
                             <input type="text" class="form-control form-control-sm" name="comment" placeholder="Add a Comment"
                             value={this.state.comment} onChange={this.onChange} />
                             <div class="input-group-append">
+                                {localStorage.getItem('token') ?
                                 <button class="btn btn-info btn-sm" type="submit">Comment</button>
+                                 :
+                                    <Link class="btn btn-info btn-sm" to="/login/">Comment</Link>
+                                }
                             </div>
                         </div>
                     </form>
@@ -222,9 +226,15 @@ class AnswerComponent extends Component{
                         </div>
                         <div>
                             <h4 className="vote-btn text-info cursor-pointer" >
+                                {localStorage.getItem('token') ?
+                                 <>
                                 {this.state.answer.likes.includes(this.state.currUser._id) ? 
                                     <i class="far fa-arrow-alt-circle-up text-warning"></i>
                                     : <i class={"far fa-arrow-alt-circle-up " + this.state.vote } onClick={(e)=>this.Vote(e, this.state.answer._id)}></i>
+                                }
+                                </>
+                                :
+                                    <Link to="/login"><i class="far fa-arrow-alt-circle-up text-warning"></i></Link>
                                 }
                             </h4>
                         </div>
