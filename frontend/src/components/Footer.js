@@ -112,11 +112,18 @@ class Footer extends React.Component {
                 <div className="join-us">
                   <div>
                     <div className="contact-details text-md-right text-left">
-                      <h5 className="text-dark font-weight-bold">Contact us</h5>
+                      {/*<h5 className="text-dark font-weight-bold">Contact us</h5>*/}
                       <div className="row">
                         <div className="col-12" style={{color:"#505050"}}>6378963002</div>
                         <a href="mailto:contact@mentomeet.com" style={{color:"#505050"}} target="_blank" className="col-12">contact@mentomeet.com</a>
-                        <div className="col-12" style={{color:"#505050"}}>Mentors available in working hours</div>
+                        <div class="col-12" style="color: rgb(80, 80, 80);">
+                            <p class="mb-0 small font-weight-bold">Talk to mentors by following methods</p>
+                            <p class="mb-0 small">QnA - 24*7</p>
+                            <p class="mb-0 small">Blogs - 24*7</p>
+                            <p class="mb-0 small">Chat Rooms - 9pm to 11pm</p>
+                            <p class="mb-0 small">Google Meet - 5pm to 6pm</p>
+
+                        </div>
                       </div>
                     </div>
                     {/* <h3 style={{ margin: "0 12px 12px 12px" }}>Join our Newsletter</h3>
