@@ -180,7 +180,11 @@ class Question extends Component {
                         <div className="col-md-8">
                             <div>
                                 <div className="d-flex justify-content-between mb-3 d-md-none">
-                                    <button type="button" className="btn btn-info " data-toggle="modal" data-target="#questionModal">Ask Question</button>
+                                    {localStorage.getItem('token') ?
+                                    <button type="button" className="btn btn-info " data-toggle="modal" data-target="#questionModal">ASK QUESTION</button>
+                                    :
+                                        <Link className="btn btn-info" to="/login/">ASK QUESTION</Link>
+                                    }
                                     <div class="">
                                         <select class="custom-select" onChange={this.CategoryComponentHandler} >
                                         <option value={0} selected>Categories...</option>
@@ -231,7 +235,12 @@ class Question extends Component {
                         <div className="col-md-4">
                             <div>
                                 <div>
+                                    {localStorage.getItem('token') ?
                                     <button type="button" className="btn btn-info d-none d-md-block w-100" data-toggle="modal" data-target="#questionModal">ASK QUESTION</button>
+                                    :
+                                        <Link className="btn btn-info" to="/login/">ASK QUESTION</Link>
+                                    }
+                                    
                                 </div>
 
                                 <div className="card my-2">
