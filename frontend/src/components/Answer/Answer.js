@@ -124,7 +124,11 @@ class CommentComponent extends Component{
         return (
             <div className="">
                 <div class="card-footer bg-white py-2">
+                        {localStorage.getItem('token') ?
                         <h6 className="text-info mb-0 cursor-pointer" onClick={this.OpenComment}>{this.props.commentData.allComments.length>0 ? this.props.commentData.allComments.length+" Comments": "Comment" }</h6>
+                        :
+                            <Link to="/login" className="text-decoration-none"><h6 className="text-info mb-0 cursor-pointer" onClick={this.OpenComment}>{this.props.commentData.allComments.length>0 ? this.props.commentData.allComments.length+" Comments": "Comment" }</h6></Link>
+                        }
                     </div>
                 <div className={this.state.isOpen ? "d-block":"d-none"}> 
                     <div class="card-body">
@@ -148,11 +152,9 @@ class CommentComponent extends Component{
                             <input type="text" class="form-control form-control-sm" name="comment" placeholder="Add a Comment"
                             value={this.state.comment} onChange={this.onChange} />
                             <div class="input-group-append">
-                                {localStorage.getItem('token') ?
+                                
                                 <button class="btn btn-info btn-sm" type="submit">Comment</button>
-                                 :
-                                    <Link class="btn btn-info btn-sm" to="/login/">Comment</Link>
-                                }
+                                 
                             </div>
                         </div>
                     </form>
